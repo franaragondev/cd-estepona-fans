@@ -1,0 +1,187 @@
+{
+  "head": {
+    "title": "HomeStocker | Contrôlez et organisez facilement le stock de votre garde-manger à la maison",
+    "description": "HomeStocker vous aide à organiser et contrôler le stock de votre garde-manger et produits à la maison en scannant les codes et en envoyant des alertes intelligentes. Économisez de l'argent, réduisez le gaspillage et évitez les achats inutiles.",
+    "url": "https://homestocker.app/",
+    "image": "https://homestocker.app/logo-simple.webp",
+    "keywords": "immobilier, location, achat, vente, maisons, appartements, homestocker"
+  },
+  "about": {
+    "title": "Une solution conçue pour votre quotidien",
+    "highlight-description": "Home Stocker est né d'un besoin réel :",
+    "description": "oublier quels produits vous avez chez vous ou quand ils expirent. Dans un monde où le gaspillage alimentaire reste un grand problème — tant économique qu'environnemental — notre application vous aide à suivre votre inventaire domestique de façon simple et visuelle. Réduisez les achats inutiles, évitez de jeter de la nourriture et contribuez à une consommation plus responsable."
+  },
+  "cta": {
+    "title": "Commencez à organiser votre garde-manger aujourd'hui",
+    "description": "Créez votre compte gratuit et découvrez comment Home Stocker peut vous aider à la maison.",
+    "placeholder": "Votre email",
+    "button": "Je suis intéressé(e)",
+    "successMessage": "Merci de rejoindre la bêta !",
+    "errorMessage": "Une erreur est survenue. Veuillez réessayer.",
+    "invalidEmailMessage": "Veuillez entrer un email valide.",
+    "botDetectedMessage": "Bot détecté. Action bloquée.",
+    "emailDeletedMessage": "Cet email a été supprimé et doit se réabonner.",
+    "serverErrorMessage": "Erreur serveur. Veuillez réessayer plus tard.",
+    "genericErrorMessage": "Erreur inconnue. Veuillez réessayer plus tard.",
+    "loginOrRegisterButton": "Commencer à organiser"
+  },
+  "features": {
+    "title": "Que pouvez-vous faire avec Home Stocker ?",
+    "pantry": "Garde-manger organisé",
+    "scan": "Scanner les produits",
+    "alerts": "Alertes intelligentes",
+    "stats": "Statistiques visuelles"
+  },
+  "footer": {
+    "text": "2025 Home Stocker. Tous droits réservés."
+  },
+  "hero": {
+    "title": "Contrôlez le stock de votre maison",
+    "description": "Home Stocker vous aide à garder votre garde-manger organisé en scannant les produits et en recevant des alertes.",
+    "placeholder": "Votre email",
+    "button": "Je veux en savoir plus",
+    "successMessage": "Merci pour votre inscription !",
+    "errorMessage": "Une erreur est survenue. Veuillez réessayer.",
+    "invalidEmailMessage": "Veuillez entrer un email valide.",
+    "botDetectedMessage": "Bot détecté. Action bloquée.",
+    "emailDeletedMessage": "Cet email a été supprimé et doit se réabonner.",
+    "serverErrorMessage": "Erreur serveur. Veuillez réessayer plus tard.",
+    "genericErrorMessage": "Erreur inconnue. Veuillez réessayer plus tard.",
+    "loginOrRegisterButton": "Rejoindre gratuitement"
+  },
+  "menu": {
+    "home": "Accueil",
+    "features": "Fonctionnalités",
+    "about": "À propos de l’application",
+    "cta": "Commencer maintenant",
+    "faq": "Questions fréquentes",
+    "login": "Se connecter",
+    "register": "Créer un compte",
+    "user": "Utilisateur",
+    "language": "Langue",
+    "profile": "Mon profil",
+    "logout": "Se déconnecter"
+  },
+  "language": {
+    "es": "Espagnol",
+    "en": "Anglais",
+    "fr": "Français"
+  },
+  "cookies": {
+    "message": "Nous utilisons des cookies pour améliorer votre expérience et analyser l’utilisation du site. Vous pouvez les accepter ou les refuser.",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "learnMore": "En savoir plus",
+    "linkText": "Politique de cookies"
+  },
+  "cookiesPolicy": {
+    "title": "Politique de cookies",
+    "intro": "Chez Home Stocker, nous utilisons des cookies pour améliorer votre expérience de navigation, analyser le trafic du site et vous offrir un service plus personnalisé.",
+    "whatAreCookiesTitle": "Que sont les cookies ?",
+    "whatAreCookies": "Les cookies sont de petits fichiers texte stockés sur votre appareil lorsque vous visitez un site web. Ils aident à mémoriser vos préférences, analyser comment vous utilisez le site et améliorer ses fonctionnalités.",
+    "typesTitle": "Quels types de cookies utilisons-nous ?",
+    "typesList": [
+      "Cookies essentiels : nécessaires au fonctionnement basique du site. Ils ne peuvent pas être désactivés.",
+      "Cookies analytiques : nous aident à comprendre l’utilisation du site pour l’améliorer. Nous utilisons des outils comme Google Analytics et Vercel Analytics à cet effet."
+    ],
+    "manageTitle": "Comment les gérer ?",
+    "manageText": "Vous pouvez accepter ou refuser les cookies non essentiels via la bannière de consentement lors de votre visite. Vous pouvez aussi supprimer ou bloquer les cookies via les paramètres de votre navigateur.",
+    "personalDataTitle": "Collectons-nous des données personnelles ?",
+    "personalDataText": "Nous n’utilisons pas les cookies pour vous identifier directement. Des outils comme Google Analytics peuvent collecter des données anonymes comme une adresse IP tronquée, type de navigateur, pages visitées ou durée de la visite. Les seules données personnelles que nous stockons directement sont votre email quand vous vous inscrivez volontairement à la bêta, géré via Mailchimp. Plus de détails dans notre Politique de confidentialité.",
+    "privacyPolicyLinkText": "Politique de confidentialité",
+    "changesTitle": "Modifications de cette politique",
+    "changesText": "Nous pouvons mettre à jour cette Politique de cookies à tout moment. Nous vous recommandons de la consulter périodiquement.",
+    "lastUpdated": "Dernière mise à jour : mai 2025"
+  },
+  "privacyPolicy": {
+    "title": "Politique de confidentialité",
+    "intro": "Chez HomeStocker, nous valorisons votre vie privée et nous engageons à protéger vos données personnelles. Cette politique explique quelles données nous collectons, comment nous les utilisons et vos droits.",
+    "sections": [
+      {
+        "title": "1. Données que nous collectons",
+        "text": "Nous collectons les informations personnelles que vous fournissez lors de l’inscription, comme votre adresse email. Nous collectons également des données de navigation via les cookies et technologies similaires, y compris des données anonymisées comme une adresse IP tronquée, type de navigateur, pages visitées et durée des sessions, via des outils comme Google Analytics et Vercel Analytics."
+      },
+      {
+        "title": "2. Comment nous collectons vos données",
+        "text": "Vos données sont collectées directement via le formulaire d’inscription et automatiquement via les cookies lorsque vous naviguez sur notre site."
+      },
+      {
+        "title": "3. Finalité du traitement",
+        "text": "Nous utilisons votre email uniquement pour vous informer lorsque la version bêta de HomeStocker est disponible. Les cookies servent à améliorer les fonctionnalités et l’expérience utilisateur, ainsi qu’à analyser l’utilisation du site."
+      },
+      {
+        "title": "4. Partage des données avec des tiers",
+        "text": "Nous ne partageons pas vos données personnelles avec des tiers, sauf Mailchimp, notre fournisseur d’email marketing, qui gère en toute sécurité notre liste d’envoi. Nous utilisons aussi des services comme Google Analytics et Vercel Analytics qui peuvent collecter des données de navigation anonymisées à des fins statistiques."
+      },
+      {
+        "title": "5. Droits concernant vos données",
+        "text": "Vous pouvez vous désabonner et supprimer votre abonnement à tout moment via le lien de désinscription dans nos emails."
+      },
+      {
+        "title": "6. Exercer vos droits",
+        "text": "Pour gérer vos préférences ou exercer vos droits sur vos données, vous pouvez utiliser le lien inclus dans les emails ou nous contacter via le formulaire de contact de notre site."
+      },
+      {
+        "title": "7. Sécurité",
+        "text": "Vos données sont protégées par Mailchimp, qui met en œuvre des mesures de sécurité conformément aux réglementations en vigueur. Nous accédons à leurs services uniquement via un point d’accès sécurisé."
+      },
+      {
+        "title": "8. Cookies et technologies similaires",
+        "text": "Nous utilisons des cookies pour améliorer l’expérience de navigation et collecter des statistiques d’utilisation. Des outils comme Google Analytics et Vercel Analytics peuvent utiliser des cookies pour collecter des informations anonymes. Plus de détails dans notre Politique de cookies."
+      },
+      {
+        "title": "9. Modifications de cette politique",
+        "text": "Cette Politique de confidentialité peut être mise à jour à l’avenir, notamment lors du lancement de l’application avec une gestion avancée des utilisateurs. Nous vous informerons de tout changement important via des avis sur notre site ou par email."
+      }
+    ],
+    "lastUpdated": "Dernière mise à jour : 21 mai 2025",
+    "cookiesLinkText": "Politique de cookies"
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "questions": [
+      {
+        "q": "Qu’est-ce que HomeStocker ?",
+        "a": "HomeStocker est une application qui vous aide à organiser et contrôler le stock de votre maison de manière simple et visuelle pour ne jamais manquer de rien."
+      },
+      {
+        "q": "Comment m’inscrire et commencer à utiliser HomeStocker ?",
+        "a": "Il vous suffit de créer un compte avec votre email et commencer à scanner vos produits pour gérer efficacement votre garde-manger."
+      },
+      {
+        "q": "HomeStocker est-il gratuit ?",
+        "a": "Oui, vous pouvez utiliser HomeStocker gratuitement. À l’avenir, nous pourrions ajouter des fonctionnalités premium selon les retours des utilisateurs."
+      },
+      {
+        "q": "Mes données sont-elles en sécurité ?",
+        "a": "Absolument. Nous protégeons vos informations selon des politiques de confidentialité strictes et utilisons des prestataires sécurisés pour gérer vos données."
+      },
+      {
+        "q": "Puis-je utiliser HomeStocker sur plusieurs appareils ?",
+        "a": "Oui, votre compte est synchronisé pour que vous puissiez accéder et gérer votre stock depuis différents appareils."
+      }
+    ]
+  },
+  "loginPage": {
+    "title": "Connectez-vous à votre compte",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "button": "Se connecter",
+    "redirect": "Vous n'avez pas de compte ?",
+    "redirectLink": "Inscrivez-vous"
+  },
+  "registerPage": {
+    "title": "Créer un compte",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "subscriptionType": "Type d’abonnement",
+    "plans": {
+      "free": "Gratuit (0 €/mois)",
+      "basic": "Basique (2,99 €/mois)",
+      "premium": "Premium (6,99 €/mois)"
+    },
+    "button": "S’inscrire",
+    "redirect": "Vous avez déjà un compte ?",
+    "redirectLink": "Connectez-vous"
+  }
+}

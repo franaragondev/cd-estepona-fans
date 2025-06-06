@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      Role     @default(EDITOR)
+  createdAt DateTime @default(now())
+  posts     News[]
+}
+
+model News {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model PhotoAlbum {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  coverImage  String?
+  photos      Photo[]
+}
+
+model Photo {
+  id        String   @id @default(cuid())
+  url       String
+  caption   String?
+  albumId   String
+  album     PhotoAlbum @relation(fields: [albumId], references: [id])
+}
+
+model Player {
+  id           String              @id @default(cuid())
+  name         String
+  number       Int
+  position     String
+  photo        String?
+  birthday     DateTime?
+  nationality  String?
+  stats        PlayerSeasonStat[]
+}
+
+model PlayerSeasonStat {
+  id        String   @id @default(cuid())
+  season    String   // Ej: "2024-2025"
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id])
+  minutes   Int      @default(0)
+  goals   Int      @default(0)
+  matches   Int      @default(0)
+}
+
+model Match {
+  id          String   @id @default(cuid())
+  date        DateTime
+  opponent    String
+  location    String
+  isHome      Boolean
+  competition String
+  score       String?  // Ej: "2-1"
+}

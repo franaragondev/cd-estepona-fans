@@ -1,0 +1,187 @@
+{
+  "head": {
+    "title": "HomeStocker | Easily control and organize your pantry stock at home",
+    "description": "HomeStocker helps you organize and control your pantry and household product stock by scanning codes and sending smart alerts. Save money, reduce waste, and avoid unnecessary purchases.",
+    "url": "https://homestocker.app/",
+    "image": "https://homestocker.app/logo-simple.webp",
+    "keywords": "real estate, rent, buy, sell, houses, apartments, homestocker"
+  },
+  "about": {
+    "title": "A solution designed for your daily life",
+    "highlight-description": "Home Stocker was born from a real need:",
+    "description": "forgetting what products you have at home or when they expire. In a world where food waste remains a big problem — both economically and environmentally — our app helps you keep track of your household inventory in a simple and visual way. Reduce unnecessary purchases, avoid throwing away food, and contribute to more responsible consumption."
+  },
+  "cta": {
+    "title": "Start organizing your pantry today",
+    "description": "Create your free account and discover how Home Stocker can help you at home.",
+    "placeholder": "Your email",
+    "button": "I'm interested",
+    "successMessage": "Thank you for joining the beta!",
+    "errorMessage": "An error occurred. Please try again.",
+    "invalidEmailMessage": "Please enter a valid email.",
+    "botDetectedMessage": "Bot detected. Action blocked.",
+    "emailDeletedMessage": "This email was deleted and needs to resubscribe.",
+    "serverErrorMessage": "Server error. Please try later.",
+    "genericErrorMessage": "Unknown error. Please try again later.",
+    "loginOrRegisterButton": "Start organizing"
+  },
+  "features": {
+    "title": "What can you do with Home Stocker?",
+    "pantry": "Organized pantry",
+    "scan": "Scan products",
+    "alerts": "Smart alerts",
+    "stats": "Visual statistics"
+  },
+  "footer": {
+    "text": "2025 Home Stocker. All rights reserved."
+  },
+  "hero": {
+    "title": "Control your home's stock",
+    "description": "Home Stocker helps you keep your pantry organized by scanning products and receiving alerts.",
+    "placeholder": "Your email",
+    "button": "I want to know more",
+    "successMessage": "Thank you for subscribing!",
+    "errorMessage": "An error occurred. Please try again.",
+    "invalidEmailMessage": "Please enter a valid email.",
+    "botDetectedMessage": "Bot detected. Action blocked.",
+    "emailDeletedMessage": "This email was deleted and needs to resubscribe.",
+    "serverErrorMessage": "Server error. Please try later.",
+    "genericErrorMessage": "Unknown error. Please try again later.",
+    "loginOrRegisterButton": "Join for free"
+  },
+  "menu": {
+    "home": "Home",
+    "features": "Features",
+    "about": "About the app",
+    "cta": "Start now",
+    "faq": "Frequently Asked Questions",
+    "login": "Log In",
+    "register": "Create Account",
+    "user": "User",
+    "language": "Language",
+    "profile": "My profile",
+    "logout": "Log out"
+  },
+  "language": {
+    "es": "Spanish",
+    "en": "English",
+    "fr": "French"
+  },
+  "cookies": {
+    "message": "We use cookies to improve your experience and analyze site usage. You can accept or reject them.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "learnMore": "Learn more",
+    "linkText": "Cookie Policy"
+  },
+  "cookiesPolicy": {
+    "title": "Cookie Policy",
+    "intro": "At Home Stocker, we use cookies to improve your browsing experience, analyze site traffic, and provide you with a more personalized service.",
+    "whatAreCookiesTitle": "What are cookies?",
+    "whatAreCookies": "Cookies are small text files stored on your device when you visit a website. They help remember your preferences, analyze how you use the site, and improve its functionality.",
+    "typesTitle": "What types of cookies do we use?",
+    "typesList": [
+      "Essential cookies: necessary for the basic functioning of the site. They cannot be disabled.",
+      "Analytical cookies: help us understand how the site is used to improve it. We use tools like Google Analytics and Vercel Analytics for this purpose."
+    ],
+    "manageTitle": "How can you manage them?",
+    "manageText": "You can accept or reject non-essential cookies via the consent banner when visiting the website. Additionally, you can delete or block cookies through your browser settings.",
+    "personalDataTitle": "Do we collect personal data?",
+    "personalDataText": "We do not use cookies to directly identify you. Tools like Google Analytics may collect anonymous data such as truncated IP address, browser type, visited pages, or visit duration. The only personal data we store directly is your email when you voluntarily subscribe to the beta, managed via Mailchimp. More details can be found in our Privacy Policy.",
+    "privacyPolicyLinkText": "Privacy Policy",
+    "changesTitle": "Changes to this policy",
+    "changesText": "We may update this Cookie Policy at any time. We recommend reviewing it periodically.",
+    "lastUpdated": "Last updated: May 2025"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "At HomeStocker we value your privacy and are committed to protecting your personal data. This Privacy Policy explains what data we collect, how we use it, and your rights.",
+    "sections": [
+      {
+        "title": "1. Data we collect",
+        "text": "We collect personal information you provide when registering, such as your email address. We also collect browsing data via cookies and similar technologies, including anonymized data like truncated IP address, browser type, visited pages, and session duration, through tools like Google Analytics and Vercel Analytics."
+      },
+      {
+        "title": "2. How we collect your data",
+        "text": "Your data is collected directly through the registration form and automatically through cookies when you browse our site."
+      },
+      {
+        "title": "3. Purpose of processing",
+        "text": "We use your email exclusively to inform you when the HomeStocker beta version is available. Cookies are used to improve functionality and user experience, as well as to analyze site usage."
+      },
+      {
+        "title": "4. Data sharing with third parties",
+        "text": "We do not share your personal data with third parties, except Mailchimp, our email marketing provider, who securely manages our mailing list. We also use services like Google Analytics and Vercel Analytics that may collect anonymized browsing data for statistical purposes."
+      },
+      {
+        "title": "5. Rights regarding your data",
+        "text": "You can unsubscribe and delete your subscription at any time using the unsubscribe link in our emails."
+      },
+      {
+        "title": "6. Exercising your rights",
+        "text": "To manage your preferences or exercise any rights over your data, you can use the link included in emails or contact us through our website contact form."
+      },
+      {
+        "title": "7. Security",
+        "text": "Your data is protected by Mailchimp, which implements security measures according to applicable regulations. We access their services only via a secure endpoint."
+      },
+      {
+        "title": "8. Cookies and similar technologies",
+        "text": "We use cookies to improve browsing experience and gather usage statistics. Tools like Google Analytics and Vercel Analytics may employ cookies to collect anonymous information. More details are available in our Cookie Policy."
+      },
+      {
+        "title": "9. Changes to this policy",
+        "text": "This Privacy Policy may be updated in the future, especially when we launch the app with advanced user management. We will notify you of any major changes via notices on our website or emails."
+      }
+    ],
+    "lastUpdated": "Last updated: May 21, 2025",
+    "cookiesLinkText": "Cookie Policy"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "questions": [
+      {
+        "q": "What is HomeStocker?",
+        "a": "HomeStocker is an app that helps you organize and control your home stock in a simple and visual way so you never run out of anything."
+      },
+      {
+        "q": "How can I register and start using HomeStocker?",
+        "a": "Just create an account with your email and start scanning your products to manage your pantry efficiently."
+      },
+      {
+        "q": "Is HomeStocker free?",
+        "a": "Yes, you can use HomeStocker for free. In the future, we may add premium features based on user feedback."
+      },
+      {
+        "q": "Is my data safe?",
+        "a": "Absolutely. We protect your information following strict privacy policies and use secure providers to manage your data."
+      },
+      {
+        "q": "Can I use HomeStocker on multiple devices?",
+        "a": "Yes, your account is synced so you can access and manage your stock from different devices."
+      }
+    ]
+  },
+  "loginPage": {
+    "title": "Log in to your account",
+    "email": "Email",
+    "password": "Password",
+    "button": "Log In",
+    "redirect": "Don't have an account?",
+    "redirectLink": "Register"
+  },
+  "registerPage": {
+    "title": "Create an account",
+    "email": "Email",
+    "password": "Password",
+    "subscriptionType": "Subscription Type",
+    "plans": {
+      "free": "Free (€0/month)",
+      "basic": "Basic (€2.99/month)",
+      "premium": "Premium (€6.99/month)"
+    },
+    "button": "Register",
+    "redirect": "Already have an account?",
+    "redirectLink": "Log in"
+  }
+}
