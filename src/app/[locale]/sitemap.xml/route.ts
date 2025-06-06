@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 
-const SITE_URL = "https://www.homestocker.app";
+const SITE_URL = "https://cd-estepona-fans.vercel.app";
 const locales = ["es", "en", "fr"];
 const pages = ["", "cookies", "privacy"];
 
