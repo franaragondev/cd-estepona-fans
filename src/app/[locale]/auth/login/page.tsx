@@ -51,8 +51,6 @@ export default function LoginPage() {
     }
   };
 
-  const locale = getLocaleFromPathname();
-
   return (
     <main className="min-h-screen flex-1 bg-gray-50 flex items-center justify-center px-4 py-12 -mt-35">
       <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
@@ -121,15 +119,6 @@ export default function LoginPage() {
             )}
           </button>
         </form>
-        <p className="mt-4 text-sm text-center text-gray-600">
-          {t("redirect")}{" "}
-          <a
-            href={locale ? `/${locale}/auth/register` : "/auth/register"}
-            className="text-indigo-600 hover:underline"
-          >
-            {t("redirectLink")}
-          </a>
-        </p>
       </div>
     </main>
   );

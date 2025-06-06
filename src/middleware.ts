@@ -32,9 +32,7 @@ export async function middleware(request: NextRequest) {
   const currentLocale = supportedLocales.includes(locale) ? locale : "en";
 
   const isProtectedRoute = pathname.startsWith(`/${currentLocale}/app`);
-  const isAuthRoute =
-    pathname.startsWith(`/${currentLocale}/auth/login`) ||
-    pathname.startsWith(`/${currentLocale}/auth/register`);
+  const isAuthRoute = pathname.startsWith(`/${currentLocale}/auth/login`);
 
   logDev("Path:", pathname);
   logDev("User authenticated:", !!user);

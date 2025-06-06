@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       user: {
         id: user.id,
         email: user.email,
-        subscriptionType: user.subscriptionType,
+        role: user.role,
       },
       token,
     });
