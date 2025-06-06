@@ -1,10 +1,10 @@
 {
   "head": {
-    "title": "HomeStocker | Controla y organiza el stock de tu despensa en casa fácilmente",
-    "description": "HomeStocker te ayuda a organizar y controlar el stock de tu despensa y productos en casa escaneando códigos y enviando alertas inteligentes. Ahorra dinero, reduce desperdicios y evita compras innecesarias.",
-    "url": "https://homestocker.app/",
-    "image": "https://homestocker.app/logo-simple.webp",
-    "keywords": "inmobiliaria, alquiler, compra, venta, casas, pisos, homestocker"
+    "title": "CD Estepona Fans | Noticias, Partidos y Contenido Exclusivo",
+    "description": "Sigue al CD Estepona como nunca antes. Consulta partidos, resultados, noticias del club y contenido exclusivo para los fans.",
+    "url": "https://cd-estepona-fans.vercel.app/",
+    "image": "https://cd-estepona-fans.vercel.app/logo.png",
+    "keywords": "cd estepona, fútbol, calendario, fans, noticias del club, resultados, fútbol español"
   },
   "about": {
     "title": "Una solución pensada para tu día a día",

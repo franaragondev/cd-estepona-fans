@@ -1,10 +1,10 @@
 {
   "head": {
-    "title": "HomeStocker | Contrôlez et organisez facilement le stock de votre garde-manger à la maison",
-    "description": "HomeStocker vous aide à organiser et contrôler le stock de votre garde-manger et produits à la maison en scannant les codes et en envoyant des alertes intelligentes. Économisez de l'argent, réduisez le gaspillage et évitez les achats inutiles.",
-    "url": "https://homestocker.app/",
-    "image": "https://homestocker.app/logo-simple.webp",
-    "keywords": "immobilier, location, achat, vente, maisons, appartements, homestocker"
+    "title": "CD Estepona Fans | Actus, Matchs et Contenu Exclusif",
+    "description": "Suivez le CD Estepona comme jamais auparavant. Accédez aux matchs, résultats, actualités du club et contenu exclusif pour les fans.",
+    "url": "https://cd-estepona-fans.vercel.app/",
+    "image": "https://cd-estepona-fans.vercel.app/logo.png",
+    "keywords": "cd estepona, football, calendrier, fans, actualités du club, résultats, football espagnol"
   },
   "about": {
     "title": "Une solution conçue pour votre quotidien",
