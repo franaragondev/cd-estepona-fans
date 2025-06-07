@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { User } from "lucide-react";
+import { Globe } from "lucide-react";
 
 const locales = [
   { code: "es", key: "es" },
@@ -21,8 +21,6 @@ export default function UserDropdown() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const basePath = `/${locale}`;
-  const isAppRoute = pathname.includes("/app");
 
   function changeLocale(newLocale: string) {
     const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
@@ -45,10 +43,6 @@ export default function UserDropdown() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
-  const handleClick = (url: string) => {
-    router.push(url);
-  };
-
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -58,8 +52,8 @@ export default function UserDropdown() {
         aria-expanded={open}
         aria-label="User menu"
       >
-        <User className="w-5 h-5" />
-        <span className="hidden sm:inline"> {tMenu("user")}</span>
+        <Globe className="w-5 h-5" />
+        <span className="hidden sm:inline"> {tMenu("language")}</span>
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${
             open ? "rotate-180" : "rotate-0"
@@ -83,66 +77,6 @@ export default function UserDropdown() {
           className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-50"
           role="menu"
         >
-          {isAppRoute ? (
-            <>
-              <button
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                role="menuitem"
-                onClick={() => {
-                  handleClick(`${basePath}/app/profile`);
-                  setOpen(false);
-                }}
-              >
-                {tMenu("profile")}
-              </button>
-
-              <button
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                role="menuitem"
-                onClick={async () => {
-                  await fetch("/api/logout", {
-                    method: "POST",
-                  });
-
-                  router.push(`/${locale}`);
-                  setOpen(false);
-                }}
-              >
-                {tMenu("logout")}
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                role="menuitem"
-                onClick={() => {
-                  handleClick("/auth/login");
-                  setOpen(false);
-                }}
-              >
-                {tMenu("login")}
-              </button>
-
-              <button
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                role="menuitem"
-                onClick={() => {
-                  handleClick("/auth/register");
-                  setOpen(false);
-                }}
-              >
-                {tMenu("register")}
-              </button>
-            </>
-          )}
-
-          <hr className="my-1" />
-
-          <div className="px-4 py-2 text-sm font-semibold text-gray-700">
-            {tMenu("language")}
-          </div>
-
           <ul>
             {locales.map(({ code, key }) => (
               <li key={code}>

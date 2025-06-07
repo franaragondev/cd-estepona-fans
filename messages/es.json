@@ -1,62 +1,62 @@
 {
   "head": {
-    "title": "CD Estepona Fans | Noticias, Partidos y Contenido Exclusivo",
-    "description": "Sigue al CD Estepona como nunca antes. Consulta partidos, resultados, noticias del club y contenido exclusivo para los fans.",
+    "title": "Aficionados del CD Estepona | Noticias, Partidos y Contenido Exclusivo",
+    "description": "Sigue al CD Estepona como nunca antes. Mantente al día con los partidos, resultados, noticias del club y contenido exclusivo para aficionados.",
     "url": "https://cd-estepona-fans.vercel.app/",
     "image": "https://cd-estepona-fans.vercel.app/logo.png",
-    "keywords": "cd estepona, fútbol, calendario, fans, noticias del club, resultados, fútbol español"
+    "keywords": "cd estepona, fútbol, partidos, aficionados, noticias del club, resultados, fútbol español"
   },
   "about": {
-    "title": "Una solución pensada para tu día a día",
-    "highlight-description": "Home Stocker nace de una necesidad real:",
-    "description": "olvidarse de qué productos tienes en casa o cuándo caducan. En un mundo donde el desperdicio de alimentos sigue siendo un gran problema —tanto económico como ambiental—, nuestra app te ayuda a llevar el control de tu inventario doméstico de forma sencilla y visual. Reduce compras innecesarias, evita tirar comida y contribuye a un consumo más responsable."
+    "title": "CD Estepona: Más que un club",
+    "highlight-description": "CD Estepona Fans es un espacio creado para ti:",
+    "description": "Te traemos las últimas noticias, resúmenes de partidos, resultados y contenido exclusivo sobre el CD Estepona. Ya estés en el estadio o siguiéndolo desde lejos, siempre estarás al día con tu equipo favorito."
   },
   "cta": {
-    "title": "Empieza a organizar tu despensa hoy",
-    "description": "Crea tu cuenta gratis y descubre cómo Home Stocker puede ayudarte en casa.",
-    "placeholder": "Tu email",
-    "button": "Me interesa",
-    "successMessage": "¡Gracias por unirte a la beta!",
-    "errorMessage": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+    "title": "Únete a la Marea Roja",
+    "description": "Suscríbete y no te pierdas ninguna novedad del CD Estepona.",
+    "placeholder": "Tu correo electrónico",
+    "button": "Entérate antes que nadie",
+    "successMessage": "¡Gracias por unirte!",
+    "errorMessage": "Ha ocurrido un error. Inténtalo de nuevo.",
     "invalidEmailMessage": "Por favor, introduce un correo válido.",
     "botDetectedMessage": "Bot detectado. Acción bloqueada.",
-    "emailDeletedMessage": "Este correo fue eliminado y debe volver a suscribirse.",
-    "serverErrorMessage": "Error del servidor. Inténtalo más tarde.",
-    "genericErrorMessage": "Error desconocido. Por favor, inténtalo más tarde.",
-    "loginOrRegisterButton": "Empieza a organizar"
+    "emailDeletedMessage": "Este correo fue eliminado y necesita volver a suscribirse.",
+    "serverErrorMessage": "Error del servidor. Intenta más tarde.",
+    "genericErrorMessage": "Error desconocido. Intenta nuevamente más tarde.",
+    "loginOrRegisterButton": "Accede al contenido exclusivo"
   },
   "features": {
-    "title": "¿Qué puedes hacer con Home Stocker?",
-    "pantry": "Despensa organizada",
-    "scan": "Escanea productos",
-    "alerts": "Alertas inteligentes",
-    "stats": "Estadísticas visuales"
+    "title": "¿Qué encontrarás aquí?",
+    "pantry": "Últimos Partidos y Resultados",
+    "scan": "Resumen de Partidos y Fotos",
+    "alerts": "Alertas en Tiempo Real",
+    "stats": "Estadísticas y Clasificación del Equipo"
   },
   "footer": {
-    "text": "2025 Home Stocker. Todos los derechos reservados."
+    "text": "2025 CD Estepona Fans. Todos los derechos reservados. Página web cedida por <link>Fran Aragón</link>."
   },
   "hero": {
-    "title": "Controla el stock de tu casa",
-    "description": "Home Stocker te ayuda a mantener tu despensa organizada escaneando productos y recibiendo alertas.",
+    "title": "Toda la actualidad del CD Estepona, en un solo lugar",
+    "description": "Sigue al equipo que amas. Recibe actualizaciones exclusivas, fotos y contenido hecho por y para los aficionados.",
     "placeholder": "Tu correo electrónico",
-    "button": "Quiero saber más",
+    "button": "Recibe las últimas novedades",
     "successMessage": "¡Gracias por suscribirte!",
-    "errorMessage": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+    "errorMessage": "Ha ocurrido un error. Inténtalo de nuevo.",
     "invalidEmailMessage": "Por favor, introduce un correo válido.",
     "botDetectedMessage": "Bot detectado. Acción bloqueada.",
-    "emailDeletedMessage": "Este correo fue eliminado y debe volver a suscribirse.",
-    "serverErrorMessage": "Error del servidor. Inténtalo más tarde.",
-    "genericErrorMessage": "Error desconocido. Por favor, inténtalo más tarde.",
-    "loginOrRegisterButton": "Únete gratis"
+    "emailDeletedMessage": "Este correo fue eliminado y necesita volver a suscribirse.",
+    "serverErrorMessage": "Error del servidor. Intenta más tarde.",
+    "genericErrorMessage": "Error desconocido. Intenta nuevamente más tarde.",
+    "loginOrRegisterButton": "Únete a la comunidad"
   },
   "menu": {
     "home": "Inicio",
-    "features": "Funciones",
-    "about": "Sobre la app",
-    "cta": "Empieza ahora",
+    "features": "Destacados",
+    "about": "Sobre el Club",
+    "cta": "Suscríbete",
     "faq": "Preguntas Frecuentes",
     "login": "Iniciar Sesión",
-    "register": "Crear cuenta",
+    "register": "Registrarse",
     "user": "Usuario",
     "language": "Idioma",
     "profile": "Mi perfil",
@@ -64,124 +64,98 @@
   },
   "language": {
     "es": "Español",
-    "en": "English",
-    "fr": "Français"
+    "en": "Inglés",
+    "fr": "Francés"
   },
   "cookies": {
-    "message": "Utilizamos cookies para mejorar tu experiencia y analizar el uso del sitio. Puedes aceptarlas o rechazarlas.",
+    "message": "Usamos cookies para mejorar tu experiencia y analizar el uso del sitio. Puedes aceptarlas o rechazarlas.",
     "accept": "Aceptar",
     "reject": "Rechazar",
     "learnMore": "Saber más",
-    "linkText": "Política de cookies"
+    "linkText": "Política de Cookies"
   },
   "cookiesPolicy": {
-    "title": "Política de cookies",
-    "intro": "En Home Stocker utilizamos cookies para mejorar tu experiencia de navegación, analizar el tráfico del sitio y ofrecerte un servicio más personalizado.",
+    "title": "Política de Cookies",
+    "intro": "Usamos cookies para mejorar tu experiencia y analizar el tráfico en nuestro sitio web.",
     "whatAreCookiesTitle": "¿Qué son las cookies?",
-    "whatAreCookies": "Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Sirven para recordar tus preferencias, analizar cómo usas el sitio y mejorar su funcionamiento.",
-    "typesTitle": "¿Qué tipos de cookies utilizamos?",
+    "whatAreCookies": "Las cookies son pequeños archivos de texto almacenados en tu dispositivo que ayudan al sitio web a recordar tus preferencias y patrones de uso.",
+    "typesTitle": "Tipos de cookies que usamos",
     "typesList": [
-      "Cookies esenciales: necesarias para el funcionamiento básico del sitio. No se pueden desactivar.",
-      "Cookies analíticas: nos permiten entender cómo se utiliza el sitio para mejorarlo. Usamos herramientas como Google Analytics y Vercel Analytics para este propósito."
+      "Cookies esenciales: Requeridas para el funcionamiento básico del sitio.",
+      "Cookies analíticas: Nos ayudan a entender cómo los visitantes interactúan con el sitio."
     ],
-    "manageTitle": "¿Cómo puedes gestionarlas?",
-    "manageText": "Puedes aceptar o rechazar el uso de cookies no esenciales desde el banner de consentimiento al visitar la web. Además, puedes eliminar o bloquear las cookies desde la configuración de tu navegador.",
-    "personalDataTitle": "¿Se recopilan datos personales?",
-    "personalDataText": "No utilizamos cookies para identificarte directamente. Herramientas como Google Analytics pueden recopilar datos anónimos, como tu dirección IP truncada, tipo de navegador, páginas visitadas o duración de la visita. El único dato personal que almacenamos directamente es tu correo electrónico cuando te suscribes voluntariamente a la beta, gestionado a través de Mailchimp. Puedes consultar más detalles en nuestra Política de Privacidad.",
+    "manageTitle": "Gestión de cookies",
+    "manageText": "Puedes aceptar o rechazar las cookies no esenciales mediante el banner o a través de la configuración de tu navegador.",
+    "personalDataTitle": "Recopilación de datos personales",
+    "personalDataText": "No usamos cookies para identificarte directamente. Algunos datos analíticos pueden recopilarse de forma anónima.",
     "privacyPolicyLinkText": "Política de Privacidad",
-    "changesTitle": "Cambios en esta política",
-    "changesText": "Podemos actualizar esta Política de Cookies en cualquier momento. Te recomendamos revisarla periódicamente.",
-    "lastUpdated": "Última actualización: mayo de 2025"
+    "changesTitle": "Actualizaciones de la política",
+    "changesText": "Podemos actualizar esta política. Revisa esta página regularmente para ver los cambios.",
+    "lastUpdated": "Última actualización: mayo 2025"
   },
   "privacyPolicy": {
     "title": "Política de Privacidad",
-    "intro": "En HomeStocker valoramos tu privacidad y nos comprometemos a proteger tus datos personales. Esta Política de Privacidad explica qué datos recogemos, cómo los usamos y cuáles son tus derechos.",
+    "intro": "Estamos comprometidos con la protección de tus datos personales. Esta Política de Privacidad explica qué recopilamos y cómo lo usamos.",
     "sections": [
       {
-        "title": "1. Datos que recogemos",
-        "text": "Recogemos información personal que tú nos proporcionas al registrarte en nuestro formulario, como tu dirección de correo electrónico. También recopilamos datos de navegación mediante cookies y tecnologías similares, incluyendo datos anonimizados como tu dirección IP truncada, tipo de navegador, páginas visitadas y duración de la sesión, a través de herramientas como Google Analytics y Vercel Analytics."
+        "title": "1. Qué recopilamos",
+        "text": "Tu dirección de correo electrónico (cuando te suscribes) y datos de uso anónimos mediante cookies."
       },
       {
-        "title": "2. Cómo recogemos tus datos",
-        "text": "Tus datos son recogidos directamente a través del formulario de registro y automáticamente mediante cookies cuando navegas por nuestro sitio."
+        "title": "2. Cómo lo recopilamos",
+        "text": "A través de los formularios que completas y automáticamente mediante cookies."
       },
       {
-        "title": "3. Finalidad del tratamiento",
-        "text": "Utilizamos tu correo electrónico exclusivamente para informarte cuando la versión beta de HomeStocker esté disponible. Las cookies se usan para mejorar la funcionalidad y experiencia del usuario, así como para analizar el uso de la web."
+        "title": "3. Por qué lo recopilamos",
+        "text": "Para mantenerte informado con noticias y novedades de CD Estepona Fans."
       },
       {
-        "title": "4. Compartición de datos con terceros",
-        "text": "No compartimos tus datos personales con terceros, excepto con Mailchimp, nuestro proveedor de email marketing, que gestiona la lista de correos de forma segura. Además, utilizamos servicios como Google Analytics y Vercel Analytics, que pueden recopilar datos anonimizados sobre tu navegación con fines estadísticos."
+        "title": "4. Terceros",
+        "text": "Utilizamos servicios como Mailchimp y Google Analytics, que pueden recopilar y procesar datos en nuestro nombre."
       },
       {
-        "title": "5. Derechos sobre tus datos",
-        "text": "Puedes darte de baja y eliminar tu suscripción en cualquier momento usando el enlace para cancelar la suscripción que encontrarás en los emails que enviamos."
+        "title": "5. Tus derechos",
+        "text": "Puedes darte de baja en cualquier momento y solicitar la eliminación de tus datos."
       },
       {
-        "title": "6. Ejercicio de derechos",
-        "text": "Para gestionar tus preferencias o ejercer cualquier derecho sobre tus datos, puedes utilizar el enlace incluido en los emails o contactarnos a través de nuestro formulario de contacto en la web."
-      },
-      {
-        "title": "7. Seguridad",
-        "text": "Tus datos están protegidos por Mailchimp, nuestro proveedor de email marketing, que implementa medidas de seguridad conforme a las normativas aplicables. Nosotros accedemos a sus servicios únicamente mediante un endpoint seguro."
-      },
-      {
-        "title": "8. Cookies y tecnologías similares",
-        "text": "Usamos cookies para mejorar la experiencia de navegación y obtener estadísticas de uso. Herramientas como Google Analytics y Vercel Analytics pueden emplear cookies para recopilar información anónima. Puedes consultar más detalles en nuestra Política de Cookies."
-      },
-      {
-        "title": "9. Cambios en esta política",
-        "text": "Esta Política de Privacidad puede actualizarse en el futuro, especialmente cuando lancemos la app con gestión avanzada de usuarios. Te notificaremos sobre cualquier cambio importante mediante avisos en nuestra web o emails."
+        "title": "6. Contacto",
+        "text": "Utiliza el formulario de contacto en nuestro sitio web para cuestiones relacionadas con la privacidad."
       }
     ],
-    "lastUpdated": "Última actualización: 21 de mayo de 2025",
+    "lastUpdated": "Última actualización: mayo 2025",
     "cookiesLinkText": "Política de Cookies"
   },
   "faq": {
     "title": "Preguntas Frecuentes",
     "questions": [
       {
-        "q": "¿Qué es HomeStocker?",
-        "a": "HomeStocker es una aplicación que te ayuda a organizar y controlar el stock de tu hogar de forma sencilla y visual, para que nunca te falte nada."
+        "q": "¿Es este el sitio oficial del CD Estepona?",
+        "a": "No, este es un sitio independiente creado por y para los aficionados del CD Estepona."
       },
       {
-        "q": "¿Cómo puedo registrarme y empezar a usar HomeStocker?",
-        "a": "Solo tienes que crear una cuenta con tu correo electrónico y comenzar a escanear tus productos para gestionar tu despensa de manera eficiente."
+        "q": "¿Cómo puedo recibir actualizaciones de los partidos?",
+        "a": "Suscríbete a nuestro boletín o síguenos en redes sociales para estar al día."
       },
       {
-        "q": "¿HomeStocker es gratuita?",
-        "a": "Sí, puedes usar HomeStocker de forma gratuita. En el futuro podríamos añadir funciones premium basadas en la opinión de nuestros usuarios."
+        "q": "¿Es gratuito?",
+        "a": "Sí, todo el contenido es gratuito para los aficionados."
       },
       {
-        "q": "¿Mis datos están seguros?",
-        "a": "Por supuesto. Protegemos tu información siguiendo estrictas políticas de privacidad y utilizamos proveedores seguros para gestionar tus datos."
+        "q": "¿Con qué frecuencia se actualiza el contenido?",
+        "a": "Actualizamos el sitio después de cada partido y cuando hay noticias importantes del club."
       },
       {
-        "q": "¿Puedo usar HomeStocker en varios dispositivos?",
-        "a": "Sí, tu cuenta está sincronizada para que puedas acceder y gestionar tu stock desde diferentes dispositivos."
+        "q": "¿Quién ha creado esta web?",
+        "a": "Esta página ha sido desarrollada y cedida gratuitamente por <link>Fran Aragón</link> para los aficionados del CD Estepona, sin ningún vínculo oficial con el club."
       }
     ]
   },
   "loginPage": {
-    "title": "Inicia sesión en tu cuenta",
+    "title": "Inicia sesión en CD Estepona Fans",
     "email": "Correo electrónico",
     "password": "Contraseña",
     "button": "Iniciar sesión",
-    "redirect": "¿No tienes una cuenta?",
+    "redirect": "¿No tienes cuenta?",
     "redirectLink": "Regístrate"
-  },
-  "registerPage": {
-    "title": "Crea una cuenta",
-    "email": "Correo electrónico",
-    "password": "Contraseña",
-    "subscriptionType": "Tipo de suscripción",
-    "plans": {
-      "free": "Gratis (0 €/mes)",
-      "basic": "Básico (2,99 €/mes)",
-      "premium": "Premium (6,99 €/mes)"
-    },
-    "button": "Registrarse",
-    "redirect": "¿Ya tienes una cuenta?",
-    "redirectLink": "Inicia sesión"
   }
 }

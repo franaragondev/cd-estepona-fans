@@ -86,3 +86,10 @@ model Match {
   competition String
   score       String?  // Ej: "2-1"
 }
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+}

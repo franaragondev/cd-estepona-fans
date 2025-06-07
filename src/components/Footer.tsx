@@ -6,9 +6,7 @@ import { usePathname } from "next/navigation";
 export default function Footer() {
   const t = useTranslations("footer");
   const pathname = usePathname();
-
-  const isAuthPage =
-    pathname?.includes("/auth/register") || pathname?.includes("/auth/login");
+  const isAuthPage = pathname?.includes("/auth/login");
 
   return (
     <footer
@@ -16,7 +14,18 @@ export default function Footer() {
         isAuthPage ? "bg-gray-50" : "bg-white"
       }`}
     >
-      &copy; {t("text")}
+      {t.rich("text", {
+        link: (chunks) => (
+          <a
+            href="https://www.linkedin.com/in/fran-aragon-simon/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-gray-700"
+          >
+            {chunks}
+          </a>
+        ),
+      })}
     </footer>
   );
 }

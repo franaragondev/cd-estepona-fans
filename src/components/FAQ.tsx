@@ -8,6 +8,7 @@ import {
 } from "@radix-ui/react-accordion";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo } from "react";
+import reactStringReplace from "react-string-replace";
 import { langMap } from "@/lib/langMap";
 
 export default function FAQ() {
@@ -41,6 +42,25 @@ export default function FAQ() {
     };
   }, [faqSchema]);
 
+  function renderAnswer(text: string) {
+    return reactStringReplace(text, /<link>(.*?)<\/link>/g, (match, i) => (
+      <a
+        key={`link-${i}`}
+        href="https://www.linkedin.com/in/fran-aragon-simon/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          color: "inherit",
+          textDecoration: "underline",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        {match}
+      </a>
+    ));
+  }
+
   return (
     <section id="faq" className="max-w-2xl mx-auto my-16 px-4">
       <h2 className="text-3xl font-bold text-center mb-8">{t("title")}</h2>
@@ -55,7 +75,7 @@ export default function FAQ() {
               {item.q}
             </AccordionTrigger>
             <AccordionContent className="pb-4 text-gray-700">
-              {item.a}
+              {renderAnswer(item.a)}
             </AccordionContent>
           </AccordionItem>
         ))}

@@ -123,6 +123,8 @@ export default function MobileMenu({
               )}
             </nav>
 
+            <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
+
             <div>
               <h3 className="mb-2 font-semibold text-gray-800 dark:text-gray-100">
                 {t("language")}
@@ -145,54 +147,6 @@ export default function MobileMenu({
                 ))}
               </ul>
             </div>
-
-            <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
-
-            {isAppRoute ? (
-              <>
-                <div className="mt-4">
-                  <Link
-                    href={`/${locale}/app/profile`}
-                    onClick={onCloseAction}
-                    className="block py-2 text-center rounded border-2 border-gray-300 text-gray-800 hover:bg-gray-800 hover:text-white hover:border-gray-800 transition"
-                  >
-                    Mi perfil
-                  </Link>
-                </div>
-
-                <div className="mt-4">
-                  <Link
-                    href={`/${locale}/app/settings`}
-                    onClick={onCloseAction}
-                    className="block py-2 text-center rounded border-2 border-gray-800 text-white bg-gray-800 hover:bg-white hover:text-gray-800 hover:border-gray-300 transition"
-                  >
-                    Ajustes
-                  </Link>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="mt-4">
-                  <Link
-                    href={`/${locale}/auth/login`}
-                    onClick={onCloseAction}
-                    className="block py-2 text-center rounded border-2 border-gray-300 text-gray-800 hover:bg-gray-800 hover:text-white hover:border-gray-800 transition"
-                  >
-                    {t("login")}
-                  </Link>
-                </div>
-
-                <div className="mt-4">
-                  <Link
-                    href={`/${locale}/auth/register`}
-                    onClick={onCloseAction}
-                    className="block py-2 text-center rounded border-2 border-gray-800 text-white bg-gray-800 hover:bg-white hover:text-gray-800 hover:border-gray-300 transition"
-                  >
-                    {t("register")}
-                  </Link>
-                </div>
-              </>
-            )}
           </motion.aside>
         </motion.div>
       )}
