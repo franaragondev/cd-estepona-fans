@@ -19,28 +19,34 @@ export function DesktopMenu({ isAppRoute }: DesktopMenuProps) {
       {isAppRoute ? (
         <>
           <Link
-            href={`${basePath}/app`}
+            href={`${basePath}/app/home`}
             className="text-gray-700 hover:text-black"
           >
             {t("home")}
           </Link>
           <Link
-            href={`${basePath}/app/pantry`}
+            href={`${basePath}/app/news`}
             className="text-gray-700 hover:text-black"
           >
-            Mi Despensa
+            {t("news")}
           </Link>
           <Link
-            href={`${basePath}/app/history`}
+            href={`${basePath}/app/matches`}
             className="text-gray-700 hover:text-black"
           >
-            Historial / Consumo
+            {t("matches")}
           </Link>
           <Link
-            href={`${basePath}/app/expirations`}
+            href={`${basePath}/app/gallery`}
             className="text-gray-700 hover:text-black"
           >
-            Próximas caducidades
+            {t("gallery")}
+          </Link>
+          <Link
+            href={`${basePath}/app/tribuna`}
+            className="text-gray-700 hover:text-black"
+          >
+            {t("tribuna")}
           </Link>
         </>
       ) : (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CalendarCheck, Camera, Bell, BarChart3 } from "lucide-react";
+import { CalendarCheck, Camera, Newspaper, BarChart3 } from "lucide-react";
 
 export default function Features() {
   const t = useTranslations("features");
@@ -9,7 +9,7 @@ export default function Features() {
   const features = [
     { icon: <CalendarCheck size={32} />, title: t("pantry") },
     { icon: <Camera size={32} />, title: t("scan") },
-    { icon: <Bell size={32} />, title: t("alerts") },
+    { icon: <Newspaper size={32} />, title: t("alerts") },
     { icon: <BarChart3 size={32} />, title: t("stats") },
   ];
 

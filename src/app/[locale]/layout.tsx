@@ -1,5 +1,4 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { headers } from "next/headers";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -79,12 +78,6 @@ export default async function LocaleLayout({
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
-  const headersList = await headers();
-  const url =
-    headersList.get("x-invoke-path") || headersList.get("referer") || "";
-
-  const isAppRoute = url.includes("/app");
-
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -109,7 +102,7 @@ export default async function LocaleLayout({
         </Script>
 
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header isAppRoute={isAppRoute} />
+          <Header />
           <ClientParallaxProvider>
             <main>{children}</main>
             <ConsentScripts />

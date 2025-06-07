@@ -17,7 +17,6 @@ export default function UserDropdown() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const tLang = useTranslations("language");
-  const tMenu = useTranslations("menu");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -53,7 +52,6 @@ export default function UserDropdown() {
         aria-label="User menu"
       >
         <Globe className="w-5 h-5" />
-        <span className="hidden sm:inline"> {tMenu("language")}</span>
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${
             open ? "rotate-180" : "rotate-0"

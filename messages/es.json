@@ -29,7 +29,7 @@
     "title": "¿Qué encontrarás aquí?",
     "pantry": "Últimos Partidos y Resultados",
     "scan": "Resumen de Partidos y Fotos",
-    "alerts": "Alertas en Tiempo Real",
+    "alerts": "Noticias y Actualizaciones",
     "stats": "Estadísticas y Clasificación del Equipo"
   },
   "footer": {
@@ -51,6 +51,10 @@
   },
   "menu": {
     "home": "Inicio",
+    "news": "Noticias",
+    "matches": "Partidos",
+    "gallery": "Galería",
+    "tribuna": "La Tribuna del Muñoz Pérez",
     "features": "Destacados",
     "about": "Sobre el Club",
     "cta": "Suscríbete",
@@ -60,7 +64,8 @@
     "user": "Usuario",
     "language": "Idioma",
     "profile": "Mi perfil",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "enterApp": "Entrar a la App"
   },
   "language": {
     "es": "Español",

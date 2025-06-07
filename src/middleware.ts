@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
   const supportedLocales = ["en", "es", "fr"];
   const currentLocale = supportedLocales.includes(locale) ? locale : "en";
 
-  const isProtectedRoute = pathname.startsWith(`/${currentLocale}/app`);
+  const isProtectedRoute = pathname.startsWith(`/${currentLocale}/admin`);
   const isAuthRoute = pathname.startsWith(`/${currentLocale}/auth/login`);
 
   logDev("Path:", pathname);
@@ -50,7 +50,9 @@ export async function middleware(request: NextRequest) {
   // Redirect to app if authenticated user tries to access auth routes
   if (isAuthRoute && user) {
     logDev("Redirecting to app");
-    return NextResponse.redirect(new URL(`/${currentLocale}/app`, request.url));
+    return NextResponse.redirect(
+      new URL(`/${currentLocale}/app/home`, request.url)
+    );
   }
 
   return intlMiddleware(request);

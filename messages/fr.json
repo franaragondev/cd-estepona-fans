@@ -29,7 +29,7 @@
     "title": "Que trouveras-tu ici ?",
     "pantry": "Derniers matchs et résultats",
     "scan": "Résumés de matchs et photos",
-    "alerts": "Alertes en temps réel",
+    "alerts": "Actualités et Mises à Jour",
     "stats": "Statistiques et classement de l’équipe"
   },
   "footer": {
@@ -51,16 +51,21 @@
   },
   "menu": {
     "home": "Accueil",
+    "news": "Actualités",
+    "matches": "Matchs",
+    "gallery": "Galerie",
+    "tribuna": "La Tribuna del Muñoz Pérez",
     "features": "À la une",
     "about": "À propos du club",
-    "cta": "Abonne-toi",
-    "faq": "FAQ",
-    "login": "Se connecter",
-    "register": "S'inscrire",
+    "cta": "S’abonner",
+    "faq": "Questions fréquentes",
+    "login": "Connexion",
+    "register": "Inscription",
     "user": "Utilisateur",
     "language": "Langue",
     "profile": "Mon profil",
-    "logout": "Se déconnecter"
+    "logout": "Déconnexion",
+    "enterApp": "Entrer dans l’application"
   },
   "language": {
     "es": "Espagnol",

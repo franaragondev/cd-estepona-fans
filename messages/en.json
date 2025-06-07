@@ -29,7 +29,7 @@
     "title": "What you’ll find here",
     "pantry": "Latest Fixtures & Results",
     "scan": "Match Highlights & Photos",
-    "alerts": "Real-Time Alerts",
+    "alerts": "News and Updates",
     "stats": "Team Stats & Rankings"
   },
   "footer": {
@@ -51,16 +51,21 @@
   },
   "menu": {
     "home": "Home",
-    "features": "Highlights",
+    "news": "News",
+    "matches": "Matches",
+    "gallery": "Gallery",
+    "tribuna": "La Tribuna del Muñoz Pérez",
+    "features": "Features",
     "about": "About the Club",
     "cta": "Subscribe",
-    "faq": "FAQs",
+    "faq": "Frequently Asked Questions",
     "login": "Log In",
-    "register": "Sign Up",
+    "register": "Register",
     "user": "User",
     "language": "Language",
-    "profile": "My profile",
-    "logout": "Log out"
+    "profile": "My Profile",
+    "logout": "Log Out",
+    "enterApp": "Enter the App"
   },
   "language": {
     "es": "Spanish",
