@@ -10,22 +10,27 @@ export default function Footer() {
 
   return (
     <footer
-      className={`text-center py-6 text-sm text-gray-500 ${
+      className={`py-6 text-sm text-gray-500 ${
         isAuthPage ? "bg-gray-50" : "bg-white"
       }`}
     >
-      {t.rich("text", {
-        link: (chunks) => (
-          <a
-            href="https://www.linkedin.com/in/fran-aragon-simon/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-gray-700"
-          >
-            {chunks}
-          </a>
-        ),
-      })}
+      <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between text-center sm:text-left gap-2">
+        <span>{t("left")}</span>
+        <span>
+          {t.rich("right", {
+            link: (chunks) => (
+              <a
+                href="https://www.linkedin.com/in/fran-aragon-simon/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-gray-700"
+              >
+                {chunks}
+              </a>
+            ),
+          })}
+        </span>
+      </div>
     </footer>
   );
 }

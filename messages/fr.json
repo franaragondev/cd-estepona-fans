@@ -33,7 +33,8 @@
     "stats": "Statistiques et classement de l’équipe"
   },
   "footer": {
-    "text": "2025 CD Estepona Fans. Tous droits réservés. Site web cédé par <link>Fran Aragón</link>."
+    "left": "2025 CD Estepona Fans. Tous droits réservés.",
+    "right": "Site web offert par <link>Fran Aragón</link>."
   },
   "hero": {
     "title": "Toute l’actualité du CD Estepona, réunie en un seul endroit",
@@ -65,7 +66,7 @@
     "language": "Langue",
     "profile": "Mon profil",
     "logout": "Déconnexion",
-    "enterApp": "Entrer dans l’application"
+    "enterApp": "Aller à l’app"
   },
   "language": {
     "es": "Espagnol",

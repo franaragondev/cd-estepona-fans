@@ -82,7 +82,7 @@ export default function Header() {
           {!isInApp && (
             <Link
               href={`${basePath}/app/home`}
-              className="px-4 py-2 rounded text-white bg-[#DC2C20]"
+              className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200"
             >
               {t("enterApp")}
             </Link>
