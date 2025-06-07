@@ -82,13 +82,25 @@ export default function Header() {
           {!isInApp && (
             <Link
               href={`${basePath}/app/home`}
-              className="px-4 py-2 rounded text-gray-700 border-2 border-[#DC2C20] hover:border-[#2F36A1] transition-colors duration-200"
+              className="px-4 py-2 rounded text-white bg-[#DC2C20]"
             >
               {t("enterApp")}
             </Link>
           )}
 
           <UserDropdown />
+        </div>
+
+        <div className="flex justify-end md:hidden">
+          {!isInApp && (
+            <Link
+              href={`${basePath}/app/home`}
+              onClick={() => setIsMenuOpen(false)}
+              className="px-4 py-2 rounded text-white bg-[#DC2C20]"
+            >
+              {t("enterApp")}
+            </Link>
+          )}
         </div>
       </header>
 

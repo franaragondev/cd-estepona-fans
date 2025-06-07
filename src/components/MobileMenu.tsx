@@ -58,28 +58,39 @@ export default function MobileMenu({
               {isAppRoute ? (
                 <>
                   <Link
-                    href={`${basePath}/app`}
+                    href={`${basePath}/app/home`}
+                    onClick={onCloseAction}
                     className="text-gray-700 hover:text-black"
                   >
                     {t("home")}
                   </Link>
                   <Link
-                    href={`${basePath}/app/pantry`}
+                    href={`${basePath}/app/news`}
+                    onClick={onCloseAction}
                     className="text-gray-700 hover:text-black"
                   >
-                    Mi Despensa
+                    {t("news")}
                   </Link>
                   <Link
-                    href={`${basePath}/app/history`}
+                    href={`${basePath}/app/matches`}
+                    onClick={onCloseAction}
                     className="text-gray-700 hover:text-black"
                   >
-                    Historial / Consumo
+                    {t("matches")}
                   </Link>
                   <Link
-                    href={`${basePath}/app/expirations`}
+                    href={`${basePath}/app/gallery`}
+                    onClick={onCloseAction}
                     className="text-gray-700 hover:text-black"
                   >
-                    Próximas caducidades
+                    {t("gallery")}
+                  </Link>
+                  <Link
+                    href={`${basePath}/app/tribuna`}
+                    onClick={onCloseAction}
+                    className="text-gray-700 hover:text-black"
+                  >
+                    {t("tribuna")}
                   </Link>
                 </>
               ) : (
@@ -125,7 +136,7 @@ export default function MobileMenu({
 
             <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
 
-            <div>
+            <div className="mb-4">
               <h3 className="mb-2 font-semibold text-gray-800 dark:text-gray-100">
                 {t("language")}
               </h3>
