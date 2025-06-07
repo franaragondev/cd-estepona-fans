@@ -96,7 +96,7 @@ export default function Header() {
             <Link
               href={`${basePath}/app/home`}
               onClick={() => setIsMenuOpen(false)}
-              className="px-4 py-2 rounded text-white bg-[#DC2C20]"
+              className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200"
             >
               {t("enterApp")}
             </Link>

@@ -1,12 +1,12 @@
 "use client";
 
 const images = [
-  "/gallery1.jpg",
-  "/gallery2.jpg",
-  "/gallery3.jpg",
-  "/gallery4.jpg",
-  "/gallery5.jpg",
-  "/gallery6.jpg",
+  "/dummy.jpg",
+  "/dummy.jpg",
+  "/dummy.jpg",
+  "/dummy.jpg",
+  "/dummy.jpg",
+  "/dummy.jpg",
 ];
 
 export default function GalleryPreview() {

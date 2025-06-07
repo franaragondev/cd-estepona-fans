@@ -5,41 +5,86 @@ const dummyNews = [
     id: 1,
     title: "Victoria contundente en el último partido",
     date: "2025-06-01",
-    summary:
-      "El CD Estepona gana 3-0 contra el rival local con una gran actuación de los delanteros.",
+    image: "/dummy.jpg",
   },
   {
     id: 2,
     title: "Anuncio de nueva equipación para la temporada 2025",
     date: "2025-05-25",
-    summary:
-      "Ya está disponible la nueva camiseta oficial con diseño renovado para los fans.",
+    image: "/dummy.jpg",
   },
   {
     id: 3,
     title: "Partido solidario el próximo domingo",
     date: "2025-05-20",
-    summary:
-      "Se celebrará un partido benéfico para apoyar a las familias afectadas por las recientes inundaciones.",
+    image: "/dummy.jpg",
+  },
+  {
+    id: 4,
+    title: "Entrenamiento abierto para los fans",
+    date: "2025-06-10",
+    image: "/dummy.jpg",
+  },
+  {
+    id: 5,
+    title: "Venta anticipada de entradas para el derbi",
+    date: "2025-06-12",
+    image: "/dummy.jpg",
+  },
+  {
+    id: 6,
+    title: "Nuevo entrenador confirmado para la próxima temporada",
+    date: "2025-06-15",
+    image: "/dummy.jpg",
   },
 ];
 
 export default function LatestNews() {
   return (
     <section>
-      <h2 className="text-2xl font-semibold mb-4">Últimas Noticias</h2>
-      <ul className="space-y-4">
-        {dummyNews.map(({ id, title, date, summary }) => (
-          <li key={id} className="border-b pb-3">
-            <h3 className="font-bold">{title}</h3>
-            <time className="text-sm text-gray-500">{date}</time>
-            <p className="text-gray-700">{summary}</p>
-          </li>
+      <h2 className="text-2xl font-semibold mb-6 text-center">
+        Últimas Noticias
+      </h2>
+      <div
+        className="grid gap-6 justify-center
+                      grid-cols-1
+                      sm:grid-cols-2
+                      md:grid-cols-3
+                      max-w-7xl
+                      mx-auto
+                      px-4"
+      >
+        {dummyNews.map(({ id, title, date, image }) => (
+          <a
+            key={id}
+            href={`/noticias/${id}`}
+            className="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition transform hover:scale-105 duration-300 group h-48 flex items-end p-4 text-white"
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* Dark overlay with rgba and zIndex to not hide the image */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }}
+            />
+            {/* Content above the overlay */}
+            <div className="relative z-20">
+              <time className="block text-sm mb-1">
+                {new Date(date).toLocaleDateString()}
+              </time>
+              <h3 className="text-lg font-bold leading-tight">{title}</h3>
+            </div>
+          </a>
         ))}
-      </ul>
-      <button className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-        Ver todas las noticias
-      </button>
+      </div>
+      <div className="text-center mt-8">
+        <button className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer">
+          Ver todas las noticias
+        </button>
+      </div>
     </section>
   );
 }
