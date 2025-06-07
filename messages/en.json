@@ -163,5 +163,9 @@
     "button": "Log In",
     "redirect": "Don't have an account?",
     "redirectLink": "Register"
+  },
+  "appHero": {
+    "title": "Welcome to CD Estepona Fans",
+    "description": "Your ultimate source for all news, matches, and exclusive content about CD Estepona."
   }
 }

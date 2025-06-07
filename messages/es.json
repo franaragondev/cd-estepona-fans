@@ -163,5 +163,9 @@
     "button": "Iniciar sesión",
     "redirect": "¿No tienes cuenta?",
     "redirectLink": "Regístrate"
+  },
+  "appHero": {
+    "title": "Bienvenidos a CD Estepona Fans",
+    "description": "Tu fuente principal para todas las noticias, partidos y contenido exclusivo sobre CD Estepona."
   }
 }
