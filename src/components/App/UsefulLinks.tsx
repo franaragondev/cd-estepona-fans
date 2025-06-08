@@ -2,8 +2,7 @@
 
 export default function UsefulLinks() {
   return (
-    <section className="py-8 bg-gray-100 text-center">
-      <h2 className="text-2xl font-semibold mb-6">Enlaces útiles</h2>
+    <section className="py-8 text-center">
       <div className="flex justify-center gap-8">
         <a
           href="https://facebook.com/cdesteponafans"
