@@ -50,9 +50,7 @@ export async function middleware(request: NextRequest) {
   // Redirect to app if authenticated user tries to access auth routes
   if (isAuthRoute && user) {
     logDev("Redirecting to app");
-    return NextResponse.redirect(
-      new URL(`/${currentLocale}/app/home`, request.url)
-    );
+    return NextResponse.redirect(new URL(`/${currentLocale}`, request.url));
   }
 
   return intlMiddleware(request);

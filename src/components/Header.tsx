@@ -1,32 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
 import UserDropdown from "./UserDropdown";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const t = useTranslations("menu");
-  const locale = useLocale();
-  const pathname = usePathname();
-  const basePath = `/${locale}`;
-
-  // Split pathname by "/" and filter out empty strings
-  // Example pathname: "/es/app/home"
-  const parts = pathname?.split("/").filter(Boolean) || [];
-  // parts = ["es", "app", "home"]
-
-  // Check if second part is "app"
-  const isInApp = parts[1] === "app";
-
-  // If we are in /es/app but no subroute after, e.g. "/es/app", consider landing page inside app
-  const isAppRoute = isInApp && parts.length > 2;
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -74,39 +56,19 @@ export default function Header() {
 
         {/* Desktop menu centered */}
         <div className="hidden md:flex justify-center">
-          <DesktopMenu isAppRoute={isAppRoute} />
+          <DesktopMenu />
         </div>
 
         {/* User dropdown on the right side */}
         <div className="hidden md:flex justify-end items-center">
-          {!isInApp && (
-            <Link
-              href={`${basePath}/app/home`}
-              className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200"
-            >
-              {t("enterApp")}
-            </Link>
-          )}
-
           <UserDropdown />
         </div>
 
-        <div className="flex justify-end md:hidden">
-          {!isInApp && (
-            <Link
-              href={`${basePath}/app/home`}
-              onClick={() => setIsMenuOpen(false)}
-              className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200"
-            >
-              {t("enterApp")}
-            </Link>
-          )}
-        </div>
+        <div className="flex justify-end md:hidden"></div>
       </header>
 
       {/* Mobile menu overlay */}
       <MobileMenu
-        isAppRoute={isAppRoute}
         isOpen={isMenuOpen}
         onCloseAction={() => setIsMenuOpen(false)}
       />

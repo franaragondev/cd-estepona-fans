@@ -9,7 +9,6 @@ import Link from "next/link";
 type MobileMenuProps = {
   isOpen: boolean;
   onCloseAction: () => void;
-  isAppRoute: boolean;
 };
 
 const locales = [
@@ -18,11 +17,7 @@ const locales = [
   { code: "fr", key: "fr" },
 ];
 
-export default function MobileMenu({
-  isAppRoute,
-  isOpen,
-  onCloseAction,
-}: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
   const router = useRouter();
   const locale = useLocale();
   const pathname = usePathname();
@@ -55,83 +50,41 @@ export default function MobileMenu({
             transition={{ type: "tween" }}
           >
             <nav className="flex flex-col space-y-4 mb-4">
-              {isAppRoute ? (
-                <>
-                  <Link
-                    href={`${basePath}/app/home`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 hover:text-black"
-                  >
-                    {t("home")}
-                  </Link>
-                  <Link
-                    href={`${basePath}/app/news`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 hover:text-black"
-                  >
-                    {t("news")}
-                  </Link>
-                  <Link
-                    href={`${basePath}/app/matches`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 hover:text-black"
-                  >
-                    {t("matches")}
-                  </Link>
-                  <Link
-                    href={`${basePath}/app/gallery`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 hover:text-black"
-                  >
-                    {t("gallery")}
-                  </Link>
-                  <Link
-                    href={`${basePath}/app/tribuna`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 hover:text-black"
-                  >
-                    {t("tribuna")}
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href={`/${locale}#home`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 dark:text-gray-100 hover:text-black dark:hover:text-white"
-                  >
-                    {t("home")}
-                  </Link>
-                  <Link
-                    href={`/${locale}#features`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 dark:text-gray-100 hover:text-black dark:hover:text-white"
-                  >
-                    {t("features")}
-                  </Link>
-                  <Link
-                    href={`/${locale}#about`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 dark:text-gray-100 hover:text-black dark:hover:text-white"
-                  >
-                    {t("about")}
-                  </Link>
-                  <Link
-                    href={`/${locale}#faq`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 dark:text-gray-100 hover:text-black dark:hover:text-white"
-                  >
-                    {t("faq")}
-                  </Link>
-                  <Link
-                    href={`/${locale}#cta`}
-                    onClick={onCloseAction}
-                    className="text-gray-700 dark:text-gray-100 hover:text-black dark:hover:text-white"
-                  >
-                    {t("cta")}
-                  </Link>
-                </>
-              )}
+              <Link
+                href={`${basePath}`}
+                onClick={onCloseAction}
+                className="text-gray-700 hover:text-black"
+              >
+                {t("home")}
+              </Link>
+              <Link
+                href={`${basePath}/news`}
+                onClick={onCloseAction}
+                className="text-gray-700 hover:text-black"
+              >
+                {t("news")}
+              </Link>
+              <Link
+                href={`${basePath}/matches`}
+                onClick={onCloseAction}
+                className="text-gray-700 hover:text-black"
+              >
+                {t("matches")}
+              </Link>
+              <Link
+                href={`${basePath}/gallery`}
+                onClick={onCloseAction}
+                className="text-gray-700 hover:text-black"
+              >
+                {t("gallery")}
+              </Link>
+              <Link
+                href={`${basePath}/tribuna`}
+                onClick={onCloseAction}
+                className="text-gray-700 hover:text-black"
+              >
+                {t("tribuna")}
+              </Link>
             </nav>
 
             <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
