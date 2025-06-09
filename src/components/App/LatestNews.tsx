@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "next-intl";
+import Link from "next/link";
+
 const dummyNews = [
   {
     id: 1,
@@ -40,6 +43,8 @@ const dummyNews = [
 ];
 
 export default function LatestNews() {
+  const locale = useLocale();
+
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-6 text-center">
@@ -55,9 +60,9 @@ export default function LatestNews() {
                       px-4"
       >
         {dummyNews.map(({ id, title, date, image }) => (
-          <a
+          <Link
             key={id}
-            href={`/noticias/${id}`}
+            href={`/${locale}/news/${id}`}
             className="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition transform hover:scale-105 duration-300 group h-48 flex items-end p-4 text-white"
             style={{
               backgroundImage: `url(${image})`,
@@ -65,25 +70,26 @@ export default function LatestNews() {
               backgroundPosition: "center",
             }}
           >
-            {/* Dark overlay with rgba and zIndex to not hide the image */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{ backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }}
             />
-            {/* Content above the overlay */}
             <div className="relative z-20">
               <time className="block text-sm mb-1">
-                {new Date(date).toLocaleDateString()}
+                {new Date(date).toLocaleDateString(locale)}
               </time>
               <h3 className="text-lg font-bold leading-tight">{title}</h3>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
       <div className="text-center mt-8">
-        <button className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer">
+        <Link
+          href={`/${locale}/news`}
+          className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
+        >
           Ver todas las noticias
-        </button>
+        </Link>
       </div>
     </section>
   );

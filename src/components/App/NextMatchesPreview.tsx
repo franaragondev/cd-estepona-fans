@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+import { useLocale } from "next-intl";
 import MatchCard from "../MatchCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectFade } from "swiper/modules";
@@ -89,6 +91,7 @@ const upcomingMatches = [
 export default function NextMatchesPreview() {
   // Reverse the array to show matches from oldest to newest
   const matchesOrdered = [...previousMatches].reverse();
+  const locale = useLocale();
 
   return (
     <section>
@@ -123,9 +126,12 @@ export default function NextMatchesPreview() {
               {/* Empty slide with button */}
               <SwiperSlide className="flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center w-full h-full">
-                  <button className="px-6 py-3 rounded text-white bg-[#2f36a1] transition-colors duration-200 -mt-26 cursor-pointer">
+                  <Link
+                    href={`/${locale}/news`}
+                    className="px-6 py-3 rounded text-white bg-[#2f36a1] transition-colors duration-200 -mt-26 cursor-pointer"
+                  >
                     Ver calendario completo
-                  </button>
+                  </Link>
                 </div>
               </SwiperSlide>
 
@@ -195,9 +201,12 @@ export default function NextMatchesPreview() {
               {/* Empty slide with button */}
               <SwiperSlide className="flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center w-full h-full">
-                  <button className="px-6 py-3 rounded text-white bg-[#DC2C20] transition-colors duration-200 -mt-26 cursor-pointer">
+                  <Link
+                    href={`/${locale}/news`}
+                    className="px-6 py-3 rounded text-white bg-[#DC2C20] transition-colors duration-200 -mt-26 cursor-pointer"
+                  >
                     Ver calendario completo
-                  </button>
+                  </Link>
                 </div>
               </SwiperSlide>
             </Swiper>
@@ -207,9 +216,12 @@ export default function NextMatchesPreview() {
 
       {/* Button to view full calendar */}
       <div className="text-center mt-8">
-        <button className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer">
+        <Link
+          href={`/${locale}/news`}
+          className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
+        >
           Ver calendario completo
-        </button>
+        </Link>
       </div>
     </section>
   );

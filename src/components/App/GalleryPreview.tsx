@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "next-intl";
+import Link from "next/link";
+
 const images = [
   "/dummy.jpg",
   "/dummy.jpg",
@@ -10,6 +13,8 @@ const images = [
 ];
 
 export default function GalleryPreview() {
+  const locale = useLocale();
+
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-4">Galería de Fans</h2>
@@ -23,9 +28,14 @@ export default function GalleryPreview() {
           />
         ))}
       </div>
-      <button className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-        Ver más en la galería
-      </button>
+      <div className="text-center mt-8">
+        <Link
+          href={`/${locale}/gallery`}
+          className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        >
+          Ver más en la galería
+        </Link>
+      </div>
     </section>
   );
 }

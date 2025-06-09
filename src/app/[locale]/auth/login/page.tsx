@@ -43,7 +43,7 @@ export default function LoginPage() {
 
       // Delay added to let spinner show briefly before redirect
       setTimeout(() => {
-        router.push(locale ? `/${locale}/app` : "/app");
+        router.push(locale ? `/${locale}` : "/");
       }, 300);
     } catch (err) {
       setError("Server error, please try again later");
