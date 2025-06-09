@@ -16,9 +16,11 @@ export default function HomePage() {
         <section className="py-10">
           <LatestNews />
         </section>
-        <section className="py-10">
-          <NextMatchesPreview />
-        </section>
+      </main>
+      <section className="py-10">
+        <NextMatchesPreview />
+      </section>
+      <main className="max-w-7xl mx-auto px-4">
         <section className="py-10">
           <GalleryPreview />
         </section>

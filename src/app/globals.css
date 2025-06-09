@@ -122,5 +122,48 @@ section {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: Arial, Helvetica, sans-serif;
   }
+}
+
+.swiper-container-custom {
+  position: relative;
+}
+
+.swiper-container-custom .swiper-button-next,
+.swiper-container-custom .swiper-button-prev {
+  bottom: 80px;
+  top: auto;
+  transform: translateY(0) scale(0.8);
+  color: white;
+  z-index: 11;
+}
+
+.swiper-container-custom .swiper-button-prev {
+  left: 10%;
+}
+
+.swiper-container-custom .swiper-button-next {
+  right: 10%;
+}
+
+.swiper-container-custom .swiper-pagination {
+  bottom: 90px !important;
+  text-align: center;
+}
+
+.swiper-container-custom .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: white;
+  opacity: 0.5;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  margin: 0 4px;
+}
+
+.swiper-container-custom .swiper-pagination-bullet-active {
+  width: 24px;
+  opacity: 1;
+  background: white;
 }
