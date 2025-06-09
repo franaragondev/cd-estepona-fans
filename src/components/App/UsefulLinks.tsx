@@ -1,38 +1,33 @@
 "use client";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function UsefulLinks() {
   return (
     <section className="py-8 text-center">
       <div className="flex justify-center gap-8">
         <a
-          href="https://facebook.com/cdesteponafans"
+          href="https://www.facebook.com/people/CD-Estepona-Fans/61558523420705/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800"
+          className="text-blue-600 hover:text-blue-800 text-3xl"
         >
-          Facebook
+          <FaFacebook />
         </a>
         <a
-          href="https://instagram.com/cdesteponafans"
+          href="https://www.instagram.com/cdesteponafans/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-pink-600 hover:text-pink-800"
+          className="text-pink-600 hover:text-pink-800 text-3xl"
         >
-          Instagram
+          <FaInstagram />
         </a>
         <a
-          href="#"
-          className="text-green-600 hover:text-green-800"
-          onClick={(e) => e.preventDefault()}
+          href="https://www.youtube.com/@CDEsteponaFans"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-red-600 hover:text-red-800 text-3xl"
         >
-          Comprar entradas
-        </a>
-        <a
-          href="#"
-          className="text-red-600 hover:text-red-800"
-          onClick={(e) => e.preventDefault()}
-        >
-          Tienda oficial
+          <FaYoutube />
         </a>
       </div>
     </section>

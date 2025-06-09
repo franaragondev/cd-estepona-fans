@@ -71,7 +71,7 @@ export default function FAQ() {
             value={`faq-${index}`}
             className="border-b"
           >
-            <AccordionTrigger className="text-left text-lg font-medium py-4">
+            <AccordionTrigger className="text-left text-lg font-medium py-4 cursor-pointer">
               {item.q}
             </AccordionTrigger>
             <AccordionContent className="pb-4 text-gray-700">
