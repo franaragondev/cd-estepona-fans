@@ -5,16 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 
-const images = [
-  "/gallery/IMG_9657.webp",
-  "/gallery/IMG_9658.webp",
-  "/gallery/IMG_9659.webp",
-  "/gallery/IMG_9660.webp",
-  "/gallery/IMG_9661.webp",
-  "/gallery/IMG_9662.webp",
-];
+interface GalleryPreviewProps {
+  images: string[];
+}
 
-export default function GalleryPreview() {
+export default function GalleryPreview({ images }: GalleryPreviewProps) {
   const locale = useLocale();
   const [modalImage, setModalImage] = useState<string | null>(null);
   const [isImageLoading, setIsImageLoading] = useState(true);

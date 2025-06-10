@@ -1,9 +1,7 @@
-"use client";
-
 import AppHero from "@/components/App/AppHero";
 import LatestNews from "@/components/App/LatestNews";
 import NextMatchesPreview from "@/components/App/NextMatchesPreview";
-import GalleryPreview from "@/components/App/GalleryPreview";
+import GalleryPreviewServer from "@/components/GalleryPreviewServer";
 import UsefulLinks from "@/components/App/UsefulLinks";
 import CallToAction from "@/components/CallToAction";
 import FAQ from "@/components/FAQ";
@@ -22,7 +20,7 @@ export default function HomePage() {
       </section>
       <main className="max-w-7xl mx-auto px-4">
         <section className="py-10">
-          <GalleryPreview />
+          <GalleryPreviewServer />
         </section>
       </main>
       <section className="py-10">

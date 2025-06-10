@@ -52,8 +52,8 @@ model Photo {
   id        String   @id @default(cuid())
   url       String
   caption   String?
-  albumId   String
-  album     PhotoAlbum @relation(fields: [albumId], references: [id])
+  albumId   String?
+  album     PhotoAlbum? @relation(fields: [albumId], references: [id])
 }
 
 model Player {
