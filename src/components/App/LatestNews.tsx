@@ -3,10 +3,23 @@
 import { useLocale } from "next-intl";
 import Link from "next/link";
 import NewsCard from "@/components/NewsCard";
-import { dummyNews } from "@/data/dummyNews";
 
-export default function LatestNews() {
+interface NewsItem {
+  id: string;
+  slug: string;
+  title: string;
+  createdAt: string; // ISO string
+  image?: string;
+}
+
+interface LatestNewsProps {
+  latestNews: NewsItem[];
+}
+
+export default function LatestNews({ latestNews }: LatestNewsProps) {
   const locale = useLocale();
+
+  console.log(latestNews);
 
   return (
     <section>
@@ -15,28 +28,23 @@ export default function LatestNews() {
       </h2>
       <div
         className="grid gap-6 justify-center
-                      grid-cols-1
-                      sm:grid-cols-2
-                      md:grid-cols-3
-                      max-w-7xl
-                      mx-auto
-                      px-4"
+                    grid-cols-1
+                    sm:grid-cols-2
+                    md:grid-cols-3
+                    max-w-7xl
+                    mx-auto
+                    px-4"
       >
-        {[...dummyNews]
-          .sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-          )
-          .slice(0, 6)
-          .map(({ id, slug, title, date, image }, index) => (
-            <NewsCard
-              key={`${id}-${index}`}
-              slug={slug}
-              title={title}
-              date={date}
-              image={image}
-              variant="overlay"
-            />
-          ))}
+        {latestNews.map(({ id, slug, title, createdAt, image }, index) => (
+          <NewsCard
+            key={`${id}-${index}`}
+            slug={slug}
+            title={title}
+            date={createdAt}
+            image={image}
+            variant="overlay"
+          />
+        ))}
       </div>
       <div className="text-center mt-8">
         <Link

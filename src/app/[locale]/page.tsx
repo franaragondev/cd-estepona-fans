@@ -1,5 +1,5 @@
 import AppHero from "@/components/App/AppHero";
-import LatestNews from "@/components/App/LatestNews";
+import LatestNewsServer from "@/components/LatestNewsServer";
 import NextMatchesPreview from "@/components/App/NextMatchesPreview";
 import GalleryPreviewServer from "@/components/GalleryPreviewServer";
 import UsefulLinks from "@/components/App/UsefulLinks";
@@ -12,7 +12,7 @@ export default function HomePage() {
       <AppHero />
       <main className="max-w-7xl mx-auto px-4">
         <section className="py-10">
-          <LatestNews />
+          <LatestNewsServer />
         </section>
       </main>
       <section className="py-10">
