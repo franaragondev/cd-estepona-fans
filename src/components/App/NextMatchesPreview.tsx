@@ -96,7 +96,7 @@ export default function NextMatchesPreview() {
   return (
     <section>
       {/* Section title */}
-      <h2 className="text-2xl font-semibold mb-4 text-center">Partidos</h2>
+      {/* <h2 className="text-2xl font-semibold mb-4 text-center">Partidos</h2> */}
 
       {/* Main container with responsive layout */}
       <div className="flex flex-col md:flex-row justify-center items-center h-[1200px] md:h-[740px]">
@@ -218,7 +218,7 @@ export default function NextMatchesPreview() {
       <div className="text-center mt-8">
         <Link
           href={`/${locale}/news`}
-          className="px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
+          className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
         >
           Ver calendario completo
         </Link>
