@@ -9,9 +9,8 @@ interface NewsItem {
   slug: string;
   title: string;
   createdAt: string; // ISO string
-  image?: string;
+  image?: string | null;
 }
-
 interface LatestNewsProps {
   latestNews: NewsItem[];
 }
@@ -41,7 +40,7 @@ export default function LatestNews({ latestNews }: LatestNewsProps) {
             slug={slug}
             title={title}
             date={createdAt}
-            image={image}
+            image={image ?? ""}
             variant="overlay"
           />
         ))}
