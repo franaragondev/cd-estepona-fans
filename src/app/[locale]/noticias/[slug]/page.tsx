@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 
@@ -45,6 +46,13 @@ export default async function Page({ params }: any) {
       <p className="text-lg text-gray-800 leading-relaxed mb-12">
         {article.content}
       </p>
+
+      <Link
+        href={`/${params.locale}/noticias`}
+        className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
+      >
+        Volver a todas las noticias
+      </Link>
     </main>
   );
 }
