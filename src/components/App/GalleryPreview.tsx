@@ -7,12 +7,12 @@ import Image from "next/image";
 
 // Array of image paths stored in the public/gallery folder
 const images = [
-  "/gallery/IMG_9657.JPG",
-  "/gallery/IMG_9658.JPG",
-  "/gallery/IMG_9659.JPG",
-  "/gallery/IMG_9660.JPG",
-  "/gallery/IMG_9661.JPG",
-  "/gallery/IMG_9662.JPG",
+  "/gallery/IMG_9657.webp",
+  "/gallery/IMG_9658.webp",
+  "/gallery/IMG_9659.webp",
+  "/gallery/IMG_9660.webp",
+  "/gallery/IMG_9661.webp",
+  "/gallery/IMG_9662.webp",
 ];
 
 export default function GalleryPreview() {
@@ -36,10 +36,11 @@ export default function GalleryPreview() {
             <Image
               src={src}
               alt={`Fan pic ${i + 1}`}
-              fill
-              style={{ objectFit: "cover" }}
-              sizes="(max-width: 768px) 100vw, 33vw"
-              priority={i === 0} // optionally prioritize first image
+              width={400}
+              height={200}
+              className="object-cover w-full h-full"
+              loading={i === 0 ? "eager" : "lazy"}
+              priority={i === 0}
             />
           </div>
         ))}
