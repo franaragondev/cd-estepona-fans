@@ -1,28 +1,22 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Metadata } from "next";
-import { dummyNews } from "@/data/dummyNews";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 type Props = {
-  params: Promise<{ locale: string; slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: { locale: string; slug: string };
 };
 
-export const dynamic = "force-dynamic";
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const article = dummyNews.find((n) => n.slug === slug);
-
-  return {
-    title: article ? article.title : "Noticia no encontrada",
-  };
-}
-
 export default async function NewsDetailPage({ params }: Props) {
-  const { slug, locale } = await params;
-  const article = dummyNews.find((n) => n.slug === slug);
+  const { slug, locale } = params;
+
+  if (!slug) return notFound();
+
+  const article = await prisma.news.findFirst({
+    where: { slug },
+    include: { author: true },
+  });
 
   if (!article) return notFound();
 
@@ -32,33 +26,28 @@ export default async function NewsDetailPage({ params }: Props) {
         {article.title}
       </h1>
 
-      <div className="relative w-full h-64 mb-6 rounded overflow-hidden">
-        <Image
-          src={article.image}
-          alt={`Imagen de la noticia: ${article.title}`}
-          fill
-          className="object-cover"
-          priority
-        />
+      <div className="relative w-full h-98 mb-6 rounded overflow-hidden">
+        {article.image && (
+          <Image
+            src={article.image}
+            alt={`Imagen de la noticia: ${article.title}`}
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
       </div>
 
       <div className="text-sm text-gray-500 mb-2">
-        {new Date(article.date).toLocaleDateString(locale)}
+        {new Date(article.createdAt).toLocaleDateString(locale)}
       </div>
       <div className="text-sm text-gray-500 mb-6">
-        Por {article.author || "CD Estepona Fans"}
+        Por {article.author?.name || "CD Estepona Fans"}
       </div>
 
       <p className="text-lg text-gray-800 leading-relaxed mb-12">
         {article.content}
       </p>
-
-      <Link
-        href={`/${locale}/noticias`}
-        className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
-      >
-        Volver a todas las noticias
-      </Link>
     </main>
   );
 }
