@@ -76,9 +76,9 @@ export default function NewsPage() {
       </style>
 
       <main className="max-w-7xl mx-auto px-4 py-8 min-h-[85vh]">
-        <h1 className="text-3xl font-bold mb-8 text-center italic uppercase bg-gradient-to-r from-[#DC2C20] via-[#7B1FA2] to-[#2f36a1] bg-clip-text text-transparent">
+        {/* <h1 className="text-3xl font-bold mb-8 text-center italic uppercase bg-gradient-to-r from-[#DC2C20] via-[#7B1FA2] to-[#2f36a1] bg-clip-text text-transparent">
           Noticias
-        </h1>
+        </h1> */}
 
         <div
           className="grid gap-8
