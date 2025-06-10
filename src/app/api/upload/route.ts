@@ -15,7 +15,7 @@ export const config = { api: { bodyParser: false } };
 function uploadToCloudinary(buffer: Buffer): Promise<any> {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder: "your_folder" },
+      { folder: "galeria" },
       (error, result) => {
         if (error) return reject(error);
         resolve(result);

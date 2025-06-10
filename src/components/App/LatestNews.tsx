@@ -18,8 +18,6 @@ interface LatestNewsProps {
 export default function LatestNews({ latestNews }: LatestNewsProps) {
   const locale = useLocale();
 
-  console.log(latestNews);
-
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-6 text-center">

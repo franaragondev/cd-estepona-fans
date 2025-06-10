@@ -25,7 +25,7 @@ export default function RegisterPage() {
       const urls = Array.isArray(data.url) ? data.url : [data.url];
       setImageUrls(urls);
     } else {
-      console.log(data.message || "Error uploading");
+      console.log("Error uploading");
     }
   }
 
