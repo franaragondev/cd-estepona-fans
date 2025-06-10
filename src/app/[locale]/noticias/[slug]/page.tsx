@@ -4,28 +4,25 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { dummyNews } from "@/data/dummyNews";
 
+type Props = {
+  params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string; slug: string };
-}): Promise<Metadata> {
-  const article = dummyNews.find((n) => n.slug === params.slug);
-  console.log(article);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = dummyNews.find((n) => n.slug === slug);
 
   return {
     title: article ? article.title : "Noticia no encontrada",
   };
 }
 
-export default function NewsDetailPage({
-  params,
-}: {
-  params: { locale: string; slug: string };
-}) {
-  const article = dummyNews.find((n) => n.slug === params.slug);
-  console.log(article);
+export default async function NewsDetailPage({ params }: Props) {
+  const { slug, locale } = await params;
+  const article = dummyNews.find((n) => n.slug === slug);
 
   if (!article) return notFound();
 
@@ -46,7 +43,7 @@ export default function NewsDetailPage({
       </div>
 
       <div className="text-sm text-gray-500 mb-2">
-        {new Date(article.date).toLocaleDateString(params.locale)}
+        {new Date(article.date).toLocaleDateString(locale)}
       </div>
       <div className="text-sm text-gray-500 mb-6">
         Por {article.author || "CD Estepona Fans"}
@@ -57,10 +54,10 @@ export default function NewsDetailPage({
       </p>
 
       <Link
-        href={`/${params.locale}/noticias`}
+        href={`/${locale}/noticias`}
         className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
       >
-        ← Volver a todas las noticias
+        Volver a todas las noticias
       </Link>
     </main>
   );

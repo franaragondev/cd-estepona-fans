@@ -28,8 +28,6 @@ export default function NewsPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  console.log(dummyNews);
-
   return (
     <>
       <style>
