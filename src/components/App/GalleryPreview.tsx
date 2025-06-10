@@ -7,12 +7,12 @@ import Image from "next/image";
 
 // Array of image paths stored in the public/gallery folder
 const images = [
-  "/gallery/IMG_9657.jpg",
-  "/gallery/IMG_9658.jpg",
-  "/gallery/IMG_9659.jpg",
-  "/gallery/IMG_9660.jpg",
-  "/gallery/IMG_9661.jpg",
-  "/gallery/IMG_9662.jpg",
+  "/gallery/IMG_9657.JPG",
+  "/gallery/IMG_9658.JPG",
+  "/gallery/IMG_9659.JPG",
+  "/gallery/IMG_9660.JPG",
+  "/gallery/IMG_9661.JPG",
+  "/gallery/IMG_9662.JPG",
 ];
 
 export default function GalleryPreview() {
