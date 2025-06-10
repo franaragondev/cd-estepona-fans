@@ -2,31 +2,59 @@
 
 import React, { useState, useEffect } from "react";
 import NewsCard from "@/components/NewsCard";
-import { dummyNews } from "@/data/dummyNews";
+
+type NewsItem = {
+  id: string;
+  slug: string;
+  title: string;
+  createdAt: string;
+  image: string | null;
+  content: string;
+  author: {
+    name: string;
+  };
+};
 
 const BATCH_SIZE = 9;
 
 export default function NewsPage() {
-  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  async function fetchNews(skip: number, take: number) {
+    setLoading(true);
+    const res = await fetch(`/api/news?skip=${skip}&take=${take}`);
+    if (!res.ok) {
+      setLoading(false);
+      return;
+    }
+    const data = await res.json();
+
+    setNews((prev) => (skip === 0 ? data : [...prev, ...data]));
+    setHasMore(data.length === take);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    setNews([]);
+    setHasMore(true);
+    fetchNews(0, BATCH_SIZE);
+  }, []);
 
   useEffect(() => {
     function handleScroll() {
       const scrollHeight = document.documentElement.scrollHeight;
       const scrollPosition = window.innerHeight + window.scrollY;
 
-      if (
-        scrollHeight - scrollPosition < 100 &&
-        visibleCount < dummyNews.length
-      ) {
-        setVisibleCount((prev) =>
-          Math.min(prev + BATCH_SIZE, dummyNews.length)
-        );
+      if (scrollHeight - scrollPosition < 100 && !loading && hasMore) {
+        fetchNews(news.length, BATCH_SIZE);
       }
     }
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [news, loading, hasMore]);
 
   return (
     <>
@@ -58,20 +86,37 @@ export default function NewsPage() {
                     sm:grid-cols-2
                     md:grid-cols-3"
         >
-          {dummyNews
-            .slice(0, visibleCount)
-            .map(({ id, slug, title, date, image, content, author }, index) => (
+          {news.map(
+            ({ id, slug, title, createdAt, image, content, author }, index) => (
               <NewsCard
                 key={`${id}-${index}`}
                 slug={slug}
                 title={title}
-                date={date}
-                image={image}
-                content={content}
-                author={author}
+                date={createdAt}
+                image={image ? image : ""}
+                content={
+                  content.length > 150 ? content.slice(0, 150) + "…" : content
+                }
+                author={author.name}
               />
-            ))}
+            )
+          )}
         </div>
+
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div
+              className="w-12 h-12 rounded-full animate-spin"
+              style={{
+                background:
+                  "conic-gradient(from 45deg, #DC2C20, #DC2C20, #2f36a1, #2f36a1, transparent 270deg 360deg)",
+                WebkitMask:
+                  "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+                mask: "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+              }}
+            />
+          </div>
+        )}
       </main>
     </>
   );

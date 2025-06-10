@@ -18,3 +18,10 @@ export async function getNews(limit = 6) {
     },
   });
 }
+
+export async function getAllNews() {
+  return await prisma.news.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { author: true },
+  });
+}

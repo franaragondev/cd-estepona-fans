@@ -1,6 +1,6 @@
 import type { News } from "@prisma/client";
 import LatestNews from "@/components/App/LatestNews";
-import { getNews } from "@/lib/latestNews";
+import { getNews } from "@/lib/news";
 
 export default async function LatestNewsServer() {
   const news: News[] = await getNews(6);
