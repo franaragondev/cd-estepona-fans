@@ -4,11 +4,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-type Props = {
-  params: { locale: string; slug: string };
-};
-
-export default async function NewsDetailPage({ params }: Props) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Page({ params }: any) {
   const { slug, locale } = params;
 
   if (!slug) return notFound();
