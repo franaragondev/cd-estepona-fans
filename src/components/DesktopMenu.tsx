@@ -14,9 +14,9 @@ export function DesktopMenu() {
 
   const links = [
     { href: `${basePath}`, label: t("home") },
-    { href: `${basePath}/news`, label: t("news") },
-    { href: `${basePath}/matches`, label: t("matches") },
-    { href: `${basePath}/gallery`, label: t("gallery") },
+    { href: `${basePath}/noticias`, label: t("news") },
+    { href: `${basePath}/partidos`, label: t("matches") },
+    { href: `${basePath}/galeria`, label: t("gallery") },
     { href: `${basePath}/tribuna`, label: t("tribuna") },
   ];
 

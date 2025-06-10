@@ -48,7 +48,7 @@ export default function Header() {
         <div className="flex justify-center md:justify-start items-center">
           <Image
             src="/logo-simple.webp"
-            alt="Home Stocker Logo"
+            alt="CD Estepona Fans Logo"
             width={40}
             height={40}
           />

@@ -2,45 +2,8 @@
 
 import { useLocale } from "next-intl";
 import Link from "next/link";
-
-const dummyNews = [
-  {
-    id: 1,
-    title: "Victoria contundente en el último partido",
-    date: "2025-06-01",
-    image: "/dummy.jpg",
-  },
-  {
-    id: 2,
-    title: "Anuncio de nueva equipación para la temporada 2025",
-    date: "2025-05-25",
-    image: "/dummy.jpg",
-  },
-  {
-    id: 3,
-    title: "Partido solidario el próximo domingo",
-    date: "2025-05-20",
-    image: "/dummy.jpg",
-  },
-  {
-    id: 4,
-    title: "Entrenamiento abierto para los fans",
-    date: "2025-06-10",
-    image: "/dummy.jpg",
-  },
-  {
-    id: 5,
-    title: "Venta anticipada de entradas para el derbi",
-    date: "2025-06-12",
-    image: "/dummy.jpg",
-  },
-  {
-    id: 6,
-    title: "Nuevo entrenador confirmado para la próxima temporada",
-    date: "2025-06-15",
-    image: "/dummy.jpg",
-  },
-];
+import NewsCard from "@/components/NewsCard";
+import { dummyNews } from "@/data/dummyNews";
 
 export default function LatestNews() {
   const locale = useLocale();
@@ -59,33 +22,25 @@ export default function LatestNews() {
                       mx-auto
                       px-4"
       >
-        {dummyNews.map(({ id, title, date, image }) => (
-          <Link
-            key={id}
-            href={`/${locale}/news/${id}`}
-            className="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition transform hover:scale-105 duration-300 group h-48 flex items-end p-4 text-white"
-            style={{
-              backgroundImage: `url(${image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }}
+        {[...dummyNews]
+          .sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          )
+          .slice(0, 6)
+          .map(({ id, slug, title, date, image }, index) => (
+            <NewsCard
+              key={`${id}-${index}`}
+              slug={slug}
+              title={title}
+              date={date}
+              image={image}
+              variant="overlay"
             />
-            <div className="relative z-20">
-              <time className="block text-sm mb-1">
-                {new Date(date).toLocaleDateString(locale)}
-              </time>
-              <h3 className="text-lg font-bold leading-tight">{title}</h3>
-            </div>
-          </Link>
-        ))}
+          ))}
       </div>
       <div className="text-center mt-8">
         <Link
-          href={`/${locale}/news`}
+          href={`/${locale}/noticias`}
           className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
         >
           Ver todas las noticias

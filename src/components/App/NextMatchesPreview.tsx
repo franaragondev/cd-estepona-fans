@@ -127,7 +127,7 @@ export default function NextMatchesPreview() {
               <SwiperSlide className="flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center w-full h-full">
                   <Link
-                    href={`/${locale}/news`}
+                    href={`/${locale}/partidos`}
                     className="px-6 py-3 rounded text-white bg-[#2f36a1] transition-colors duration-200 -mt-26 cursor-pointer"
                   >
                     Ver calendario completo
@@ -202,7 +202,7 @@ export default function NextMatchesPreview() {
               <SwiperSlide className="flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center w-full h-full">
                   <Link
-                    href={`/${locale}/news`}
+                    href={`/${locale}/partidos`}
                     className="px-6 py-3 rounded text-white bg-[#DC2C20] transition-colors duration-200 -mt-26 cursor-pointer"
                   >
                     Ver calendario completo
@@ -217,7 +217,7 @@ export default function NextMatchesPreview() {
       {/* Button to view full calendar */}
       <div className="text-center mt-8">
         <Link
-          href={`/${locale}/news`}
+          href={`/${locale}/partidos`}
           className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
         >
           Ver calendario completo

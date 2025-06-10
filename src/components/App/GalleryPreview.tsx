@@ -48,7 +48,7 @@ export default function GalleryPreview() {
 
       <div className="text-center mt-8">
         <Link
-          href={`/${locale}/gallery`}
+          href={`/${locale}/galeria`}
           className="inline-block px-4 py-2 bg-red-600 text-white rounded bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
         >
           Ver más en la galería

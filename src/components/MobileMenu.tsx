@@ -58,21 +58,21 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
                 {t("home")}
               </Link>
               <Link
-                href={`${basePath}/news`}
+                href={`${basePath}/noticias`}
                 onClick={onCloseAction}
                 className="text-gray-700 hover:text-black"
               >
                 {t("news")}
               </Link>
               <Link
-                href={`${basePath}/matches`}
+                href={`${basePath}/partidos`}
                 onClick={onCloseAction}
                 className="text-gray-700 hover:text-black"
               >
                 {t("matches")}
               </Link>
               <Link
-                href={`${basePath}/gallery`}
+                href={`${basePath}/galeria`}
                 onClick={onCloseAction}
                 className="text-gray-700 hover:text-black"
               >

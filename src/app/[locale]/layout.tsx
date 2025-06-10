@@ -38,7 +38,7 @@ export async function generateMetadata({
     title: head.title,
     description: head.description,
     keywords: head.keywords,
-    authors: [{ name: "HomeStocker Team" }],
+    authors: [{ name: "CD Estepona Fans" }],
     alternates: {
       canonical: head.url,
       languages: {
