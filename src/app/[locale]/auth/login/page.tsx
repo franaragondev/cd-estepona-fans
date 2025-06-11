@@ -40,10 +40,10 @@ export default function LoginPage() {
       }
 
       const locale = getLocaleFromPathname();
-
-      // Delay added to let spinner show briefly before redirect
       setTimeout(() => {
-        router.push(locale ? `/${locale}` : "/");
+        const path = locale ? `/${locale}/admin` : "/admin";
+        router.push(locale ? `/${locale}/admin` : "/admin");
+        window.location.href = path;
       }, 300);
     } catch (err) {
       setError("Server error, please try again later");
@@ -57,6 +57,7 @@ export default function LoginPage() {
         <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">
           {t("title")}
         </h1>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">

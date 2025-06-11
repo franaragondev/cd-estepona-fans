@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { Globe } from "lucide-react";
+import { Globe, LogOut } from "lucide-react";
 
 const locales = [
   { code: "es", key: "es" },
@@ -14,12 +14,28 @@ const locales = [
 
 export default function UserDropdown() {
   const [open, setOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const tLang = useTranslations("language");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+
+  // Check login status on mount
+  useEffect(() => {
+    async function checkLogin() {
+      try {
+        const res = await fetch("/api/session");
+        const data = await res.json();
+        setLoggedIn(data.loggedIn);
+      } catch (error) {
+        console.error("Failed to fetch session", error);
+        setLoggedIn(false);
+      }
+    }
+    checkLogin();
+  }, []);
 
   function changeLocale(newLocale: string) {
     const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
@@ -42,8 +58,22 @@ export default function UserDropdown() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  async function handleLogout() {
+    try {
+      await fetch(`/api/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      setLoggedIn(false);
+      router.refresh();
+      router.push(`/${locale}`);
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  }
+
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative flex" ref={dropdownRef}>
       <button
         onClick={() => setOpen((prev) => !prev)}
         className="flex items-center gap-2 rounded px-3 py-1 hover:bg-gray-100 focus:outline-none"
@@ -70,10 +100,19 @@ export default function UserDropdown() {
         </svg>
       </button>
 
+      {loggedIn && (
+        <button
+          onClick={handleLogout}
+          title="Logout"
+          className="cursor-pointer flex items-center rounded px-3 py-1 hover:bg-gray-100 focus:outline-none"
+        >
+          <LogOut className="w-5 h-5" />
+        </button>
+      )}
+
       {open && (
         <div
-          className="absolute right-0 mt-2 w-48 bg-white/30 dark:bg-gray-900/30 border border-white/20 dark:border-gray-700/20 
-  backdrop-blur-md rounded shadow-lg z-50"
+          className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-50"
           role="menu"
         >
           <ul>

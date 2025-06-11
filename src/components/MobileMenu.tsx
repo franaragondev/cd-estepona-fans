@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
@@ -18,6 +19,8 @@ const locales = [
 ];
 
 export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const router = useRouter();
   const locale = useLocale();
   const pathname = usePathname();
@@ -30,6 +33,21 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
     router.push(newPathname);
     onCloseAction();
   }
+
+  // Check login status on mount
+  useEffect(() => {
+    async function checkLogin() {
+      try {
+        const res = await fetch("/api/session");
+        const data = await res.json();
+        setLoggedIn(data.loggedIn);
+      } catch (error) {
+        console.error("Failed to fetch session", error);
+        setLoggedIn(false);
+      }
+    }
+    checkLogin();
+  }, []);
 
   return (
     <AnimatePresence>
@@ -111,6 +129,20 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
                 ))}
               </ul>
             </div>
+            {loggedIn && (
+              <div className="mt-4">
+                <button
+                  onClick={() => {
+                    fetch("/api/logout", { method: "POST" }).then(() => {
+                      window.location.href = `/${locale}`;
+                    });
+                  }}
+                  className="w-full inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
+                >
+                  {t("logout")}
+                </button>
+              </div>
+            )}
           </motion.aside>
         </motion.div>
       )}

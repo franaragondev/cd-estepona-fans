@@ -2,6 +2,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { AuthProvider } from "../context/AuthContext";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
@@ -103,14 +104,16 @@ export default async function LocaleLayout({
         </Script>
 
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          <ScrollToTop />
-          <ClientParallaxProvider>
-            <main>{children}</main>
-            <ConsentScripts />
-            <CookieBanner />
-          </ClientParallaxProvider>
-          <Footer />
+          <AuthProvider>
+            <Header />
+            <ScrollToTop />
+            <ClientParallaxProvider>
+              <main>{children}</main>
+              <ConsentScripts />
+              <CookieBanner />
+            </ClientParallaxProvider>
+            <Footer />
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>
