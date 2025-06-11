@@ -74,7 +74,7 @@ export default function TribunaPage() {
 
   if (videos.length === 0) {
     return (
-      <main className="flex items-center justify-center py-16">
+      <main className="flex items-center justify-center py-16 min-h-[85vh]">
         <p>No se pudo cargar el contenido de La Tribuna.</p>
       </main>
     );
