@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { redirect } from "next/navigation";
+import Uploader from "@/components/Uploader";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -32,6 +33,7 @@ export default async function AdminPage({ params }: any) {
       <main className="min-h-screen p-8">
         <h1>Admin Dashboard</h1>
         <p>Bienvenido, {user.email}!</p>
+        <Uploader />
       </main>
     );
   } catch {
