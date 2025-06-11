@@ -86,6 +86,7 @@ model Match {
   isHome      Boolean
   competition String
   score       String?  // Ej: "2-1"
+  opponentImage String?  // Nombre o ruta de la imagen del rival, ej: "CPCacereno.png"
 }
 
 model Subscriber {

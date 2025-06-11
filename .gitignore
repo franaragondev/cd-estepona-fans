@@ -43,3 +43,5 @@ next-env.d.ts
 node_modules/
 
 /src/generated/prisma/
+
+seed.ts
