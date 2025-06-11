@@ -156,7 +156,7 @@ export default function GalleryFull({ images }: GalleryFullProps) {
         >
           <button
             onClick={() => setModalIndex(null)}
-            className="fixed top-5 right-5 text-white text-3xl font-bold z-60"
+            className="fixed top-5 right-5 text-white text-3xl font-bold z-60 cursor-pointer"
           >
             &times;
           </button>

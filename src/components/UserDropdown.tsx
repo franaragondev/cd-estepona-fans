@@ -72,7 +72,8 @@ export default function UserDropdown() {
 
       {open && (
         <div
-          className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-50"
+          className="absolute right-0 mt-2 w-48 bg-white/30 dark:bg-gray-900/30 border border-white/20 dark:border-gray-700/20 
+  backdrop-blur-md rounded shadow-lg z-50"
           role="menu"
         >
           <ul>
