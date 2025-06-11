@@ -2,42 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 
+interface VideoSnippet {
+  title: string;
+  publishedAt: string;
+  description: string;
+}
+
 interface VideoItem {
   id: string;
-  snippet: {
-    title: string;
-    publishedAt: string;
-    description: string;
-  };
-}
-
-interface SearchResultItem {
-  id: {
-    videoId: string;
-  };
-}
-
-async function fetchLatestVideos(maxResults: number = 5): Promise<VideoItem[]> {
-  const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY!;
-  const channelId = "UCz4kCQiwLKzOAKVcO3019fg";
-
-  const searchRes = await fetch(
-    `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=id&order=date&type=video&maxResults=${maxResults}`
-  );
-  if (!searchRes.ok) throw new Error("Error en búsqueda de vídeos");
-  const searchData = await searchRes.json();
-
-  const videoIds = (searchData.items as SearchResultItem[])
-    .map((item) => item.id.videoId)
-    .join(",");
-
-  const videosRes = await fetch(
-    `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoIds}&part=snippet`
-  );
-  if (!videosRes.ok) throw new Error("Error al cargar detalles de vídeos");
-  const videosData = await videosRes.json();
-
-  return videosData.items;
+  snippet: VideoSnippet;
 }
 
 export default function TribunaPage() {
@@ -45,9 +18,12 @@ export default function TribunaPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchLatestVideos()
-      .then((res) => {
-        setVideos(res);
+    fetch("/api/youtube/videos")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setVideos(data);
+        }
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -81,12 +57,11 @@ export default function TribunaPage() {
   }
 
   const [latest, ...recent] = videos;
-
   const lastThree = recent.slice(0, 3);
 
   return (
     <main className="px-4 py-10 max-w-6xl mx-auto space-y-14 min-h-[85vh]">
-      {/* last video */}
+      {/* Último vídeo */}
       <section>
         <div className="aspect-w-16 aspect-h-9 w-full h-[16rem] md:h-[28rem]">
           <iframe
@@ -112,7 +87,7 @@ export default function TribunaPage() {
         )}
       </section>
 
-      {/*latest 3 episodes */}
+      {/* Últimos 3 vídeos */}
       {lastThree.length > 0 && (
         <section>
           <h2 className="text-xl font-semibold mb-4">Episodios recientes</h2>
