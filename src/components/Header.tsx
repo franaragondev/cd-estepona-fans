@@ -26,8 +26,9 @@ export default function Header() {
   return (
     <>
       <header
-        className="p-4 bg-white text-black sticky top-0 z-50 shadow-md
-             grid grid-cols-3 items-center md:px-12 md:grid-cols-[1fr_auto_1fr]"
+        className="p-4 sticky top-0 z-50
+             grid grid-cols-3 items-center md:px-12 md:grid-cols-[1fr_auto_1fr]
+             bg-white/30 backdrop-blur-md border-b border-white/20 shadow-md"
       >
         {/* Mobile hamburger menu button */}
         <div className="flex items-center md:hidden justify-start">

@@ -56,7 +56,7 @@ export async function POST(request: Request) {
       const savedImage = await prisma.photo.create({
         data: {
           url: result.secure_url,
-          album: { connect: { id: "1" } },
+          album: { connect: { id: "6" } },
         },
       });
 

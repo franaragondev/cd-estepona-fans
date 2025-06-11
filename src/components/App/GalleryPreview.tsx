@@ -16,7 +16,9 @@ export default function GalleryPreview({ images }: GalleryPreviewProps) {
 
   return (
     <section>
-      <h2 className="text-2xl font-semibold mb-4">Galería de Fans</h2>
+      <h2 className="text-center text-[2.5rem] font-bold leading-[1.1] tracking-[-0.01em] uppercase text-[#19246b] mb-8 text-left">
+        Galería de Fans
+      </h2>
 
       <div className="grid grid-cols-3 gap-3">
         {images.slice(0, 6).map((src, i) => (

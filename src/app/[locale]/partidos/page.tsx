@@ -76,6 +76,10 @@ export default function Page() {
       ? Math.round(((total - remaining) / total) * 100)
       : 0;
 
+  const handleRemoveFile = (index: number) => {
+    setFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="min-h-[90vh] flex flex-col justify-center items-center gap-6 px-4 py-8">
       <form
@@ -105,7 +109,16 @@ export default function Page() {
         {files.length > 0 && (
           <ul className="text-sm text-gray-700 space-y-1">
             {files.map((file, idx) => (
-              <li key={idx}>• {file.name}</li>
+              <li key={idx} className="flex items-center justify-between">
+                <span>• {file.name}</span>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveFile(idx)}
+                  className="text-red-500 hover:underline text-xs ml-2"
+                >
+                  Remove
+                </button>
+              </li>
             ))}
           </ul>
         )}
