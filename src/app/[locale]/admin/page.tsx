@@ -16,8 +16,8 @@ export default async function AdminPage({
 }: {
   params: { locale: string };
 }) {
-  const cookieStore = cookies();
-  const token = (await cookieStore).get("token")?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
   const JWT_SECRET = process.env.JWT_SECRET;
 
   if (!token || !JWT_SECRET) {
