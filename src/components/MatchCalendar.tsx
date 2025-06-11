@@ -56,11 +56,9 @@ export default function Page() {
     return acc;
   }, {} as Record<number, Match[]>);
 
-  console.log(matches);
-
   return (
-    <div className="px-4 py-8 mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Calendario de partidos</h1>
+    <div className="px-4 py-8 mx-auto relative">
+      {/* <h1 className="text-2xl font-bold mb-4">Calendario de partidos</h1> */}
 
       <div className="flex justify-between mb-4">
         <button
@@ -97,106 +95,113 @@ export default function Page() {
         </button>
       </div>
 
-      {loading ? (
-        <p>Cargando partidos...</p>
-      ) : (
-        <div className="grid grid-cols-7 gap-2 text-center">
-          {/* Header días semana */}
-          {["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"].map((d) => (
-            <div key={d} className="font-semibold border-b pb-1">
-              {d}
-            </div>
-          ))}
-
-          {Array((new Date(year, month, 1).getDay() + 6) % 7)
-            .fill(null)
-            .map((_, i) => (
-              <div key={"empty" + i} />
-            ))}
-
-          {/* Días del mes */}
-          {Array(days)
-            .fill(null)
-            .map((_, i) => {
-              const day = i + 1;
-              const dayMatches = matchesByDay[day] || [];
-              const today = new Date();
-              const isPast =
-                new Date(year, month, day) <
-                new Date(
-                  today.getFullYear(),
-                  today.getMonth(),
-                  today.getDate()
-                );
-
-              return (
-                <div
-                  key={day}
-                  className="border rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs"
-                >
-                  <div className="font-bold">{day}</div>
-
-                  {dayMatches.map((match) => {
-                    const matchDate = new Date(match.date);
-                    const showResultColor = isPast && match.score !== undefined;
-                    const resultClass =
-                      showResultColor && match.score
-                        ? getResultColor(match.score, match.isHome)
-                        : "";
-
-                    return (
-                      <div
-                        key={match.id}
-                        className={`w-full rounded p-0.5 flex flex-col items-center gap-0.5 ${resultClass}`}
-                      >
-                        <div className="flex justify-center gap-1 items-center">
-                          <Image
-                            src={
-                              match.isHome
-                                ? "/logo-simple.webp"
-                                : `/teams/${match.opponentImage}`
-                            }
-                            alt={`Logo de ${
-                              match.isHome ? match.opponent : "CD ESTEPONA"
-                            }`}
-                            width={24}
-                            height={24}
-                            className="h-6 w-6 object-contain"
-                            loading="lazy"
-                          />
-                          <span>vs</span>
-                          <Image
-                            src={
-                              match.isHome
-                                ? `/teams/${match.opponentImage}`
-                                : "/logo-simple.webp"
-                            }
-                            alt={`Logo de ${
-                              match.isHome ? "CD ESTEPONA" : match.opponent
-                            }`}
-                            width={24}
-                            height={24}
-                            className="h-6 w-6 object-contain"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div className="text-[9px]">{match.location}</div>
-                        <div className="text-[9px]">
-                          {isPast && match.score !== undefined
-                            ? `${match.score}`
-                            : matchDate.toLocaleTimeString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              })}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 bg-white/70">
+          <div
+            className="w-12 h-12 rounded-full animate-spin"
+            style={{
+              background:
+                "conic-gradient(from 45deg, #DC2C20, #DC2C20, #2f36a1, #2f36a1, transparent 270deg 360deg)",
+              WebkitMask:
+                "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+              mask: "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+            }}
+          />
         </div>
       )}
+
+      <div className="grid grid-cols-7 gap-2 text-center">
+        {/* week day */}
+        {["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"].map((d) => (
+          <div key={d} className="font-semibold border-b pb-1">
+            {d}
+          </div>
+        ))}
+
+        {Array((new Date(year, month, 1).getDay() + 6) % 7)
+          .fill(null)
+          .map((_, i) => (
+            <div key={"empty" + i} />
+          ))}
+
+        {/* month day */}
+        {Array(days)
+          .fill(null)
+          .map((_, i) => {
+            const day = i + 1;
+            const dayMatches = matchesByDay[day] || [];
+            const today = new Date();
+            const isPast =
+              new Date(year, month, day) <
+              new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+            return (
+              <div
+                key={day}
+                className="border rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs"
+              >
+                <div className="font-bold">{day}</div>
+
+                {dayMatches.map((match) => {
+                  const matchDate = new Date(match.date);
+                  const showResultColor = isPast && match.score !== undefined;
+                  const resultClass =
+                    showResultColor && match.score
+                      ? getResultColor(match.score, match.isHome)
+                      : "";
+
+                  return (
+                    <div
+                      key={match.id}
+                      className={`w-full rounded p-0.5 flex flex-col items-center gap-0.5 ${resultClass}`}
+                    >
+                      <div className="flex justify-center gap-1 items-center">
+                        <Image
+                          src={
+                            match.isHome
+                              ? "/logo-simple.webp"
+                              : `/teams/${match.opponentImage}`
+                          }
+                          alt={`Logo de ${
+                            match.isHome ? match.opponent : "CD ESTEPONA"
+                          }`}
+                          width={24}
+                          height={24}
+                          className="h-6 w-6 object-contain"
+                          loading="lazy"
+                        />
+                        <span>vs</span>
+                        <Image
+                          src={
+                            match.isHome
+                              ? `/teams/${match.opponentImage}`
+                              : "/logo-simple.webp"
+                          }
+                          alt={`Logo de ${
+                            match.isHome ? "CD ESTEPONA" : match.opponent
+                          }`}
+                          width={24}
+                          height={24}
+                          className="h-6 w-6 object-contain"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="text-[9px]">{match.location}</div>
+                      <div className="text-[9px]">
+                        {isPast && match.score !== undefined
+                          ? `${match.score}`
+                          : matchDate.toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }
