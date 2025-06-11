@@ -3,6 +3,7 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/Header";
+import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import ClientParallaxProvider from "@/components/ClientParallaxProvider";
 import CookieBanner from "@/components/CookieBanner";
@@ -103,6 +104,7 @@ export default async function LocaleLayout({
 
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
+          <ScrollToTop />
           <ClientParallaxProvider>
             <main>{children}</main>
             <ConsentScripts />

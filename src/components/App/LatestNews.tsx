@@ -20,7 +20,7 @@ export default function LatestNews({ latestNews }: LatestNewsProps) {
 
   return (
     <section>
-      <h2 className="text-center text-[2.5rem] font-bold leading-[1.1] tracking-[-0.01em] uppercase text-[#19246b] mb-8 text-left mt-14">
+      <h2 className="text-center text-2xl md:text-[2.5rem] font-bold leading-[1.1] tracking-[-0.01em] uppercase text-[#19246b] mb-8 text-left mt-14 ml-4">
         Últimas Noticias
       </h2>
       <div
