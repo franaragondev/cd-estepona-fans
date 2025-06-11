@@ -11,11 +11,8 @@ interface JwtPayload {
   role: string;
 }
 
-export default async function AdminPage({
-  params,
-}: {
-  params: { locale: string };
-}) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function AdminPage({ params }: any) {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
   const JWT_SECRET = process.env.JWT_SECRET;
@@ -34,10 +31,10 @@ export default async function AdminPage({
     return (
       <main className="min-h-screen p-8">
         <h1>Admin Dashboard</h1>
-        <p>Welcome, {user.email}!</p>
+        <p>Bienvenido, {user.email}!</p>
       </main>
     );
-  } catch (e) {
+  } catch {
     redirect(`/${params.locale}/auth/login`);
   }
 }
