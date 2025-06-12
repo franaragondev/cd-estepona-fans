@@ -207,7 +207,9 @@ export default function Page() {
             return (
               <div
                 key={day}
-                className={`border rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs relative ${
+                className={`${
+                  hasAnimatedBorder ? "" : "border"
+                } rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs relative ${
                   isToday ? "bg-blue-50" : ""
                 }${
                   isToday && dayMatches.length === 0
@@ -221,7 +223,7 @@ export default function Page() {
                   return (
                     <div
                       key={match.id}
-                      className="w-full rounded p-0.5 flex flex-col items-center gap-0.5"
+                      className="w-full rounded p-0.5 flex flex-col items-center gap-0.5 z-20"
                     >
                       <div className="flex justify-center gap-1 items-center">
                         <Image
