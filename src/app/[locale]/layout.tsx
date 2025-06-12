@@ -104,15 +104,16 @@ export default async function LocaleLayout({
       <body>
         {/* Google tag (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-1DDZ6SWC4V"
+          src="https://www.googletagmanager.com/gtag/js?id=G-QVPHJBS6Y0"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-1DDZ6SWC4V');
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QVPHJBS6Y0');
           `}
         </Script>
 
