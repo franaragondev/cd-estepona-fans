@@ -169,3 +169,37 @@ section {
   opacity: 1;
   background: white;
 }
+
+@keyframes border-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animated-border {
+  position: relative;
+  border-radius: 0.375rem; /* same as rounded */
+  padding: 0.25rem; /* padding so content doesn't overlap the border */
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.375rem;
+  padding: 2px; /* thickness of the animated border */
+  background: linear-gradient(270deg, #dc2c20, #2f36a1, #dc2c20, #2f36a1);
+  background-size: 400% 400%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude; /* cuts out the inner fill */
+  animation: border-move 3s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
