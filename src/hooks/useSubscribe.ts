@@ -1,13 +1,14 @@
 import { useState, useRef } from "react";
 
 type Status =
+  | "error"
   | "idle"
   | "loading"
   | "success"
-  | "error"
+  | "server_error"
+  | "email_deleted"
   | "bot"
-  | "invalid_email"
-  | "server_error";
+  | "invalid_email";
 
 export function useSubscribe(t: (key: string) => string) {
   const [email, setEmail] = useState("");
