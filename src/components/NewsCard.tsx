@@ -46,7 +46,6 @@ export default function NewsCard({
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          filter: "brightness(0.7)",
         }}
       >
         {/* Semi-transparent overlay to improve text readability */}

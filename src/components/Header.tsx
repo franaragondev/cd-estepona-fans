@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
 import UserDropdown from "./UserDropdown";
+import { useLocale } from "next-intl";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const locale = useLocale();
+  const basePath = `/${locale}`;
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -47,12 +51,14 @@ export default function Header() {
 
         {/* Logo */}
         <div className="flex justify-center md:justify-start items-center">
-          <Image
-            src="/logo-simple.webp"
-            alt="CD Estepona Fans Logo"
-            width={40}
-            height={40}
-          />
+          <Link key={`${basePath}`} href={`${basePath}`}>
+            <Image
+              src="/logo-simple.webp"
+              alt="CD Estepona Fans Logo"
+              width={40}
+              height={40}
+            />
+          </Link>
         </div>
 
         {/* Desktop menu centered */}
