@@ -134,7 +134,7 @@ section {
 
 .swiper-container-custom .swiper-button-next,
 .swiper-container-custom .swiper-button-prev {
-  bottom: 80px;
+  bottom: 50px;
   top: auto;
   transform: translateY(0) scale(0.8);
   color: white;
@@ -150,7 +150,7 @@ section {
 }
 
 .swiper-container-custom .swiper-pagination {
-  bottom: 90px !important;
+  bottom: 60px !important;
   text-align: center;
 }
 

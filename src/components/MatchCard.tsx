@@ -30,7 +30,7 @@ export default function MatchCard({
         </p>
         <p className="text-[22px] mb-0 text-center uppercase">{dateTime}</p>
       </div>
-      <div className="flex w-[90vw] mt-12 md:mt-16 md:w-[35vw] justify-around h-[8rem] md:h-[10rem]">
+      <div className="flex w-[90vw] mt-12 md:mt-16 md:w-[35vw] justify-around h-[10rem]">
         <div className="w-[30vw] md:w-[15vw] justify-between flex flex-col items-center">
           <Image
             src={homeLogo}
