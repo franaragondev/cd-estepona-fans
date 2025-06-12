@@ -49,6 +49,11 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
     checkLogin();
   }, []);
 
+  const handleAdmin = () => {
+    router.push(`/${locale}/admin`);
+    onCloseAction();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -132,12 +137,18 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
             {loggedIn && (
               <div className="mt-4">
                 <button
+                  onClick={handleAdmin}
+                  className="w-full inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"
+                >
+                  Panel de Administración
+                </button>
+                <button
                   onClick={() => {
                     fetch("/api/logout", { method: "POST" }).then(() => {
                       window.location.href = `/${locale}`;
                     });
                   }}
-                  className="w-full inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
+                  className="w-full inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer mt-5"
                 >
                   {t("logout")}
                 </button>

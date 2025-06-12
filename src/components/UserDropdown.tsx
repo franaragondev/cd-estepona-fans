@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { Globe, LogOut } from "lucide-react";
+import { Globe, LogOut, UserCog } from "lucide-react";
 
 const locales = [
   { code: "es", key: "es" },
@@ -72,6 +72,10 @@ export default function UserDropdown() {
     }
   }
 
+  const handleAdmin = () => {
+    router.push(`/${locale}/admin`);
+  };
+
   return (
     <div className="relative flex" ref={dropdownRef}>
       <button
@@ -101,13 +105,22 @@ export default function UserDropdown() {
       </button>
 
       {loggedIn && (
-        <button
-          onClick={handleLogout}
-          title="Logout"
-          className="cursor-pointer flex items-center rounded px-3 py-1 hover:bg-gray-100 focus:outline-none"
-        >
-          <LogOut className="w-5 h-5" />
-        </button>
+        <>
+          <button
+            onClick={handleAdmin}
+            title="Admin"
+            className="cursor-pointer flex items-center rounded px-3 py-1 hover:bg-gray-100 focus:outline-none"
+          >
+            <UserCog className="w-5 h-5" />
+          </button>
+          <button
+            onClick={handleLogout}
+            title="Logout"
+            className="cursor-pointer flex items-center rounded px-3 py-1 hover:bg-gray-100 focus:outline-none"
+          >
+            <LogOut className="w-5 h-5" />
+          </button>
+        </>
       )}
 
       {open && (
