@@ -11,6 +11,19 @@ import CookieBanner from "@/components/CookieBanner";
 import ConsentScripts from "@/components/ConsentScripts";
 
 import "@/app/globals.css";
+import { DM_Sans, Montserrat } from "next/font/google";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-dm-sans",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-montserrat",
+});
 
 export const viewport = {
   width: "device-width",
@@ -21,7 +34,7 @@ export const viewport = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
@@ -75,7 +88,7 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
@@ -87,7 +100,7 @@ export default async function LocaleLayout({
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${dmSans.variable} ${montserrat.variable}`}>
       <body>
         {/* Google tag (gtag.js) */}
         <Script
