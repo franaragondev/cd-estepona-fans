@@ -20,8 +20,7 @@ interface Match {
   homeLogo: string;
   awayTeam: string;
   awayLogo: string;
-  scoreHome: number | null;
-  scoreAway: number | null;
+  score?: string;
 }
 
 interface RawMatch {
@@ -71,20 +70,7 @@ export default function NextMatchesPreview() {
             awayLogo: m.isHome
               ? `/teams/${m.opponentImage}`
               : "/logo-simple.webp",
-            scoreHome: m.isHome
-              ? m.score
-                ? parseScoreHome(m.score)
-                : null
-              : m.score
-              ? parseScoreAway(m.score)
-              : null,
-            scoreAway: m.isHome
-              ? m.score
-                ? parseScoreAway(m.score)
-                : null
-              : m.score
-              ? parseScoreHome(m.score)
-              : null,
+            score: m.score,
           };
 
           if (matchDate < now) previous.push(match);
@@ -110,13 +96,6 @@ export default function NextMatchesPreview() {
 
     fetchMatches();
   }, []);
-
-  function parseScoreHome(scoreStr: string) {
-    return parseInt(scoreStr.split("-")[0], 10);
-  }
-  function parseScoreAway(scoreStr: string) {
-    return parseInt(scoreStr.split("-")[1], 10);
-  }
 
   function formatDate(dateStr: string) {
     const date = new Date(dateStr);
@@ -216,8 +195,7 @@ export default function NextMatchesPreview() {
                       homeLogo={match.homeLogo}
                       awayTeam={match.awayTeam}
                       awayLogo={match.awayLogo}
-                      scoreHome={match.scoreHome}
-                      scoreAway={match.scoreAway}
+                      score={match.score ?? "-:-"}
                     />
                   </SwiperSlide>
                 ))}
@@ -256,8 +234,7 @@ export default function NextMatchesPreview() {
                       homeLogo={match.homeLogo}
                       awayTeam={match.awayTeam}
                       awayLogo={match.awayLogo}
-                      scoreHome={match.scoreHome}
-                      scoreAway={match.scoreAway}
+                      score={match.score ?? "-:-"}
                     />
                   </SwiperSlide>
                 ))}

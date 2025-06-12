@@ -8,8 +8,7 @@ interface MatchCardProps {
   homeLogo: string;
   awayTeam: string;
   awayLogo: string;
-  scoreHome: number | null;
-  scoreAway: number | null;
+  score: string;
 }
 
 export default function MatchCard({
@@ -20,8 +19,7 @@ export default function MatchCard({
   homeLogo,
   awayTeam,
   awayLogo,
-  scoreHome,
-  scoreAway,
+  score,
 }: MatchCardProps) {
   return (
     <div className="mt-14 text-center text-white flex flex-col items-center">
@@ -44,9 +42,7 @@ export default function MatchCard({
           <p className="mt-6 uppercase">{homeTeam}</p>
         </div>
         <div className="flex text-[44px] md:text-[60px] font-extrabold w-[30vw] md:w-[15vw] justify-center">
-          <p>{scoreHome !== null ? scoreHome : "-"}</p>
-          <p>:</p>
-          <p>{scoreAway !== null ? scoreAway : "-"}</p>
+          <p>{score !== null ? score : "-"}</p>
         </div>
         <div className="w-[30vw] md:w-[15vw] justify-between flex flex-col items-center">
           <Image
