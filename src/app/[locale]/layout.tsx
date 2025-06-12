@@ -110,10 +110,10 @@ export default async function LocaleLayout({
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-  gtag('config', 'G-QVPHJBS6Y0');
+            gtag('config', 'G-QVPHJBS6Y0');
           `}
         </Script>
 
