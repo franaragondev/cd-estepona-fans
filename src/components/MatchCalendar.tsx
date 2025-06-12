@@ -79,6 +79,7 @@ export default function Page() {
         <button
           className="px-4 py-2 border rounded cursor-pointer capitalize"
           onClick={() => {
+            setMatches([]);
             if (month === 0) {
               setMonth(11);
               setYear(year - 1);
@@ -112,6 +113,7 @@ export default function Page() {
         <button
           className="px-4 py-2 border rounded cursor-pointer capitalize"
           onClick={() => {
+            setMatches([]);
             if (month === 11) {
               setMonth(0);
               setYear(year + 1);
@@ -129,7 +131,7 @@ export default function Page() {
       </div>
 
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center z-10 bg-white/70">
+        <div className="absolute inset-0 flex items-center justify-center z-30 bg-white/70">
           <div
             className="w-12 h-12 rounded-full animate-spin"
             style={{
@@ -256,8 +258,10 @@ export default function Page() {
                           loading="lazy"
                         />
                       </div>
-                      <div className="text-[9px]">{match.location}</div>
-                      <div className="text-[9px]">
+                      <div className="text-[9px] md:text-[12px]">
+                        {match.location}
+                      </div>
+                      <div className="text-[9px] md:text-[12px] font-bold">
                         {isPast && match.score !== undefined
                           ? `${match.score}`
                           : matchDate.toLocaleTimeString(locale, {
