@@ -58,7 +58,7 @@ export default function Page() {
 
   return (
     <div className="px-4 py-8 mx-auto relative">
-      {/* <h1 className="text-2xl font-bold mb-4">Calendario de partidos</h1> */}
+      <h1 className="sr-only">Calendario de Partidos</h1>
 
       <div className="flex justify-between mb-4">
         <button

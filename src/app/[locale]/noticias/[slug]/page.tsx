@@ -18,9 +18,12 @@ export default async function Page({ params }: any) {
 
   if (!article) return notFound();
 
+  const neutralDark = "#333"; // neutral dark text color
+  const neutralGray = "#666"; // medium gray for details
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-12 min-h-[85vh]">
-      <h1 className="text-4xl font-bold mb-6 text-[#DC2C20]">
+      <h1 className="text-4xl font-bold mb-6" style={{ color: neutralDark }}>
         {article.title}
       </h1>
 
@@ -36,20 +39,29 @@ export default async function Page({ params }: any) {
         )}
       </div>
 
-      <div className="text-sm text-gray-500 mb-2">
+      <div
+        className="text-sm mb-2"
+        style={{ color: neutralGray, fontWeight: 500 }}
+      >
         {new Date(article.createdAt).toLocaleDateString(locale)}
       </div>
-      <div className="text-sm text-gray-500 mb-6">
+      <div
+        className="text-sm mb-6"
+        style={{ color: neutralGray, fontStyle: "italic" }}
+      >
         Por {article.author?.name || "CD Estepona Fans"}
       </div>
 
-      <p className="text-lg text-gray-800 leading-relaxed mb-12">
+      <p
+        className="text-lg leading-relaxed mb-12"
+        style={{ color: neutralDark, opacity: 0.85 }}
+      >
         {article.content}
       </p>
 
       <Link
         href={`/${params.locale}/noticias`}
-        className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
+        className="inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"
       >
         Volver a todas las noticias
       </Link>

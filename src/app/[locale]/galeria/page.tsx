@@ -10,6 +10,7 @@ export default async function GalleryPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-12 min-h-[85vh]">
+      <h1 className="sr-only">Galería de Imágenes</h1>
       <GalleryFull images={images} />
     </main>
   );
