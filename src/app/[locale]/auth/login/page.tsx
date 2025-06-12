@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
   const t = useTranslations("loginPage");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function LoginPage() {
       const res = await fetch(`${window.location.origin}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }), // <-- envío username
         next: { revalidate: 0 },
       });
 
@@ -42,7 +42,7 @@ export default function LoginPage() {
       const locale = getLocaleFromPathname();
       setTimeout(() => {
         const path = locale ? `/${locale}/admin` : "/admin";
-        router.push(locale ? `/${locale}/admin` : "/admin");
+        router.push(path);
         window.location.href = path;
       }, 300);
     } catch (err) {
@@ -61,13 +61,13 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              {t("email")}
+              {t("username")}
             </label>
             <input
-              type="email"
+              type="text"
               className="mt-1 w-full border-0 border-b border-gray-400 focus:border-gray-800 focus:outline-none focus:ring-0 rounded-none"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>

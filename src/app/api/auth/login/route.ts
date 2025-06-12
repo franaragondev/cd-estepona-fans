@@ -5,20 +5,20 @@ import jwt from "jsonwebtoken";
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
+    const { username, password } = await req.json();
 
-    if (!email || !password) {
+    if (!username || !password) {
       return NextResponse.json(
-        { message: "Missing email or password" },
+        { message: "Missing username or password" },
         { status: 400 }
       );
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findFirst({ where: { username } });
 
     if (!user || !user.password) {
       return NextResponse.json(
-        { message: "Invalid email or password" },
+        { message: "Invalid username or password" },
         { status: 401 }
       );
     }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     if (!isValid) {
       return NextResponse.json(
-        { message: "Invalid email or password" },
+        { message: "Invalid username or password" },
         { status: 401 }
       );
     }
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
+      { id: user.id, username: user.name, role: user.role },
       JWT_SECRET,
       { expiresIn: "7d" }
     );
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       message: "Login successful",
       user: {
         id: user.id,
-        email: user.email,
+        username: user.name,
         role: user.role,
       },
       token,

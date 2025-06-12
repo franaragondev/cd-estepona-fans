@@ -158,7 +158,7 @@
   },
   "loginPage": {
     "title": "Inicia sesión en CD Estepona Fans",
-    "email": "Correo electrónico",
+    "username": "Usuario",
     "password": "Contraseña",
     "button": "Iniciar sesión",
     "redirect": "¿No tienes cuenta?",
