@@ -1,5 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https:///cd-estepona-fans.vercel.app/api/sitemap.xml
+# Host
+Host: https://www.cdesteponafans.com
+
+# Sitemaps
+Sitemap: https://www.cdesteponafans.com/sitemap.xml
