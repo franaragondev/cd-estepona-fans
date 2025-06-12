@@ -1,62 +1,32 @@
 import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
-export async function POST(request: Request) {
-  const data = await request.formData();
-  const email = data.get("email");
-  const honeypot = data.get("honeypot");
+const prisma = new PrismaClient();
 
-  if (honeypot) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn("Honeypot triggered. Possible bot submission.");
-    }
-    return NextResponse.json({ message: "bot_detected" }, { status: 400 });
-  }
-
-  if (!email || typeof email !== "string") {
-    return NextResponse.json({ message: "invalid_email" }, { status: 400 });
-  }
-
-  const apiKey = process.env.MAILCHIMP_API_KEY;
-  const listId = process.env.MAILCHIMP_LIST_ID;
-  const dataCenter = process.env.MAILCHIMP_DATA_CENTER;
-
-  if (!apiKey || !listId || !dataCenter) {
-    return NextResponse.json(
-      { message: "server_error" },
-      { status: 500 }
-    );
-  }
-
-  const mailchimpURL = `https://${dataCenter}.api.mailchimp.com/3.0/lists/${listId}/members`;
-  const encodedApiKey = Buffer.from(`anystring:${apiKey}`).toString("base64");
-
+export async function POST(req: Request) {
   try {
-    const response = await fetch(mailchimpURL, {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${encodedApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email_address: email,
-        status: "subscribed",
-      }),
+    const { email, name } = await req.json();
+
+    if (!email || !email.includes("@")) {
+      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+    }
+
+    const subscriber = await prisma.subscriber.create({
+      data: { email, name: name || null },
     });
 
-    if (response.ok) {
-      return NextResponse.json({ message: "success" });
-    } else {
-      const error = await response.json();
-      if (error.title === "Forgotten Email Not Subscribed") {
-        return NextResponse.json({ message: "email_deleted" }, { status: 400 });
-      }
-      return NextResponse.json({ message: "mailchimp_error" }, { status: 400 });
+    return NextResponse.json({
+      message: "Subscribed successfully",
+      subscriber,
+    });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      // Unique constraint failed
+      return NextResponse.json(
+        { error: "Email already subscribed" },
+        { status: 409 }
+      );
     }
-  } catch (error) {
-    console.error("Mailchimp request failed:", error);
-    return NextResponse.json(
-      { message: "server_error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

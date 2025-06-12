@@ -6,7 +6,6 @@ type Status =
   | "success"
   | "error"
   | "bot"
-  | "email_deleted"
   | "invalid_email"
   | "server_error";
 
@@ -28,7 +27,12 @@ export function useSubscribe(t: (key: string) => string) {
       return;
     }
 
-    const honeypot = honeypotRef.current?.value || "";
+    const honeypotValue = honeypotRef.current?.value || "";
+    if (honeypotValue) {
+      setStatus("bot");
+      setErrorMessage(t("botDetectedMessage"));
+      return;
+    }
 
     setStatus("loading");
     setErrorMessage("");
@@ -36,25 +40,29 @@ export function useSubscribe(t: (key: string) => string) {
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
-        body: new URLSearchParams({ email, honeypot }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        switch (data.message) {
-          case "bot_detected":
-            setStatus("bot");
-            setErrorMessage(t("botDetectedMessage"));
-            break;
+        const data = await res.json();
+        switch (data.error) {
+          case "Invalid email":
           case "invalid_email":
             setStatus("invalid_email");
             setErrorMessage(t("invalidEmailMessage"));
             break;
-          case "email_deleted":
-            setStatus("email_deleted");
-            setErrorMessage(t("emailDeletedMessage"));
+          case "Bot detected":
+            setStatus("bot");
+            setErrorMessage(t("botDetectedMessage"));
             break;
+          case "Email already subscribed":
+            setStatus("error");
+            setErrorMessage(t("emailAlreadySubscribedMessage") || data.error);
+            break;
+          case "Server error":
           case "server_error":
             setStatus("server_error");
             setErrorMessage(t("serverErrorMessage"));
@@ -73,7 +81,7 @@ export function useSubscribe(t: (key: string) => string) {
     } catch (error) {
       setStatus("server_error");
       setErrorMessage(t("serverErrorMessage"));
-      console.log(error);
+      console.error(error);
     }
   };
 

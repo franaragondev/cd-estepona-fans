@@ -103,7 +103,6 @@ export default function CallToAction() {
             {(status === "error" ||
               status === "bot" ||
               status === "invalid_email" ||
-              status === "email_deleted" ||
               status === "server_error") && (
               <motion.p
                 className="text-red-400 text-sm mt-2"
