@@ -3,7 +3,15 @@ import { getAllSlugs } from "@/lib/getAllSlugs";
 
 const SITE_URL = "https://www.cdesteponafans.com";
 const locales = ["es", "en", "fr"];
-const pages = ["", "cookies", "privacy"];
+const pages = [
+  "",
+  "cookies",
+  "privacy",
+  "noticias",
+  "partidos",
+  "galeria",
+  "tribuna",
+];
 
 async function generateSitemap(locale: string) {
   const urls: string[] = [];
@@ -29,6 +37,20 @@ async function generateSitemap(locale: string) {
     .map((url) => {
       const urlObj = new URL(url);
       const path = urlObj.pathname.replace(/^\/(es|en|fr)/, "");
+      const pageName = path.replace("/", "");
+
+      const highPriorityPages = [
+        "",
+        "noticias",
+        "partidos",
+        "galeria",
+        "tribuna",
+      ];
+      const priority = highPriorityPages.includes(pageName)
+        ? "1.0"
+        : ["cookies", "privacy"].includes(pageName)
+        ? "0.5"
+        : "0.8";
 
       const hreflangs = locales
         .map(
@@ -45,9 +67,7 @@ async function generateSitemap(locale: string) {
     <loc>${url}</loc>
     ${hreflangs}
     <changefreq>monthly</changefreq>
-    <priority>${
-      url.endsWith("/cookies") || url.endsWith("/privacy") ? "0.5" : "1.0"
-    }</priority>
+    <priority>${priority}</priority>
   </url>`;
     })
     .join("\n")}

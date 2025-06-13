@@ -4,6 +4,7 @@ const SITE_URL = "https://www.cdesteponafans.com";
 const locales = ["es", "en", "fr"];
 
 export async function GET() {
+  // sitemap for each language
   const sitemaps = locales
     .map(
       (locale) => `
@@ -11,10 +12,12 @@ export async function GET() {
     <loc>${SITE_URL}/${locale}/sitemap.xml</loc>
   </sitemap>`
     )
-    .join("");
+    .join("\n");
 
+  // Sitemap Index XML, reference all sitemaps for each language
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemaps}
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemaps}
 </sitemapindex>
 `;
 
