@@ -1,16 +1,24 @@
 import { NextResponse, NextRequest } from "next/server";
+import { getAllSlugs } from "@/lib/getAllSlugs";
 
-const SITE_URL = "https://cd-estepona-fans.vercel.app";
+const SITE_URL = "https://www.cdesteponafans.com";
 const locales = ["es", "en", "fr"];
 const pages = ["", "cookies", "privacy"];
 
-function generateSitemap(locale: string) {
+async function generateSitemap(locale: string) {
   const urls: string[] = [];
 
+  // Statics URLs
   for (const page of pages) {
     const path = page ? `/${page}` : "";
     urls.push(`${SITE_URL}/${locale}${path}`);
   }
+
+  // Dynamics URLs
+  const slugs = await getAllSlugs();
+  slugs.forEach((slug) => {
+    urls.push(`${SITE_URL}/${locale}/noticias/${slug}`);
+  });
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset
@@ -49,11 +57,11 @@ function generateSitemap(locale: string) {
 export async function GET(request: NextRequest) {
   const locale = request.nextUrl.pathname.split("/")[1];
 
-  if (!["es", "en", "fr"].includes(locale)) {
+  if (!locales.includes(locale)) {
     return new NextResponse("Not found", { status: 404 });
   }
 
-  const sitemap = generateSitemap(locale);
+  const sitemap = await generateSitemap(locale);
   return new NextResponse(sitemap, {
     headers: {
       "Content-Type": "application/xml",
