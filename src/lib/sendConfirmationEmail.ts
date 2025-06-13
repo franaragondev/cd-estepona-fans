@@ -13,9 +13,10 @@ const transporter = nodemailer.createTransport({
 
 export default async function sendConfirmationEmail(
   email: string,
-  token: string
+  token: string,
+  locale = "es"
 ) {
-  const confirmUrl = `https://www.cdesteponafans.com/api/confirm?token=${token}`;
+  const confirmUrl = `https://www.cdesteponafans.com/${locale}/api/confirm?token=${token}`;
 
   const mailOptions = {
     from: '"CD Estepona Fans" <noreply@cdesteponafans.com>',

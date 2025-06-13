@@ -11,6 +11,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
+    // Obtener locale desde headers 'accept-language' o usar "es" por defecto
+    const acceptLanguage = req.headers.get("accept-language") || "es";
+    // Aquí una lógica simple para elegir entre "es" o "en" (puedes adaptar)
+    const locale = acceptLanguage.startsWith("en") ? "en" : "es";
+
     const token = randomUUID();
 
     await prisma.pendingSubscriber.upsert({
@@ -19,7 +24,8 @@ export async function POST(req: Request) {
       create: { email, token },
     });
 
-    await sendConfirmationEmail(email, token);
+    // Pasamos el locale a la función que envía el email
+    await sendConfirmationEmail(email, token, locale);
 
     return NextResponse.json({
       message:
