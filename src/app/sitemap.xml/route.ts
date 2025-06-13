@@ -6,15 +6,17 @@ const locales = ["es", "en", "fr"];
 export async function GET() {
   const sitemaps = locales
     .map(
-      (locale) =>
-        `  <sitemap>\n    <loc>${SITE_URL}/${locale}/sitemap.xml</loc>\n  </sitemap>`
+      (locale) => `
+  <sitemap>
+    <loc>${SITE_URL}/${locale}/sitemap.xml</loc>
+  </sitemap>`
     )
-    .join("\n");
+    .join("");
 
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemaps}
-</sitemapindex>`;
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemaps}
+</sitemapindex>
+`;
 
   return new NextResponse(sitemapIndex, {
     headers: {

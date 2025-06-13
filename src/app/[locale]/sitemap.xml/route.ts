@@ -41,16 +41,16 @@ async function generateSitemap(locale: string) {
         .join("\n      ");
 
       return `
-    <url>
-      <loc>${url}</loc>
-      ${hreflangs}
-      <changefreq>monthly</changefreq>
-      <priority>${
-        url.endsWith("/cookies") || url.endsWith("/privacy") ? "0.5" : "1.0"
-      }</priority>
-    </url>`;
+  <url>
+    <loc>${url}</loc>
+    ${hreflangs}
+    <changefreq>monthly</changefreq>
+    <priority>${
+      url.endsWith("/cookies") || url.endsWith("/privacy") ? "0.5" : "1.0"
+    }</priority>
+  </url>`;
     })
-    .join("")}
+    .join("\n")}
 </urlset>`;
 }
 
