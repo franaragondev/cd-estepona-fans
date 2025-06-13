@@ -8,14 +8,15 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  debug: true,
+  name: "cdesteponafans.com",
 });
 
 export default async function sendConfirmationEmail(
   email: string,
   token: string
 ) {
-  const confirmUrl = `https://www.cdesteponafans.com/api/confirm?token=${token}`;
+  // Use your production domain and HTTPS in confirm URL
+  const confirmUrl = `https://cdesteponafans.com/api/confirm?token=${token}`;
 
   const mailOptions = {
     from: '"CD Estepona Fans" <noreply@cdesteponafans.com>',
