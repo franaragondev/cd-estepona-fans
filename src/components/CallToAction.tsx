@@ -101,10 +101,9 @@ export default function CallToAction() {
               </motion.p>
             )}
 
-            {(status === "error" ||
-              status === "bot" ||
-              status === "invalid_email" ||
-              status === "server_error") && (
+            {["error", "bot", "invalid_email", "server_error"].includes(
+              status
+            ) && (
               <motion.p
                 className="text-red-400 text-sm mt-2"
                 initial="hidden"

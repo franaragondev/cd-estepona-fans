@@ -29,12 +29,8 @@ export async function GET(req: Request) {
       where: { id: pending.id },
     });
 
-    const url = new URL(req.url);
-    const pathname = url.pathname;
-    const localeMatch = pathname.match(/^\/([^\/]+)\//);
-    const locale = localeMatch ? localeMatch[1] : "es";
+    const locale = "es"; // o hardcodeado aquí, o podrías intentar sacar del host/headers si tienes multi-locale
 
-    // /[locale]/?confirmed=true
     return NextResponse.redirect(
       new URL(`/${locale}/?confirmed=true`, req.url)
     );

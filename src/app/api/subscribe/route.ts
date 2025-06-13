@@ -11,21 +11,28 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    // Obtener locale desde headers 'accept-language' o usar "es" por defecto
-    const acceptLanguage = req.headers.get("accept-language") || "es";
-    // Aquí una lógica simple para elegir entre "es" o "en" (puedes adaptar)
-    const locale = acceptLanguage.startsWith("en") ? "en" : "es";
+    // 1. Comprueba si ya está confirmado
+    const existingSubscriber = await prisma.subscriber.findUnique({
+      where: { email },
+    });
 
+    if (existingSubscriber) {
+      return NextResponse.json(
+        { error: "Email already confirmed" },
+        { status: 409 }
+      );
+    }
+
+    // 2. Crear o actualizar token para pendiente
     const token = randomUUID();
-
     await prisma.pendingSubscriber.upsert({
       where: { email },
       update: { token, createdAt: new Date() },
       create: { email, token },
     });
 
-    // Pasamos el locale a la función que envía el email
-    await sendConfirmationEmail(email, token, locale);
+    // 3. Enviar email de confirmación
+    await sendConfirmationEmail(email, token);
 
     return NextResponse.json({
       message:
@@ -33,6 +40,7 @@ export async function POST(req: Request) {
     });
   } catch (error: unknown) {
     console.error("Error in POST /api/subscribe:", error);
+
     if (
       typeof error === "object" &&
       error !== null &&

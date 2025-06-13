@@ -23,6 +23,7 @@
     "emailDeletedMessage": "Este correo fue eliminado y necesita volver a suscribirse.",
     "serverErrorMessage": "Error del servidor. Intenta más tarde.",
     "genericErrorMessage": "Error desconocido. Intenta nuevamente más tarde.",
+    "emailAlreadySubscribedMessage": "Este correo ya está suscrito.",
     "loginOrRegisterButton": "Accede al contenido exclusivo"
   },
   "features": {
