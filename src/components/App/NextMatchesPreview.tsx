@@ -117,7 +117,7 @@ export default function NextMatchesPreview() {
       <section>
         <div className="flex flex-col md:flex-row justify-center items-center h-[1200px] md:h-[740px]">
           {/* Previous matches slider */}
-          <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team.jpeg')] bg-cover bg-center ">
+          <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team.webp')] bg-cover bg-center ">
             <div className="absolute inset-0 bg-[rgba(220,44,32,0.8)]"></div>
             <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
               <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
@@ -128,7 +128,7 @@ export default function NextMatchesPreview() {
           </div>
 
           {/* Upcoming matches slider */}
-          <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team2.jpeg')] bg-cover bg-center">
+          <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team2.webp')] bg-cover bg-center">
             <div className="absolute inset-0 bg-[rgba(47,54,161,0.8)]"></div>
             <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
               <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
@@ -155,7 +155,7 @@ export default function NextMatchesPreview() {
     <section>
       <div className="flex flex-col md:flex-row justify-center items-center h-[1200px] md:h-[740px]">
         {/* Previous matches slider */}
-        <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team.jpeg')] bg-cover bg-center ">
+        <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team.webp')] bg-cover bg-center ">
           <div className="absolute inset-0 bg-[rgba(220,44,32,0.8)]"></div>
           <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
             <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
@@ -206,7 +206,7 @@ export default function NextMatchesPreview() {
         </div>
 
         {/* Upcoming matches slider */}
-        <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team2.jpeg')] bg-cover bg-center">
+        <div className="relative w-full md:w-1/2 h-[600px] md:h-[740px] bg-[url('/team2.webp')] bg-cover bg-center">
           <div className="absolute inset-0 bg-[rgba(47,54,161,0.8)]"></div>
           <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
             <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
