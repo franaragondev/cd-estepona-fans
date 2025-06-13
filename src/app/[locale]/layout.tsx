@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import ClientParallaxProvider from "@/components/ClientParallaxProvider";
 import CookieBanner from "@/components/CookieBanner";
 import ConsentScripts from "@/components/ConsentScripts";
+import Head from "next/head";
 
 import "@/app/globals.css";
 import { DM_Sans, Montserrat } from "next/font/google";
@@ -98,11 +99,36 @@ export default async function LocaleLayout({
   }
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
+  const { head } = messages;
+  const urlObj = new URL(head.url);
+  const baseUrl = urlObj.origin;
+
+  // URLs hreflang
+  const hreflangUrls = {
+    es: `${baseUrl}/es${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`,
+    en: `${baseUrl}/en${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`,
+    fr: `${baseUrl}/fr${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`,
+  };
 
   return (
     <html lang={locale} className={`${dmSans.variable} ${montserrat.variable}`}>
+      <Head>
+        {/* Canonical */}
+        <link rel="canonical" href={head.url} />
+
+        {/* Hreflang for each language */}
+        {Object.entries(hreflangUrls).map(([lang, href]) => (
+          <link key={lang} rel="alternate" hrefLang={lang} href={href} />
+        ))}
+
+        {/* x-default */}
+        <link
+          rel="alternate"
+          hrefLang="x-default"
+          href={`${baseUrl}/es${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`}
+        />
+      </Head>
       <body>
-        {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-QVPHJBS6Y0"
           strategy="afterInteractive"

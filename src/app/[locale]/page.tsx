@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import AppHero from "@/components/App/AppHero";
 import LatestNewsServer from "@/components/LatestNewsServer";
 import NextMatchesPreview from "@/components/App/NextMatchesPreview";
