@@ -5,12 +5,45 @@ import { useEffect, useState } from "react";
 
 export default function ConfirmModal() {
   const searchParams = useSearchParams();
-  const router = useRouter(); // <--- aquí
+  const router = useRouter();
+
+  // Estados para controlar modal y mensajes
   const [showModal, setShowModal] = useState(false);
+  const [messageTitle, setMessageTitle] = useState("");
+  const [messageBody, setMessageBody] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (searchParams.get("confirmed") === "true") {
+    const confirmed = searchParams.get("confirmed");
+    const token = searchParams.get("token");
+
+    if (confirmed === "true") {
+      // Caso actual: solo mostrar modal de éxito simple
+      setMessageTitle("Gracias por confirmar tu suscripción");
+      setMessageBody("Tu suscripción ha sido confirmada exitosamente.");
       setShowModal(true);
+      setLoading(false);
+    } else if (token) {
+      // Nuevo caso: tenemos token, llamar a API para validar
+      setLoading(true);
+      fetch(`https://www.cdesteponafans.com/api/confirm?token=${token}`)
+        .then(async (res) => {
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Error desconocido");
+          // Éxito
+          setMessageTitle("Gracias por confirmar tu suscripción");
+          setMessageBody("Tu suscripción ha sido confirmada exitosamente.");
+          setShowModal(true);
+        })
+        .catch((error) => {
+          // Error token inválido o expirado
+          setMessageTitle("Error al confirmar");
+          setMessageBody(error.message);
+          setShowModal(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   }, [searchParams]);
 
@@ -26,10 +59,16 @@ export default function ConfirmModal() {
 
   if (!showModal) return null;
 
-  // Función que cierra modal y redirige a /
   const handleClose = () => {
     setShowModal(false);
-    router.push("/"); // redirige a la raíz
+
+    // Construir la URL sin 'confirmed' ni 'token'
+    const url = new URL(window.location.href);
+    url.searchParams.delete("confirmed");
+    url.searchParams.delete("token");
+
+    // Actualizar la URL sin recargar ni añadir entrada al historial
+    router.replace(url.pathname + url.search);
   };
 
   return (
@@ -38,13 +77,24 @@ export default function ConfirmModal() {
       role="dialog"
       aria-modal={true}
       aria-labelledby="modalTitle"
+      onClick={handleClose} // cerrar modal al clicar fuera del contenido
     >
-      <div className="modal-content" tabIndex={-1}>
-        <h2 id="modalTitle">Gracias por confirmar tu suscripción</h2>
-        <p>Tu suscripción ha sido confirmada exitosamente.</p>
-        <button onClick={handleClose} aria-label="Cerrar modal">
-          Cerrar
-        </button>
+      <div
+        className="modal-content"
+        tabIndex={-1}
+        onClick={(e) => e.stopPropagation()} // evitar cerrar modal si clicas dentro
+      >
+        {loading ? (
+          <p>Confirmando...</p>
+        ) : (
+          <>
+            <h2 id="modalTitle">{messageTitle}</h2>
+            <p>{messageBody}</p>
+            <button onClick={handleClose} aria-label="Cerrar modal">
+              Cerrar
+            </button>
+          </>
+        )}
       </div>
 
       <style jsx>{`
