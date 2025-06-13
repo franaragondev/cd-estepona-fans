@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useLocale } from "next-intl";
 import MatchCard from "../MatchCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectFade } from "swiper/modules";
+import { useTranslations } from "next-intl";
+import NewsButton from "@/components/CommonButton";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -37,6 +38,7 @@ interface RawMatch {
 
 export default function NextMatchesPreview() {
   const locale = useLocale();
+  const t = useTranslations("nextMatchesPreview");
 
   const [previousMatches, setPreviousMatches] = useState<Match[]>([]);
   const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
@@ -119,7 +121,7 @@ export default function NextMatchesPreview() {
             <div className="absolute inset-0 bg-[rgba(220,44,32,0.8)]"></div>
             <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
               <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
-                Anteriores
+                {t("previousTitle")}
               </h2>
               <div className="w-full h-full flex flex-col justify-between swiper-container-custom"></div>
             </div>
@@ -130,7 +132,7 @@ export default function NextMatchesPreview() {
             <div className="absolute inset-0 bg-[rgba(47,54,161,0.8)]"></div>
             <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
               <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
-                Próximos
+                {t("nextTitle")}
               </h2>
               <div className="w-full h-full flex flex-col justify-between swiper-container-custom"></div>
             </div>
@@ -138,12 +140,12 @@ export default function NextMatchesPreview() {
         </div>
 
         <div className="text-center mt-8">
-          <Link
+          <NewsButton
             href={`/${locale}/partidos`}
             className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
-          >
-            Ver calendario completo
-          </Link>
+            buttonTitle="button"
+            translation="nextMatchesPreview"
+          />
         </div>
       </section>
     );
@@ -157,7 +159,7 @@ export default function NextMatchesPreview() {
           <div className="absolute inset-0 bg-[rgba(220,44,32,0.8)]"></div>
           <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
             <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
-              Anteriores
+              {t("previousTitle")}
             </h2>
             <Swiper
               modules={[Navigation, Pagination, EffectFade]}
@@ -172,12 +174,12 @@ export default function NextMatchesPreview() {
             >
               <SwiperSlide className="flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center w-full h-full">
-                  <Link
+                  <NewsButton
                     href={`/${locale}/partidos`}
                     className="px-6 py-3 rounded text-white bg-[#2f36a1] transition-colors duration-200 -mt-26 cursor-pointer"
-                  >
-                    Ver calendario completo
-                  </Link>
+                    buttonTitle="button"
+                    translation="nextMatchesPreview"
+                  />
                 </div>
               </SwiperSlide>
 
@@ -208,7 +210,7 @@ export default function NextMatchesPreview() {
           <div className="absolute inset-0 bg-[rgba(47,54,161,0.8)]"></div>
           <div className="relative z-10 flex justify-center pt-6 flex-col items-center w-full h-full">
             <h2 className="text-white text-4xl md:text-5xl mt-4 md:mt-14 font-light italic uppercase">
-              Próximos
+              {t("nextTitle")}
             </h2>
             <Swiper
               modules={[Navigation, Pagination, EffectFade]}
@@ -240,12 +242,12 @@ export default function NextMatchesPreview() {
                 ))}
               <SwiperSlide className="flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center w-full h-full">
-                  <Link
+                  <NewsButton
                     href={`/${locale}/partidos`}
-                    className="px-6 py-3 rounded text-white bg-[#2f36a1] transition-colors duration-200 -mt-26 cursor-pointer"
-                  >
-                    Ver calendario completo
-                  </Link>
+                    className="px-6 py-3 rounded text-white bg-[#DC2C20] transition-colors duration-200 -mt-26 cursor-pointer"
+                    buttonTitle="button"
+                    translation="nextMatchesPreview"
+                  />
                 </div>
               </SwiperSlide>
             </Swiper>
@@ -254,12 +256,12 @@ export default function NextMatchesPreview() {
       </div>
 
       <div className="text-center mt-8">
-        <Link
+        <NewsButton
           href={`/${locale}/partidos`}
           className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
-        >
-          Ver calendario completo
-        </Link>
+          buttonTitle="button"
+          translation="nextMatchesPreview"
+        />
       </div>
     </section>
   );

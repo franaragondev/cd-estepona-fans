@@ -105,7 +105,7 @@ export default function NewsCard({
             className="text-xs mb-2"
             style={{ color: neutralGray, fontStyle: "italic" }}
           >
-            By {author}
+            Por {author}
           </span>
         ) : (
           <span

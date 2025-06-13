@@ -2,9 +2,9 @@
   "head": {
     "title": "CD Estepona Fans | News, Fixtures & Exclusive Content",
     "description": "Follow CD Estepona like never before. Stay up to date with fixtures, results, club news, and exclusive content made for fans.",
-    "url": "https://cd-estepona-fans.vercel.app/",
-    "image": "https://cd-estepona-fans.vercel.app/logo.png",
-    "keywords": "cd estepona, football, fixtures, fans, club news, results, spanish football"
+    "url": "https://www.cdesteponafans.com/",
+    "image": "https://www.cdesteponafans.com/logo.png",
+    "keywords": "cd estepona, football, matches, fans, club news, results, spanish football, segunda ref, deportivo estepona, estepona team, match schedule, cd estepona transfers, estepona stadium, cd estepona players, segunda ref standings, match reports, andalusian football"
   },
   "about": {
     "title": "CD Estepona: More than a club",
@@ -167,5 +167,25 @@
   "appHero": {
     "title": "Welcome to CD Estepona Fans",
     "description": "Your ultimate source for all news, matches, and exclusive content about CD Estepona."
+  },
+  "latestNews": {
+    "title": "Latest News",
+    "button": "View all news"
+  },
+  "nextMatchesPreview": {
+    "previousTitle": "PREVIOUS",
+    "nextTitle": "NEXT",
+    "button": "View full schedule"
+  },
+  "galleryPreview": {
+    "title": "FAN GALLERY",
+    "button": "See more in the gallery"
+  },
+  "tribuna": {
+    "latestEpisodes": "Latest episodes",
+    "error": "Failed to load La Tribuna content."
+  },
+  "newsPage": {
+    "button": "Back to all news"
   }
 }

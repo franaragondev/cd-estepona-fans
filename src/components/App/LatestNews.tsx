@@ -1,8 +1,9 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import Link from "next/link";
 import NewsCard from "@/components/NewsCard";
+import { useTranslations } from "next-intl";
+import NewsButton from "../CommonButton";
 
 interface NewsItem {
   id: string;
@@ -17,11 +18,12 @@ interface LatestNewsProps {
 
 export default function LatestNews({ latestNews }: LatestNewsProps) {
   const locale = useLocale();
+  const t = useTranslations("latestNews");
 
   return (
     <section>
       <h2 className="text-center text-2xl md:text-[2.5rem] font-bold leading-[1.1] tracking-[-0.01em] uppercase text-[#19246b] mb-8 text-left mt-14 ml-4">
-        Últimas Noticias
+        {t("title")}
       </h2>
       <div
         className="grid gap-6 justify-center
@@ -44,12 +46,12 @@ export default function LatestNews({ latestNews }: LatestNewsProps) {
         ))}
       </div>
       <div className="text-center mt-8">
-        <Link
+        <NewsButton
           href={`/${locale}/noticias`}
           className="inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
-        >
-          Ver todas las noticias
-        </Link>
+          buttonTitle="button"
+          translation="latestNews"
+        />
       </div>
     </section>
   );

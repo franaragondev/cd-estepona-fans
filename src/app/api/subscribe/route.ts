@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
@@ -21,12 +19,12 @@ export async function POST(req: Request) {
     });
   } catch (error: any) {
     if (error.code === "P2002") {
-      // Unique constraint failed
       return NextResponse.json(
         { error: "Email already subscribed" },
         { status: 409 }
       );
     }
+
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface VideoSnippet {
   title: string;
@@ -14,6 +15,7 @@ interface VideoItem {
 }
 
 export default function TribunaPage() {
+  const t = useTranslations("tribuna");
   const [videos, setVideos] = useState<VideoItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +53,7 @@ export default function TribunaPage() {
   if (videos.length === 0) {
     return (
       <main className="flex items-center justify-center py-16 min-h-[85vh]">
-        <p>No se pudo cargar el contenido de La Tribuna.</p>
+        <p>{t("error")}</p>
       </main>
     );
   }
@@ -90,7 +92,7 @@ export default function TribunaPage() {
       {/* Últimos 3 vídeos */}
       {lastThree.length > 0 && (
         <section>
-          <h2 className="text-xl font-semibold mb-4">Episodios recientes</h2>
+          <h2 className="text-xl font-semibold mb-4">{t("latestEpisodes")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {lastThree.map((video) => (
               <div

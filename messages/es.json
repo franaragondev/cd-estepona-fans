@@ -1,10 +1,10 @@
 {
   "head": {
-    "title": "Aficionados del CD Estepona | Noticias, Partidos y Contenido Exclusivo",
+    "title": "CD Estepona Fans | Noticias, Partidos y Contenido Exclusivo",
     "description": "Sigue al CD Estepona como nunca antes. Mantente al día con los partidos, resultados, noticias del club y contenido exclusivo para aficionados.",
-    "url": "https://cd-estepona-fans.vercel.app/",
-    "image": "https://cd-estepona-fans.vercel.app/logo.png",
-    "keywords": "cd estepona, fútbol, partidos, aficionados, noticias del club, resultados, fútbol español"
+    "url": "https://www.cdesteponafans.com/",
+    "image": "https://www.cdesteponafans.com/logo.png",
+    "keywords": "cd estepona, fútbol, partidos, aficionados, noticias del club, resultados, fútbol español, segunda ref, club deportivo estepona, equipo de estepona, calendario de partidos, fichajes cd estepona, estadio estepona, jugadores cd estepona, clasificación segunda ref, crónicas de partidos, fútbol andaluz"
   },
   "about": {
     "title": "CD Estepona: Más que un club",
@@ -167,5 +167,25 @@
   "appHero": {
     "title": "Bienvenidos a CD Estepona Fans",
     "description": "Tu fuente principal para todas las noticias, partidos y contenido exclusivo sobre CD Estepona."
+  },
+  "latestNews": {
+    "title": "Últimas Noticias",
+    "button": "Ver todas las noticias"
+  },
+  "nextMatchesPreview": {
+    "previousTitle": "ANTERIORES",
+    "nextTitle": "PRÓXIMOS",
+    "button": "Ver calendario completo"
+  },
+  "galleryPreview": {
+    "title": "GALERÍA DE FANS",
+    "button": "Ver más en la galería"
+  },
+  "tribuna": {
+    "latestEpisodes": "Episodios recientes",
+    "error": "No se pudo cargar el contenido de La Tribuna."
+  },
+  "newsPage": {
+    "button": "Volver a todas las noticias"
   }
 }

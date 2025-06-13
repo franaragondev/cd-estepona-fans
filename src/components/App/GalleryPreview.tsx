@@ -1,9 +1,10 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import NewsButton from "../CommonButton";
 
 interface GalleryPreviewProps {
   images: string[];
@@ -11,13 +12,14 @@ interface GalleryPreviewProps {
 
 export default function GalleryPreview({ images }: GalleryPreviewProps) {
   const locale = useLocale();
+  const t = useTranslations("galleryPreview");
   const [modalImage, setModalImage] = useState<string | null>(null);
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   return (
     <section>
       <h2 className="text-center text-2xl md:text-[2.5rem] font-bold leading-[1.1] tracking-[-0.01em] uppercase text-[#19246b] mb-8 text-left">
-        Galería de Fans
+        {t("title")}
       </h2>
 
       <div className="grid grid-cols-3 gap-3">
@@ -44,12 +46,12 @@ export default function GalleryPreview({ images }: GalleryPreviewProps) {
       </div>
 
       <div className="text-center mt-8">
-        <Link
+        <NewsButton
           href={`/${locale}/galeria`}
           className="inline-block px-4 py-2 bg-red-600 text-white rounded bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer"
-        >
-          Ver más en la galería
-        </Link>
+          buttonTitle="button"
+          translation="galleryPreview"
+        />
       </div>
 
       {modalImage && (

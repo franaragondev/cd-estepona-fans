@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
+import NewsButton from "@/components/CommonButton";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page({ params }: any) {
@@ -18,8 +16,8 @@ export default async function Page({ params }: any) {
 
   if (!article) return notFound();
 
-  const neutralDark = "#333"; // neutral dark text color
-  const neutralGray = "#666"; // medium gray for details
+  const neutralDark = "#333";
+  const neutralGray = "#666";
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-12 min-h-[85vh]">
@@ -58,13 +56,12 @@ export default async function Page({ params }: any) {
       >
         {article.content}
       </p>
-
-      <Link
+      <NewsButton
         href={`/${params.locale}/noticias`}
         className="inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"
-      >
-        Volver a todas las noticias
-      </Link>
+        buttonTitle="button"
+        translation="newsPage"
+      />
     </main>
   );
 }
