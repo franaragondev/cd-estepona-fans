@@ -7,10 +7,12 @@ import GalleryPreviewServer from "@/components/GalleryPreviewServer";
 import UsefulLinks from "@/components/App/UsefulLinks";
 import CallToAction from "@/components/CallToAction";
 import FAQ from "@/components/FAQ";
+import ConfirmModal from "@/components/ConfirmModal";
 
 export default function HomePage() {
   return (
     <>
+      <ConfirmModal />
       <AppHero />
       <main className="max-w-7xl mx-auto px-4">
         <section className="py-10">

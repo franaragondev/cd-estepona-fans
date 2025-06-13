@@ -86,6 +86,7 @@ export default function CallToAction() {
             )}
           </button>
 
+          {/* Mensajes de estado */}
           <AnimatePresence>
             {status === "success" && (
               <motion.p
