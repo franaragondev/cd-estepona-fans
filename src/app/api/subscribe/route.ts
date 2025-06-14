@@ -11,19 +11,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    // 1. Comprueba si ya está confirmado
     const existingSubscriber = await prisma.subscriber.findUnique({
       where: { email },
     });
 
     if (existingSubscriber) {
       return NextResponse.json(
-        { error: "Email already confirmed" },
+        { error: "El correo ya ha sido confirmado" },
         { status: 409 }
       );
     }
 
-    // 2. Crear o actualizar token para pendiente
     const token = randomUUID();
     await prisma.pendingSubscriber.upsert({
       where: { email },
@@ -31,12 +29,11 @@ export async function POST(req: Request) {
       create: { email, token },
     });
 
-    // 3. Enviar email de confirmación
     await sendConfirmationEmail(email, token);
 
     return NextResponse.json({
       message:
-        "Confirmation email sent. Please check your inbox to confirm subscription.",
+        "Correo de confirmación enviado. Por favor, revisa tu bandeja de entrada para confirmar la suscripción.",
     });
   } catch (error: unknown) {
     console.error("Error in POST /api/subscribe:", error);
@@ -48,7 +45,7 @@ export async function POST(req: Request) {
       (error as { code?: string }).code === "P2002"
     ) {
       return NextResponse.json(
-        { error: "Email already pending confirmation" },
+        { error: "El correo ya está pendiente de confirmación" },
         { status: 409 }
       );
     }

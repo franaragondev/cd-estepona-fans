@@ -16,7 +16,7 @@
     "description": "Suscríbete y no te pierdas ninguna novedad del CD Estepona.",
     "placeholder": "Tu correo electrónico",
     "button": "Entérate antes que nadie",
-    "successMessage": "¡Gracias por unirte!",
+    "successMessage": "Revisa tu email y confirma tu suscripción para recibir novedades.",
     "errorMessage": "Ha ocurrido un error. Inténtalo de nuevo.",
     "invalidEmailMessage": "Por favor, introduce un correo válido.",
     "botDetectedMessage": "Bot detectado. Acción bloqueada.",
@@ -188,5 +188,12 @@
   },
   "newsPage": {
     "button": "Volver a todas las noticias"
+  },
+  "confirmEmailModal": {
+    "title": "Gracias por confirmar tu suscripción",
+    "description": "Tu suscripción ha sido confirmada exitosamente.",
+    "button": "Cerrar",
+    "unknownError": "Error desconocido",
+    "errorConfirming": "Error al confirmar"
   }
 }

@@ -2,12 +2,13 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ConfirmModal() {
+  const t = useTranslations("confirmEmailModal");
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // Estados para controlar modal y mensajes
   const [showModal, setShowModal] = useState(false);
   const [messageTitle, setMessageTitle] = useState("");
   const [messageBody, setMessageBody] = useState("");
@@ -18,26 +19,22 @@ export default function ConfirmModal() {
     const token = searchParams.get("token");
 
     if (confirmed === "true") {
-      // Caso actual: solo mostrar modal de éxito simple
-      setMessageTitle("Gracias por confirmar tu suscripción");
-      setMessageBody("Tu suscripción ha sido confirmada exitosamente.");
+      setMessageTitle(t("title"));
+      setMessageBody(t("description"));
       setShowModal(true);
       setLoading(false);
     } else if (token) {
-      // Nuevo caso: tenemos token, llamar a API para validar
       setLoading(true);
       fetch(`https://www.cdesteponafans.com/api/confirm?token=${token}`)
         .then(async (res) => {
           const data = await res.json();
-          if (!res.ok) throw new Error(data.error || "Error desconocido");
-          // Éxito
-          setMessageTitle("Gracias por confirmar tu suscripción");
-          setMessageBody("Tu suscripción ha sido confirmada exitosamente.");
+          if (!res.ok) throw new Error(data.error || t("unknownError"));
+          setMessageTitle(t("title"));
+          setMessageBody(t("description"));
           setShowModal(true);
         })
         .catch((error) => {
-          // Error token inválido o expirado
-          setMessageTitle("Error al confirmar");
+          setMessageTitle(t("errorConfirming"));
           setMessageBody(error.message);
           setShowModal(true);
         })
@@ -62,12 +59,10 @@ export default function ConfirmModal() {
   const handleClose = () => {
     setShowModal(false);
 
-    // Construir la URL sin 'confirmed' ni 'token'
     const url = new URL(window.location.href);
     url.searchParams.delete("confirmed");
     url.searchParams.delete("token");
 
-    // Actualizar la URL sin recargar ni añadir entrada al historial
     router.replace(url.pathname + url.search);
   };
 
@@ -77,21 +72,32 @@ export default function ConfirmModal() {
       role="dialog"
       aria-modal={true}
       aria-labelledby="modalTitle"
-      onClick={handleClose} // cerrar modal al clicar fuera del contenido
+      onClick={handleClose}
     >
       <div
         className="modal-content"
         tabIndex={-1}
-        onClick={(e) => e.stopPropagation()} // evitar cerrar modal si clicas dentro
+        onClick={(e) => e.stopPropagation()}
       >
         {loading ? (
-          <p>Confirmando...</p>
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div
+              className="w-12 h-12 rounded-full animate-spin"
+              style={{
+                background:
+                  "conic-gradient(from 45deg, #DC2C20, #DC2C20, #2f36a1, #2f36a1, transparent 270deg 360deg)",
+                WebkitMask:
+                  "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+                mask: "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+              }}
+            />
+          </div>
         ) : (
           <>
             <h2 id="modalTitle">{messageTitle}</h2>
             <p>{messageBody}</p>
             <button onClick={handleClose} aria-label="Cerrar modal">
-              Cerrar
+              {t("button")}
             </button>
           </>
         )}

@@ -16,7 +16,7 @@
     "description": "Subscribe and never miss an update about CD Estepona.",
     "placeholder": "Your email",
     "button": "Be the first to know",
-    "successMessage": "Thanks for joining!",
+    "successMessage": "Check your email and confirm your subscription to get updates.",
     "errorMessage": "An error occurred. Please try again.",
     "invalidEmailMessage": "Please enter a valid email.",
     "botDetectedMessage": "Bot detected. Action blocked.",
@@ -187,5 +187,12 @@
   },
   "newsPage": {
     "button": "Back to all news"
+  },
+  "confirmEmailModal": {
+    "title": "Thank you for confirming your subscription",
+    "description": "Your subscription has been successfully confirmed.",
+    "button": "Close",
+    "unknownError": "Unknown error",
+    "errorConfirming": "Error confirming"
   }
 }

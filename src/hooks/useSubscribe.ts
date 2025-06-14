@@ -60,9 +60,9 @@ export function useSubscribe(t: (key: string) => string) {
             setErrorMessage(t("botDetectedMessage"));
             break;
           case "Email already subscribed":
-          case "Email already confirmed": // <-- Añadido este caso
+          case "Email already confirmed":
             setStatus("error");
-            setErrorMessage(data.error); // Muestra el mensaje exacto del backend
+            setErrorMessage(data.error);
             break;
           case "Server error":
           case "server_error":

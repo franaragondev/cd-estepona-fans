@@ -15,7 +15,6 @@ export default async function sendConfirmationEmail(
   email: string,
   token: string
 ) {
-  // Use your production domain and HTTPS in confirm URL
   const confirmUrl = `https://cdesteponafans.com/api/confirm?token=${token}`;
 
   const mailOptions = {
