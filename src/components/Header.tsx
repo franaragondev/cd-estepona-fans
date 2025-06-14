@@ -53,7 +53,7 @@ export default function Header() {
         <div className="flex justify-center md:justify-start items-center">
           <Link key={`${basePath}`} href={`${basePath}`}>
             <Image
-              src="/logo-simple.webp"
+              src="/logo.webp"
               alt="CD Estepona Fans Logo"
               width={40}
               height={40}

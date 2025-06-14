@@ -66,12 +66,12 @@ export default function NextMatchesPreview() {
             date: m.date,
             homeTeam: m.isHome ? "CD ESTEPONA" : m.opponent,
             homeLogo: m.isHome
-              ? "/logo-simple.webp"
+              ? "/teams/cdEstepona.webp"
               : `/teams/${m.opponentImage}`,
             awayTeam: m.isHome ? m.opponent : "CD ESTEPONA",
             awayLogo: m.isHome
               ? `/teams/${m.opponentImage}`
-              : "/logo-simple.webp",
+              : "/teams/cdEstepona.webp",
             score: m.score,
           };
 

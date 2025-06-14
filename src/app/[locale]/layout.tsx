@@ -79,7 +79,7 @@ export async function generateMetadata({
     },
     metadataBase: new URL(baseUrl),
     icons: {
-      icon: "/favicon.ico",
+      icon: "/favicon.png",
     },
   };
 }

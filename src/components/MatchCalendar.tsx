@@ -231,7 +231,7 @@ export default function Page() {
                         <Image
                           src={
                             match.isHome
-                              ? "/logo-simple.webp"
+                              ? "/teams/cdEstepona.webp"
                               : `/teams/${match.opponentImage}`
                           }
                           alt={`Logo de ${
@@ -247,7 +247,7 @@ export default function Page() {
                           src={
                             match.isHome
                               ? `/teams/${match.opponentImage}`
-                              : "/logo-simple.webp"
+                              : "/teams/cdEstepona.webp"
                           }
                           alt={`Logo de ${
                             match.isHome ? "CD ESTEPONA" : match.opponent
