@@ -27,6 +27,14 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
 
+    const albumId = formData.get("albumId");
+    if (!albumId || typeof albumId !== "string") {
+      return NextResponse.json(
+        { message: "Album ID is required" },
+        { status: 400 }
+      );
+    }
+
     const files = formData.getAll("file");
 
     if (!files.length) {
@@ -54,7 +62,7 @@ export async function POST(request: Request) {
       const savedImage = await prisma.photo.create({
         data: {
           url: result.secure_url,
-          album: { connect: { id: "6" } },
+          album: { connect: { id: albumId } },
         },
       });
 
