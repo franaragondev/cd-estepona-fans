@@ -63,7 +63,7 @@ export default async function AdminPage({ params }: any) {
               Partidos
             </h2>
             {/* <MatchesAdmin /> */}
-            <h4 className="flex justify-center">PRÓXIMAMENTE...</h4>
+            <h4 className="flex justify-center">PRÓXIMAMENTE....</h4>
           </div>
         </section>
       </main>
