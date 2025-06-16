@@ -187,10 +187,6 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
 
   return (
     <section>
-      <h3 className="text-xl font-semibold mb-4">
-        Gestionar Noticias - Usuario: {name}
-      </h3>
-
       <form
         onSubmit={handleSubmit}
         className="mb-8 space-y-4 bg-white p-6 rounded shadow"
