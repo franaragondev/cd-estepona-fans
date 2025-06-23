@@ -1,5 +1,6 @@
-export const revalidate = 60;
-
+import type { Metadata } from "next";
+import { getCommonMetadata } from "@/utils/getCommonMetadata";
+import ConfirmModal from "@/components/ConfirmModal";
 import AppHero from "@/components/App/AppHero";
 import LatestNewsServer from "@/components/LatestNewsServer";
 import NextMatchesPreview from "@/components/App/NextMatchesPreview";
@@ -7,15 +8,11 @@ import GalleryPreviewServer from "@/components/GalleryPreviewServer";
 import UsefulLinks from "@/components/App/UsefulLinks";
 import CallToAction from "@/components/CallToAction";
 import FAQ from "@/components/FAQ";
-import ConfirmModal from "@/components/ConfirmModal";
-import { getCommonMetadata } from "@/utils/getCommonMetadata";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  const { locale } = params;
+export const revalidate = 60;
+
+export async function generateMetadata(ctx: any): Promise<Metadata> {
+  const locale = ctx.params.locale;
   return await getCommonMetadata(locale);
 }
 
