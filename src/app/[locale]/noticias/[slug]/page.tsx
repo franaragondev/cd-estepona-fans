@@ -52,7 +52,7 @@ export default async function Page({ params }: any) {
 
       <p
         className="text-lg leading-relaxed mb-12"
-        style={{ color: neutralDark, opacity: 0.85 }}
+        style={{ color: neutralDark, opacity: 0.85, whiteSpace: "pre-wrap" }}
       >
         {article.content}
       </p>
