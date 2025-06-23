@@ -25,13 +25,14 @@ export default async function Page({ params }: any) {
         {article.title}
       </h1>
 
-      <div className="relative w-full h-98 mb-6 rounded overflow-hidden">
+      <div className="w-full rounded overflow-hidden flex justify-center">
         {article.image && (
           <Image
             src={article.image}
             alt={`Imagen de la noticia: ${article.title}`}
-            fill
-            className="object-cover"
+            width={1200}
+            height={800}
+            className="w-full h-auto object-contain"
             priority
           />
         )}
