@@ -12,6 +12,7 @@ interface NewsItem {
   image?: string;
   authorId: string;
   createdAt: Date;
+  published: boolean;
 }
 
 interface NewsAdminProps {
@@ -26,6 +27,7 @@ const initialFormState = {
   content: "",
   image: "",
   authorId: "",
+  published: false,
 };
 
 function generateSlug(text: string) {
@@ -38,12 +40,13 @@ function generateSlug(text: string) {
 
 export default function NewsAdmin({ name, id }: NewsAdminProps) {
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
+  const [draftsList, setDraftsList] = useState<NewsItem[]>([]);
   const [form, setForm] = useState({ ...initialFormState, authorId: id });
   const [isEditing, setIsEditing] = useState(false);
   const [skip, setSkip] = useState(0);
   const take = 9;
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [modal, setModal] = useState<{
     message: string;
     title?: string;
@@ -57,9 +60,17 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
   }, [id, isEditing]);
 
   async function fetchNews() {
-    const res = await fetch(`/api/admin/news?skip=${skip}&take=${take}`);
-    const data = await res.json();
-    setNewsList(data);
+    const resPublic = await fetch(
+      `/api/admin/news?skip=${skip}&take=${take}&published=true`
+    );
+    const dataPublic = await resPublic.json();
+    setNewsList(dataPublic);
+
+    const resDrafts = await fetch(
+      `/api/admin/news?skip=0&take=100&published=false`
+    );
+    const dataDrafts = await resDrafts.json();
+    setDraftsList(dataDrafts);
   }
 
   useEffect(() => {
@@ -71,25 +82,40 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) {
-    const { name, value } = e.target;
+    const target = e.target;
 
-    if (name === "title") {
-      const newSlug = generateSlug(value);
-      setForm((f) => ({
-        ...f,
-        title: value,
-        slug: newSlug,
-      }));
+    if (target instanceof HTMLInputElement && target.type === "checkbox") {
+      const { name, checked } = target;
+
+      setForm((f) => ({ ...f, [name]: checked }));
     } else {
-      setForm((f) => ({
-        ...f,
-        [name]: value,
-      }));
+      const { name, value } = target;
+
+      if (name === "title") {
+        setForm((f) => ({ ...f, title: value, slug: generateSlug(value) }));
+      } else {
+        setForm((f) => ({ ...f, [name]: value }));
+      }
     }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    const requireImage = form.published;
+    const isFormValid =
+      form.title.trim() !== "" &&
+      form.content.trim() !== "" &&
+      (!requireImage || form.image !== "");
+    if (!isFormValid) {
+      setModal({
+        title: "Error",
+        message: form.published
+          ? "Para publicar la noticia, completa título, contenido e imagen."
+          : "Para guardar borrador, completa título y contenido.",
+      });
+      return;
+    }
 
     const method = isEditing ? "PUT" : "POST";
     const url = "/api/admin/news";
@@ -100,6 +126,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
     formData.append("slug", form.slug);
     formData.append("content", form.content);
     formData.append("authorId", form.authorId);
+    formData.append("published", form.published ? "true" : "false");
 
     if (uploadedFile) {
       formData.append("file", uploadedFile);
@@ -108,15 +135,17 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
     }
 
     try {
-      const res = await fetch(url, {
-        method,
-        body: formData,
-      });
-
+      const res = await fetch(url, { method, body: formData });
       if (res.ok) {
         setModal({
           title: "Éxito",
-          message: isEditing ? "Noticia actualizada" : "Noticia creada",
+          message: isEditing
+            ? form.published
+              ? "Noticia actualizada y publicada"
+              : "Borrador actualizado"
+            : form.published
+            ? "Noticia creada y publicada"
+            : "Borrador guardado",
         });
         setForm({ ...initialFormState, authorId: id });
         setIsEditing(false);
@@ -139,6 +168,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
       content: item.content,
       image: item.image || "",
       authorId: item.authorId,
+      published: item.published,
     });
     setIsEditing(true);
     setUploadedFile(null);
@@ -149,7 +179,6 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
       const res = await fetch(`/api/admin/news?id=${idToDelete}`, {
         method: "DELETE",
       });
-
       if (res.ok) {
         setModal({ title: "Éxito", message: "Noticia borrada" });
         fetchNews();
@@ -173,17 +202,34 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
     });
   }
 
-  function handleImageUpload(result: { urls: string[]; files: unknown[] }) {
-    setForm((f) => ({
-      ...f,
-      image: result.urls[0] || "",
-    }));
+  async function handlePublishDraft(idToPublish: string) {
+    try {
+      const formData = new FormData();
+      formData.append("id", idToPublish);
+      formData.append("published", "true");
+
+      const res = await fetch("/api/admin/news", {
+        method: "PUT",
+        body: formData,
+      });
+      if (res.ok) {
+        setModal({ title: "Éxito", message: "Borrador publicado" });
+        fetchNews();
+      } else {
+        setModal({ title: "Error", message: "Error publicando borrador" });
+      }
+    } catch (error) {
+      console.error(error);
+      setModal({ title: "Error", message: "Error publicando borrador" });
+    }
+  }
+
+  function handleImageUpload(result: { urls: string[] }) {
+    setForm((f) => ({ ...f, image: result.urls[0] || "" }));
   }
 
   const isFormValid =
     form.title.trim() !== "" && form.content.trim() !== "" && form.image !== "";
-
-  console.log(form.image);
 
   return (
     <section>
@@ -231,7 +277,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
         />
 
         <Uploader
-          albumId={"4"}
+          albumId="4"
           slug={form.slug}
           title={form.title}
           content={form.content}
@@ -258,7 +304,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
         </select>
 
         {!isFormValid && (
-          <p className="text-sm text-red-600 mt-2">
+          <p className="text-sm text-red-600 mt-2 -mb-2">
             {`⚠️ Para poder ${
               isEditing ? "actualizar" : "crear"
             } la noticia, completa:`}{" "}
@@ -273,18 +319,43 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
             .
           </p>
         )}
-        <button
-          type="submit"
-          disabled={!isFormValid}
-          className={`px-4 py-2 rounded transition text-white ${
-            isFormValid
-              ? "bg-indigo-600 hover:bg-indigo-700"
-              : "bg-gray-400 cursor-not-allowed"
-          }`}
-        >
-          {isEditing ? "Actualizar Noticia" : "Crear Noticia"}
-        </button>
 
+        <div className="flex justify-between">
+          <label className="inline-flex items-center space-x-2 mt-4">
+            <input
+              type="checkbox"
+              name="published"
+              checked={form.published}
+              onChange={handleChange}
+              className="form-checkbox h-5 w-5 text-indigo-600"
+            />
+            <span>Publicar ahora</span>
+          </label>
+
+          <button
+            type="submit"
+            disabled={
+              form.title.trim() === "" ||
+              form.content.trim() === "" ||
+              (form.published && form.image === "")
+            }
+            className={`cursor-pointer mt-4 px-4 py-2 rounded transition text-white ${
+              form.title.trim() !== "" &&
+              form.content.trim() !== "" &&
+              (!form.published || form.image !== "")
+                ? "bg-indigo-600 hover:bg-indigo-700"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
+          >
+            {isEditing
+              ? form.published
+                ? "Actualizar y Publicar"
+                : "Actualizar Borrador"
+              : form.published
+              ? "Crear y Publicar"
+              : "Guardar Borrador"}
+          </button>
+        </div>
         {isEditing && (
           <button
             type="button"
@@ -300,7 +371,8 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
         )}
       </form>
 
-      <ul className="space-y-4">
+      <h2 className="text-xl font-semibold mb-4">Noticias Publicadas</h2>
+      <ul className="space-y-4 mb-12">
         {newsList.map((item) => (
           <li
             key={item.id}
@@ -335,6 +407,49 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
         ))}
       </ul>
 
+      <h2 className="text-xl font-semibold mb-4">Borradores</h2>
+      {draftsList.length === 0 && <p>No hay borradores guardados.</p>}
+      <ul className="space-y-4">
+        {draftsList.map((item) => (
+          <li
+            key={item.id}
+            className="bg-yellow-50 p-4 rounded shadow flex justify-between items-center"
+          >
+            <div>
+              <h4 className="font-semibold">{item.title}</h4>
+              <p className="text-sm text-gray-600">
+                Última actualización:{" "}
+                {new Date(item.createdAt).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            </div>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => handleEdit(item)}
+                className="px-3 py-1 rounded bg-yellow-400 hover:bg-yellow-500 transition"
+              >
+                Editar
+              </button>
+              <button
+                onClick={() => handlePublishDraft(item.id)}
+                className="px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700 transition"
+              >
+                Publicar
+              </button>
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 transition"
+              >
+                Borrar
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+
       <div className="mt-6 flex justify-between">
         <button
           disabled={skip === 0}
@@ -351,6 +466,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
           Siguiente
         </button>
       </div>
+
       {modal && (
         <Modal
           isOpen={!!modal}

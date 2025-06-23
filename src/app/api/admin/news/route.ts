@@ -5,12 +5,18 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const skip = parseInt(searchParams.get("skip") || "0", 10);
   const take = parseInt(searchParams.get("take") || "9", 10);
+  const publishedParam = searchParams.get("published");
+  let published: boolean | undefined = undefined;
+
+  if (publishedParam === "true") published = true;
+  else if (publishedParam === "false") published = false;
 
   const news = await prisma.news.findMany({
     skip,
     take,
     orderBy: { createdAt: "desc" },
     include: { author: true },
+    where: published !== undefined ? { published } : undefined,
   });
 
   return NextResponse.json(news);
@@ -25,6 +31,8 @@ export async function POST(request: NextRequest) {
     const content = form.get("content") as string;
     const authorId = form.get("authorId") as string;
     const image = form.get("image") as string | null;
+    const publishedStr = form.get("published") as string | null;
+    const published = publishedStr === "true";
 
     if (!title || !slug || !content || !authorId) {
       return NextResponse.json(
@@ -40,6 +48,7 @@ export async function POST(request: NextRequest) {
         content,
         image,
         authorId,
+        published,
       },
     });
 
@@ -56,12 +65,7 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const form = await request.formData();
-
     const id = form.get("id") as string;
-    const title = form.get("title") as string;
-    const slug = form.get("slug") as string;
-    const content = form.get("content") as string;
-    const image = form.get("image") as string | null;
 
     if (!id) {
       return NextResponse.json(
@@ -70,14 +74,24 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    const title = form.get("title");
+    const slug = form.get("slug");
+    const content = form.get("content");
+    const image = form.get("image");
+    const publishedStr = form.get("published");
+
+    const published = publishedStr === "true";
+
+    const dataToUpdate: any = {};
+    if (title) dataToUpdate.title = title;
+    if (slug) dataToUpdate.slug = slug;
+    if (content) dataToUpdate.content = content;
+    if (image) dataToUpdate.image = image;
+    dataToUpdate.published = published;
+
     const updated = await prisma.news.update({
       where: { id },
-      data: {
-        title,
-        slug,
-        content,
-        image,
-      },
+      data: dataToUpdate,
     });
 
     return NextResponse.json(updated);
