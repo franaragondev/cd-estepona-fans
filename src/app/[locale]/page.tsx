@@ -8,6 +8,16 @@ import UsefulLinks from "@/components/App/UsefulLinks";
 import CallToAction from "@/components/CallToAction";
 import FAQ from "@/components/FAQ";
 import ConfirmModal from "@/components/ConfirmModal";
+import { getCommonMetadata } from "@/utils/getCommonMetadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const { locale } = params;
+  return await getCommonMetadata(locale);
+}
 
 export default function HomePage() {
   return (
