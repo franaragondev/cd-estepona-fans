@@ -13,6 +13,7 @@ export async function getNews(limit = 6) {
       createdAt: true,
       updatedAt: true,
       authorId: true,
+      published: true,
     },
   });
 }

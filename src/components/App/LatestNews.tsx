@@ -11,6 +11,7 @@ interface NewsItem {
   title: string;
   createdAt: string; // ISO string
   image?: string | null;
+  published: boolean;
 }
 interface LatestNewsProps {
   latestNews: NewsItem[];
