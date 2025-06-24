@@ -2,16 +2,10 @@ import prisma from "@/lib/prisma";
 import { sendEmail } from "./sendEmail";
 
 export async function notifySubscribersOfNewPost(newsId: string) {
-  const testSubscriberId = "cmbzhi8cz0003kt04xhey5bsu";
+  const subscribers = await prisma.subscriber.findMany();
 
-  const subscriber = await prisma.subscriber.findUnique({
-    where: { id: testSubscriberId },
-  });
-
-  if (!subscriber) {
-    console.warn(
-      `⚠️ No se encontró el subscriber de test con ID ${testSubscriberId}`
-    );
+  if (!subscribers || subscribers.length === 0) {
+    console.warn("⚠️ No hay suscriptores en la base de datos");
     return;
   }
 
@@ -38,70 +32,65 @@ export async function notifySubscribersOfNewPost(newsId: string) {
             <tr>
                 <td align="center" style="padding:30px 10px;">
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="background:#ffffff; border-radius:12px; box-shadow:0px 4px 18px rgba(0,0,0,0.1); overflow:hidden;">
-                    
                     <!-- LOGO EN CABECERA -->
                     <tr>
-                <td align="center" style="padding:25px;" bgcolor="#f4f7fa">
-                    <img src="https://cdesteponafans.com/logo.png" alt="CD Estepona Fans" style="max-width:180px;" />
-                </td>
-            </tr>
-
-            <!-- TITULO -->
-            <tr>
-                <td style="padding:15px 30px; text-align:center;">
-                <h1 style="margin:0; font-size:26px; font-weight:600; color:#2c3e50;">
-                    ${news.title}
-                </h1>
-                </td>
-            </tr>
-
-            <!-- CONTENIDO -->
-            <tr>
-                <td style="padding:15px 40px; font-size:16px; line-height:1.6; color:#555;">
-                ${excerpt}
-                </td>
-            </tr>
-
-            <!-- BOTON CTA -->
-            <tr>
-                <td align="center" style="padding:25px 30px;">
-                <a href="${url}" style="
-                    font-size:16px;
-                    font-weight:600;
-                    text-decoration:none;
-                    padding:14px 28px;
-                    color:#ffffff;
-                    background-color:#0070f3;
-                    border-radius:30px;
-                    display:inline-block;">
-                    Leer noticia completa →
-                </a>
-                </td>
-            </tr>
-
-            <!-- FOOTER TEXTO -->
-            <tr>
-                <td style="padding:20px 30px; font-size:12px; color:#999; text-align:center;">
-                Si no deseas recibir estos correos, simplemente ignora este mensaje.
-                </td>
-            </tr>
-
-            <tr>
-                <td align="center" style="padding:10px 30px; font-size:12px; color:#bbb;">
-                &copy; 2025 CD Estepona Fans. Todos los derechos reservados.
-                </td>
-            </tr>
-
-            </table>
+                        <td align="center" style="padding:25px;" bgcolor="#f4f7fa">
+                            <img src="https://cdesteponafans.com/logo.png" alt="CD Estepona Fans" style="max-width:180px;" />
+                        </td>
+                    </tr>
+                    <!-- TITULO -->
+                    <tr>
+                        <td style="padding:15px 30px; text-align:center;">
+                        <h1 style="margin:0; font-size:26px; font-weight:600; color:#2c3e50;">
+                            ${news.title}
+                        </h1>
+                        </td>
+                    </tr>
+                    <!-- CONTENIDO -->
+                    <tr>
+                        <td style="padding:15px 40px; font-size:16px; line-height:1.6; color:#555;">
+                        ${excerpt}
+                        </td>
+                    </tr>
+                    <!-- BOTON CTA -->
+                    <tr>
+                        <td align="center" style="padding:25px 30px;">
+                        <a href="${url}" style="
+                            font-size:16px;
+                            font-weight:600;
+                            text-decoration:none;
+                            padding:14px 28px;
+                            color:#ffffff;
+                            background-color:#0070f3;
+                            border-radius:30px;
+                            display:inline-block;">
+                            Leer noticia completa →
+                        </a>
+                        </td>
+                    </tr>
+                    <!-- FOOTER TEXTO -->
+                    <tr>
+                        <td style="padding:20px 30px; font-size:12px; color:#999; text-align:center;">
+                        Si no deseas recibir estos correos, simplemente ignora este mensaje.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding:10px 30px; font-size:12px; color:#bbb;">
+                        &copy; 2025 CD Estepona Fans. Todos los derechos reservados.
+                        </td>
+                    </tr>
+                    </table>
                 </td>
             </tr>
         </table>
     </body>
   `;
 
-  await sendEmail({
-    to: subscriber.email,
-    subject,
-    html,
-  });
+  for (const subscriber of subscribers) {
+    await sendEmail({
+      to: subscriber.email,
+      subject,
+      html,
+    });
+  }
 }
