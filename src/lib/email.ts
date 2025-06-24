@@ -9,10 +9,7 @@ export async function notifySubscribersOfNewPost(newsId: string) {
     return;
   }
 
-  const news = await prisma.news.findUnique({
-    where: { id: newsId },
-  });
-
+  const news = await prisma.news.findUnique({ where: { id: newsId } });
   if (!news) {
     console.warn(`⚠️ No se encontró la noticia con ID ${newsId}`);
     return;
@@ -81,33 +78,18 @@ export async function notifySubscribersOfNewPost(newsId: string) {
     </body>
   `;
 
-  const batchSize = 10;
-  const delayMs = 5000;
+  const delayMs = 1000;
 
-  for (let i = 0; i < subscribers.length; i += batchSize) {
-    const batch = subscribers.slice(i, i + batchSize);
-
-    await Promise.all(
-      batch.map(async (subscriber) => {
-        try {
-          await sendEmail({
-            to: subscriber.email,
-            subject,
-            html,
-          });
-          console.log(`✅ Email enviado a ${subscriber.email}`);
-        } catch (error) {
-          console.error(
-            `❌ Error enviando email a ${subscriber.email}:`,
-            error
-          );
-        }
-      })
-    );
-
-    if (i + batchSize < subscribers.length) {
-      console.log(`Esperando ${delayMs / 1000}s antes del siguiente batch...`);
-      await new Promise((res) => setTimeout(res, delayMs));
+  for (const subscriber of subscribers) {
+    try {
+      await sendEmail({
+        to: subscriber.email,
+        subject,
+        html,
+      });
+    } catch (error) {
+      console.error(error);
     }
+    await new Promise((res) => setTimeout(res, delayMs));
   }
 }

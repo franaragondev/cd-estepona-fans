@@ -1,25 +1,23 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: true,
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_PASS,
   },
-  name: "cdesteponafans.com",
 });
 
-export async function sendEmail({
-  to,
-  subject,
-  html,
-}: {
-  to: string;
+type SendEmailParams = {
+  to: string | string[];
   subject: string;
   html: string;
-}) {
+  bcc?: string | string[];
+};
+
+export async function sendEmail({ to, subject, html }: SendEmailParams) {
   await transporter.sendMail({
     from: '"CD Estepona Fans" <noreply@cdesteponafans.com>',
     to,
