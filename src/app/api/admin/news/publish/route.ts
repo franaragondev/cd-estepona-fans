@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { notifySubscribersOfNewPost } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -17,6 +18,8 @@ export async function POST(request: NextRequest) {
       where: { id },
       data: { published: true },
     });
+
+    await notifySubscribersOfNewPost(id);
 
     return NextResponse.json(updated);
   } catch (error) {
