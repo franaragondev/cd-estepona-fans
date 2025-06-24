@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { notifySubscribersOfNewPost } from "@/lib/email";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -52,6 +53,10 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    if (published) {
+      await notifySubscribersOfNewPost(created.id);
+    }
+
     return NextResponse.json(created, { status: 201 });
   } catch (error) {
     console.error(error);
@@ -74,13 +79,14 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const title = form.get("title");
-    const slug = form.get("slug");
-    const content = form.get("content");
-    const image = form.get("image");
-    const publishedStr = form.get("published");
-
+    const title = form.get("title") as string;
+    const slug = form.get("slug") as string;
+    const content = form.get("content") as string;
+    const image = form.get("image") as string;
+    const publishedStr = form.get("published") as string;
     const published = publishedStr === "true";
+
+    const existing = await prisma.news.findUnique({ where: { id } });
 
     const dataToUpdate: any = {};
     if (title) dataToUpdate.title = title;
@@ -93,6 +99,10 @@ export async function PUT(request: NextRequest) {
       where: { id },
       data: dataToUpdate,
     });
+
+    if (!existing?.published && published) {
+      await notifySubscribersOfNewPost(updated.id);
+    }
 
     return NextResponse.json(updated);
   } catch (error) {
