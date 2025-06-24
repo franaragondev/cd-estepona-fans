@@ -6,7 +6,7 @@ const locales = ["es", "en", "fr"];
 const pages = [
   "",
   "cookies",
-  "privacy",
+  "privacidad",
   "noticias",
   "partidos",
   "galeria",
@@ -48,7 +48,7 @@ async function generateSitemap(locale: string) {
       ];
       const priority = highPriorityPages.includes(pageName)
         ? "1.0"
-        : ["cookies", "privacy"].includes(pageName)
+        : ["cookies", "privacidad"].includes(pageName)
         ? "0.5"
         : "0.8";
 

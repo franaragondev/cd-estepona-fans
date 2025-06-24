@@ -94,7 +94,8 @@
     "manageTitle": "Gestión de cookies",
     "manageText": "Puedes aceptar o rechazar las cookies no esenciales mediante el banner o a través de la configuración de tu navegador.",
     "personalDataTitle": "Recopilación de datos personales",
-    "personalDataText": "No usamos cookies para identificarte directamente. Algunos datos analíticos pueden recopilarse de forma anónima.",
+    "personalDataTextPart1": "No usamos cookies para identificarte directamente. Algunos datos analíticos pueden recopilarse de forma anónima. Consulta nuestra ",
+    "personalDataTextPart2": " para más detalles.",
     "privacyPolicyLinkText": "Política de Privacidad",
     "changesTitle": "Actualizaciones de la política",
     "changesText": "Podemos actualizar esta política. Revisa esta página regularmente para ver los cambios.",
@@ -118,7 +119,7 @@
       },
       {
         "title": "4. Terceros",
-        "text": "Utilizamos servicios como Mailchimp y Google Analytics, que pueden recopilar y procesar datos en nuestro nombre."
+        "text": "Utilizamos servicios como Brevo y Google Analytics, que pueden recopilar y procesar datos en nuestro nombre."
       },
       {
         "title": "5. Tus derechos",

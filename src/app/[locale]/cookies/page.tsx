@@ -53,20 +53,11 @@ export default function CookiesPage() {
         {t("personalDataTitle")}
       </h2>
       <p className="mb-4">
-        {t("personalDataText")
-          .split("Política de Privacidad")
-          .map((part, i, arr) =>
-            i < arr.length - 1 ? (
-              <span key={i}>
-                {part}
-                <Link href="/privacy" legacyBehavior>
-                  <a className="underline">{t("privacyPolicyLinkText")}</a>
-                </Link>
-              </span>
-            ) : (
-              part
-            )
-          )}
+        {t("personalDataTextPart1")}
+        <Link href="/privacidad" className="underline">
+          {t("privacyPolicyLinkText")}
+        </Link>
+        {t("personalDataTextPart2")}
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-2">{t("changesTitle")}</h2>
