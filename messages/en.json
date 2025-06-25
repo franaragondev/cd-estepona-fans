@@ -56,6 +56,7 @@
     "matches": "Matches",
     "gallery": "Gallery",
     "tribuna": "La Tribuna del Muñoz Pérez",
+    "live": "Live",
     "features": "Features",
     "about": "About the Club",
     "cta": "Subscribe",
@@ -196,5 +197,11 @@
     "button": "Close",
     "unknownError": "Unknown error",
     "errorConfirming": "Error confirming"
+  },
+  "live": {
+    "loading": "Loading...",
+    "noLiveScheduledTitle": "No live streams scheduled",
+    "noLiveScheduledDescription": "There are no live streams at the moment. Subscribe on our website to receive all the latest news and updates from CD Estepona.",
+    "visitChannel": "See latest videos"
   }
 }

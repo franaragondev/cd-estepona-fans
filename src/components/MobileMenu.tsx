@@ -65,7 +65,7 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
           exit={{ opacity: 0 }}
         >
           <motion.aside
-            className="fixed top-16 left-0 h-[calc(100%-4rem)] w-54 bg-white dark:bg-gray-900 shadow-lg z-50 p-4"
+            className="fixed top-16 left-0 h-[calc(100%-4rem)] w-54 bg-white dark:bg-gray-900 shadow-lg z-50 p-4 mt-4"
             onClick={(e) => e.stopPropagation()}
             initial={{ x: -300 }}
             animate={{ x: 0 }}
@@ -107,6 +107,13 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
                 className="text-gray-700 hover:text-black"
               >
                 {t("tribuna")}
+              </Link>
+              <Link
+                href={`${basePath}/directos`}
+                onClick={onCloseAction}
+                className="text-gray-700 hover:text-black"
+              >
+                {t("live")}
               </Link>
             </nav>
 

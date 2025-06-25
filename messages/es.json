@@ -57,6 +57,7 @@
     "matches": "Partidos",
     "gallery": "Galería",
     "tribuna": "La Tribuna del Muñoz Pérez",
+    "live": "Directos",
     "features": "Destacados",
     "about": "Sobre el Club",
     "cta": "Suscríbete",
@@ -197,5 +198,11 @@
     "button": "Cerrar",
     "unknownError": "Error desconocido",
     "errorConfirming": "Error al confirmar"
+  },
+  "live": {
+    "loading": "Cargando...",
+    "noLiveScheduledTitle": "No hay directos programados",
+    "noLiveScheduledDescription": "Por ahora no hay transmisiones en directo. Suscríbete en nuestra web para recibir todas las novedades y noticias del CD Estepona.",
+    "visitChannel": "Ver últimos vídeos"
   }
 }
