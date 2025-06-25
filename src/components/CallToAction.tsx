@@ -24,20 +24,25 @@ export default function CallToAction() {
       minHeight="400px"
       sectionName="cta"
     >
-      <div className="relative z-10 max-w-md mx-auto text-center text-white px-4 py-12 -mt-24">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-4 py-12 min-h-[400px] -mt-20">
         <h2 className="text-2xl font-bold mb-4">{t("title")}</h2>
         <p className="mb-6 text-gray-300">{t("description")}</p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2 w-full max-w-md items-stretch"
+        >
           <input
             type="email"
             placeholder={t("placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="px-4 py-2 rounded-md border border-white text-white bg-transparent placeholder-white"
+            className="w-full px-4 py-2 rounded-md border border-white text-white bg-transparent placeholder-white"
             autoComplete="off"
             required
             disabled={status === "loading"}
           />
+
           {/* Honeypot anti-bot field */}
           <div
             aria-hidden="true"
@@ -47,14 +52,14 @@ export default function CallToAction() {
               type="text"
               name="honeypot"
               tabIndex={-1}
-              defaultValue=""
               autoComplete="off"
               ref={honeypotRef}
+              defaultValue=""
             />
           </div>
 
           <button
-            className="bg-white text-black py-2 rounded-md font-medium hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-white text-black py-2 rounded-md font-medium hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
             type="submit"
             disabled={status === "loading"}
           >
@@ -73,12 +78,12 @@ export default function CallToAction() {
                     r="10"
                     stroke="currentColor"
                     strokeWidth="4"
-                  ></circle>
+                  />
                   <path
                     className="opacity-75"
                     fill="currentColor"
                     d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                  ></path>
+                  />
                 </svg>
               </div>
             ) : (
@@ -99,7 +104,6 @@ export default function CallToAction() {
                 {t("successMessage")}
               </motion.p>
             )}
-
             {["error", "bot", "invalid_email", "server_error"].includes(
               status
             ) && (

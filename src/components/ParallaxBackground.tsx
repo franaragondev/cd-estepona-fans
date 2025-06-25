@@ -42,7 +42,7 @@ export default function ParallaxBackground({
       </Parallax>
 
       <div className="absolute inset-0 flex items-center justify-center z-20 px-4 text-white text-center">
-        <div className="max-w-md">{children}</div>
+        <div className="max-w-md md:max-w-4xl">{children}</div>
       </div>
     </section>
   );
