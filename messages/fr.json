@@ -1,54 +1,55 @@
 {
   "head": {
-    "title": "CD Estepona Fans | Actualités, Matchs et Contenu Exclusif",
-    "description": "Suis le CD Estepona comme jamais auparavant. Reste informé des matchs, résultats, actualités du club et contenu exclusif pour les supporters.",
+    "title": "CD Estepona Fans | Actualités, Matchs, Résultats et Contenu Exclusif du Club Deportivo Estepona",
+    "description": "Suivez le CD Estepona comme jamais auparavant. Actualités mises à jour, matchs en direct, résultats, transferts et contenu exclusif pour les véritables fans du CD Estepona.",
     "url": "https://www.cdesteponafans.com/",
     "image": "https://www.cdesteponafans.com/logo.png",
-    "keywords": "cd estepona, football, matchs, supporters, actualités du club, résultats, football espagnol, segunda ref, club deportivo estepona, équipe d’estepona, calendrier des matchs, transferts cd estepona, stade d’estepona, joueurs cd estepona, classement segunda ref, résumés de matchs, football andalou"
+    "keywords": "cd estepona, cd estepona fans, club deportivo estepona, football andalou, division régionale 2, actualités cd estepona, matchs cd estepona, résultats cd estepona, fans cd estepona, vidéos cd estepona, stade munoz perez, calendrier matchs estepona"
   },
   "about": {
-    "title": "CD Estepona : Plus qu’un club",
-    "highlight-description": "CD Estepona Fans est un espace créé pour toi :",
-    "description": "Nous t’apportons les dernières nouvelles, les résumés de matchs, les résultats et du contenu exclusif sur le CD Estepona. Que tu sois au stade ou que tu suives l’équipe à distance, tu resteras toujours informé sur ton équipe préférée."
+    "title": "CD Estepona Fans : Plus qu’un club, la passion de ses supporters",
+    "highlight-description": "CD Estepona Fans est votre espace officiel pour suivre le club :",
+    "description": "Sur CD Estepona Fans, vous trouverez les dernières actualités, analyses et résumés de matchs, résultats instantanés et contenu exclusif sur le Club Deportivo Estepona. Que vous soyez au stade ou que vous suiviez depuis chez vous, vous serez toujours connecté à votre équipe et à la grande communauté de fans."
   },
   "cta": {
-    "title": "Rejoins la Marée Rouge",
-    "description": "Abonne-toi pour ne rien manquer de l’actualité du CD Estepona.",
-    "placeholder": "Ton adresse e-mail",
-    "button": "Soyez le premier informé",
-    "successMessage": "Vérifiez votre e-mail et confirmez votre abonnement pour recevoir les nouveautés.",
-    "errorMessage": "Une erreur s’est produite. Réessaie.",
-    "invalidEmailMessage": "Veuillez saisir une adresse e-mail valide.",
+    "title": "Rejoignez la Marée Rouge du CD Estepona",
+    "description": "Abonnez-vous et recevez toutes les nouveautés du CD Estepona directement dans votre boîte mail. Faites partie de la communauté de CD Estepona Fans et ne manquez aucun détail.",
+    "placeholder": "Votre adresse e-mail",
+    "button": "Soyez les premiers informés",
+    "successMessage": "Vérifiez votre email et confirmez votre abonnement pour recevoir des nouveautés exclusives.",
+    "errorMessage": "Une erreur est survenue. Veuillez réessayer.",
+    "invalidEmailMessage": "Veuillez entrer une adresse email valide.",
     "botDetectedMessage": "Bot détecté. Action bloquée.",
-    "emailDeletedMessage": "Cet e-mail a été supprimé. Veuillez vous réabonner.",
-    "serverErrorMessage": "Erreur du serveur. Réessaie plus tard.",
-    "genericErrorMessage": "Erreur inconnue. Réessaie plus tard.",
-    "loginOrRegisterButton": "Accède au contenu exclusif"
+    "emailDeletedMessage": "Cet email a été supprimé et doit se réabonner.",
+    "serverErrorMessage": "Erreur du serveur. Veuillez réessayer plus tard.",
+    "genericErrorMessage": "Erreur inconnue. Veuillez réessayer plus tard.",
+    "emailAlreadySubscribedMessage": "Cet email est déjà abonné.",
+    "loginOrRegisterButton": "Accédez au contenu exclusif"
   },
   "features": {
-    "title": "Que trouveras-tu ici ?",
-    "pantry": "Derniers matchs et résultats",
-    "scan": "Résumés de matchs et photos",
+    "title": "Que trouverez-vous ici ?",
+    "pantry": "Derniers Matchs et Résultats",
+    "scan": "Résumés de Matchs et Photos",
     "alerts": "Actualités et Mises à Jour",
-    "stats": "Statistiques et classement de l’équipe"
+    "stats": "Statistiques et Classement de l’Équipe"
   },
   "footer": {
     "left": "2025 CD Estepona Fans. Tous droits réservés.",
-    "right": "Site web offert par <link>Fran Aragón</link>."
+    "right": "Site web fourni par <link>Fran Aragón</link>."
   },
   "hero": {
-    "title": "Toute l’actualité du CD Estepona, réunie en un seul endroit",
-    "description": "Suis l’équipe que tu aimes. Reçois des mises à jour exclusives, des photos et du contenu créé par et pour les supporters.",
-    "placeholder": "Ton adresse e-mail",
-    "button": "Recevez les dernières actualités",
-    "successMessage": "Merci pour ton abonnement !",
-    "errorMessage": "Une erreur s’est produite. Réessaie.",
-    "invalidEmailMessage": "Veuillez saisir une adresse e-mail valide.",
+    "title": "Toute l’actualité du CD Estepona, en un seul endroit",
+    "description": "Suivez l’équipe que vous aimez : actualités, matchs, vidéos exclusives et toute la passion de CD Estepona Fans. Rejoignez la communauté officielle des supporters et vivez chaque instant.",
+    "placeholder": "Votre adresse e-mail",
+    "button": "Recevez les dernières nouveautés",
+    "successMessage": "Merci de vous être abonné à CD Estepona Fans !",
+    "errorMessage": "Une erreur est survenue. Veuillez réessayer.",
+    "invalidEmailMessage": "Veuillez entrer une adresse email valide.",
     "botDetectedMessage": "Bot détecté. Action bloquée.",
-    "emailDeletedMessage": "Cet e-mail a été supprimé. Veuillez vous réabonner.",
-    "serverErrorMessage": "Erreur du serveur. Réessaie plus tard.",
-    "genericErrorMessage": "Erreur inconnue. Réessaie plus tard.",
-    "loginOrRegisterButton": "Rejoins la communauté"
+    "emailDeletedMessage": "Cet email a été supprimé et doit se réabonner.",
+    "serverErrorMessage": "Erreur du serveur. Veuillez réessayer plus tard.",
+    "genericErrorMessage": "Erreur inconnue. Veuillez réessayer plus tard.",
+    "loginOrRegisterButton": "Rejoignez la communauté CD Estepona Fans"
   },
   "menu": {
     "home": "Accueil",
@@ -56,18 +57,18 @@
     "matches": "Matchs",
     "gallery": "Galerie",
     "tribuna": "La Tribuna del Muñoz Pérez",
-    "live": "En direct",
-    "features": "À la une",
-    "about": "À propos du club",
+    "live": "Direct",
+    "features": "À la Une",
+    "about": "À propos du Club",
     "cta": "S’abonner",
-    "faq": "Questions fréquentes",
+    "faq": "Questions Fréquentes",
     "login": "Connexion",
     "register": "Inscription",
     "user": "Utilisateur",
     "language": "Langue",
     "profile": "Mon profil",
     "logout": "Déconnexion",
-    "enterApp": "Aller à l’app"
+    "enterApp": "Aller à l’App"
   },
   "language": {
     "es": "Espagnol",
@@ -75,47 +76,47 @@
     "fr": "Français"
   },
   "cookies": {
-    "message": "Nous utilisons des cookies pour améliorer votre expérience et analyser l'utilisation du site. Vous pouvez les accepter ou les refuser.",
+    "message": "Nous utilisons des cookies pour améliorer votre expérience et analyser l’utilisation du site. Vous pouvez les accepter ou les refuser.",
     "accept": "Accepter",
     "reject": "Refuser",
     "learnMore": "En savoir plus",
-    "linkText": "Politique de Cookies"
+    "linkText": "Politique de cookies"
   },
   "cookiesPolicy": {
-    "title": "Politique de Cookies",
+    "title": "Politique de cookies",
     "intro": "Nous utilisons des cookies pour améliorer votre expérience et analyser le trafic sur notre site web.",
     "whatAreCookiesTitle": "Qu’est-ce que les cookies ?",
-    "whatAreCookies": "Les cookies sont de petits fichiers texte stockés sur votre appareil qui aident le site à se souvenir de vos préférences et de vos habitudes d'utilisation.",
+    "whatAreCookies": "Les cookies sont de petits fichiers texte stockés sur votre appareil qui aident le site web à se souvenir de vos préférences et habitudes d’utilisation.",
     "typesTitle": "Types de cookies que nous utilisons",
     "typesList": [
-      "Cookies essentiels : nécessaires au fonctionnement de base du site.",
+      "Cookies essentiels : nécessaires au fonctionnement basique du site.",
       "Cookies analytiques : nous aident à comprendre comment les visiteurs interagissent avec le site."
     ],
     "manageTitle": "Gestion des cookies",
-    "manageText": "Vous pouvez accepter ou refuser les cookies non essentiels via la bannière ou les paramètres de votre navigateur.",
+    "manageText": "Vous pouvez accepter ou refuser les cookies non essentiels via la bannière ou dans les paramètres de votre navigateur.",
     "personalDataTitle": "Collecte de données personnelles",
-    "personalDataTextPart1": "Nous n'utilisons pas de cookies pour vous identifier directement. Certaines données analytiques peuvent être collectées de manière anonyme. Veuillez consulter notre ",
+    "personalDataTextPart1": "Nous n’utilisons pas les cookies pour vous identifier directement. Certaines données analytiques peuvent être collectées anonymement. Consultez notre ",
     "personalDataTextPart2": " pour plus de détails.",
-    "privacyPolicyLinkText": "Politique de Confidentialité",
+    "privacyPolicyLinkText": "Politique de confidentialité",
     "changesTitle": "Mises à jour de la politique",
-    "changesText": "Nous pouvons mettre à jour cette politique. Consultez régulièrement cette page pour connaître les changements.",
+    "changesText": "Nous pouvons mettre à jour cette politique. Veuillez consulter cette page régulièrement pour voir les changements.",
     "lastUpdated": "Dernière mise à jour : mai 2025"
   },
   "privacyPolicy": {
-    "title": "Politique de Confidentialité",
-    "intro": "Nous nous engageons à protéger vos données personnelles. Cette Politique de Confidentialité explique ce que nous collectons et comment nous l’utilisons.",
+    "title": "Politique de confidentialité",
+    "intro": "Nous nous engageons à protéger vos données personnelles. Cette politique de confidentialité explique ce que nous collectons et comment nous l’utilisons.",
     "sections": [
       {
         "title": "1. Ce que nous collectons",
-        "text": "Votre adresse e-mail (lorsque vous vous abonnez) et des données d'utilisation anonymes via des cookies."
+        "text": "Votre adresse email (lors de l’abonnement) et les données d’utilisation anonymes via les cookies."
       },
       {
         "title": "2. Comment nous les collectons",
-        "text": "Par le biais des formulaires que vous remplissez et automatiquement via les cookies."
+        "text": "Via les formulaires que vous remplissez et automatiquement via les cookies."
       },
       {
         "title": "3. Pourquoi nous les collectons",
-        "text": "Pour vous tenir informé des actualités et nouveautés de CD Estepona Fans."
+        "text": "Pour vous tenir informé avec des nouvelles et mises à jour de CD Estepona Fans."
       },
       {
         "title": "4. Tiers",
@@ -127,72 +128,72 @@
       },
       {
         "title": "6. Contact",
-        "text": "Utilisez le formulaire de contact de notre site pour toute question relative à la vie privée."
+        "text": "Utilisez le formulaire de contact sur notre site pour les questions liées à la vie privée."
       }
     ],
     "lastUpdated": "Dernière mise à jour : mai 2025",
-    "cookiesLinkText": "Politique de Cookies"
+    "cookiesLinkText": "Politique de cookies"
   },
   "faq": {
-    "title": "Questions Fréquemment Posées",
+    "title": "Questions Fréquentes",
     "questions": [
       {
         "q": "Est-ce le site officiel du CD Estepona ?",
-        "a": "Non, il s’agit d’un site indépendant créé par et pour le groupe CD Estepona Fans."
+        "a": "Non, c’est un site indépendant créé par et pour le groupe CD Estepona Fans."
       },
       {
         "q": "Comment puis-je recevoir les mises à jour des matchs ?",
-        "a": "Abonne-toi à notre newsletter ou suis-nous sur les réseaux sociaux pour rester informé."
+        "a": "Abonnez-vous à notre newsletter ou suivez-nous sur les réseaux sociaux pour rester informé."
       },
       {
         "q": "Est-ce gratuit ?",
-        "a": "Oui, tout le contenu est gratuit pour les supporters."
+        "a": "Oui, tout le contenu est gratuit pour les fans."
       },
       {
         "q": "À quelle fréquence le contenu est-il mis à jour ?",
         "a": "Nous mettons à jour le site après chaque match et lorsqu’il y a des nouvelles importantes du club."
       },
       {
-        "q": "Qui a créé ce site web ?",
-        "a": "Ce site a été développé et offert gratuitement par <link>Fran Aragón</link> pour le groupe CD Estepona Fans, sans aucun lien officiel avec le club."
+        "q": "Qui a créé ce site ?",
+        "a": "Ce site a été développé et offert gratuitement par <link>Fran Aragón</link> pour le groupe CD Estepona Fans, sans affiliation officielle au club."
       }
     ]
   },
   "loginPage": {
-    "title": "Connecte-toi à CD Estepona Fans",
-    "username": "Utilisateur",
+    "title": "Connectez-vous à CD Estepona Fans",
+    "username": "Nom d’utilisateur",
     "password": "Mot de passe",
-    "button": "Se connecter",
-    "redirect": "Pas encore de compte ?",
-    "redirectLink": "Inscris-toi"
+    "button": "Connexion",
+    "redirect": "Vous n’avez pas de compte ?",
+    "redirectLink": "Inscrivez-vous"
   },
   "appHero": {
-    "title": "Bienvenue chez CD Estepona Fans",
-    "description": "Votre source ultime pour toutes les actualités, matchs et contenus exclusifs sur le CD Estepona."
+    "title": "Bienvenue sur CD Estepona Fans",
+    "description": "Votre source principale pour toutes les actualités, matchs et contenu exclusif sur CD Estepona."
   },
   "latestNews": {
-    "title": "Dernières nouvelles",
-    "button": "Voir toutes les nouvelles"
+    "title": "Dernières actualités",
+    "button": "Voir toutes les actualités"
   },
   "nextMatchesPreview": {
     "previousTitle": "PRÉCÉDENTS",
-    "nextTitle": "PROCHAINS",
+    "nextTitle": "SUIVANTS",
     "button": "Voir le calendrier complet",
-    "noTime": "Pas d’heure définie"
+    "noTime": "Heure non définie"
   },
   "galleryPreview": {
     "title": "GALERIE DES FANS",
     "button": "Voir plus dans la galerie"
   },
   "tribuna": {
-    "latestEpisodes": "Épisodes récents",
-    "error": "Échec du chargement du contenu de La Tribuna."
+    "latestEpisodes": "Derniers épisodes",
+    "error": "Impossible de charger le contenu de La Tribune."
   },
   "newsPage": {
     "button": "Retour à toutes les actualités"
   },
   "confirmEmailModal": {
-    "title": "Merci d'avoir confirmé votre abonnement",
+    "title": "Merci d’avoir confirmé votre abonnement",
     "description": "Votre abonnement a été confirmé avec succès.",
     "button": "Fermer",
     "unknownError": "Erreur inconnue",
@@ -201,7 +202,7 @@
   "live": {
     "loading": "Chargement...",
     "noLiveScheduledTitle": "Aucun direct programmé",
-    "noLiveScheduledDescription": "Aucun direct n’est prévu pour le moment. Abonnez-vous sur notre site pour recevoir toutes les nouveautés et actualités du CD Estepona.",
+    "noLiveScheduledDescription": "Aucun streaming en direct n’est prévu pour le moment. Abonnez-vous sur notre site pour recevoir toutes les nouveautés et actualités du CD Estepona.",
     "visitChannel": "Voir les dernières vidéos"
   }
 }

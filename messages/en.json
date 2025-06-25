@@ -1,54 +1,55 @@
 {
   "head": {
-    "title": "CD Estepona Fans | News, Fixtures & Exclusive Content",
-    "description": "Follow CD Estepona like never before. Stay up to date with fixtures, results, club news, and exclusive content made for fans.",
+    "title": "CD Estepona Fans | News, Matches, Results and Exclusive Content of Club Deportivo Estepona",
+    "description": "Follow CD Estepona like never before. Updated news, live matches, results, signings, and exclusive content for true fans of CD Estepona.",
     "url": "https://www.cdesteponafans.com/",
     "image": "https://www.cdesteponafans.com/logo.png",
-    "keywords": "cd estepona, football, matches, fans, club news, results, spanish football, segunda ref, deportivo estepona, estepona team, match schedule, cd estepona transfers, estepona stadium, cd estepona players, segunda ref standings, match reports, andalusian football"
+    "keywords": "cd estepona, cd estepona fans, club deportivo estepona, andalusian football, regional second division, cd estepona news, cd estepona matches, cd estepona results, cd estepona fans, cd estepona videos, munoz perez stadium, estepona match calendar"
   },
   "about": {
-    "title": "CD Estepona: More than a club",
-    "highlight-description": "CD Estepona Fans is a space created for you:",
-    "description": "We bring you the latest news, match highlights, results, and exclusive content about CD Estepona. Whether you’re at the stadium or following from afar, you’ll always be up to date with your favorite team."
+    "title": "CD Estepona Fans: More than a club, the passion of its fans",
+    "highlight-description": "CD Estepona Fans is your official space to follow the club:",
+    "description": "At CD Estepona Fans you will find the latest news, analysis and match summaries, instant results, and exclusive content about Club Deportivo Estepona. Whether you are at the stadium or following from home, you will always be connected with your team and the great fan community."
   },
   "cta": {
-    "title": "Join the Red Tide",
-    "description": "Subscribe and never miss an update about CD Estepona.",
-    "placeholder": "Your email",
+    "title": "Join the Red Tide of CD Estepona",
+    "description": "Subscribe and receive all the latest updates about CD Estepona directly in your email. Be part of the CD Estepona Fans community and never miss a detail.",
+    "placeholder": "Your email address",
     "button": "Be the first to know",
-    "successMessage": "Check your email and confirm your subscription to get updates.",
+    "successMessage": "Check your email and confirm your subscription to receive exclusive updates.",
     "errorMessage": "An error occurred. Please try again.",
-    "invalidEmailMessage": "Please enter a valid email.",
+    "invalidEmailMessage": "Please enter a valid email address.",
     "botDetectedMessage": "Bot detected. Action blocked.",
-    "emailDeletedMessage": "This email was deleted and needs to resubscribe.",
+    "emailDeletedMessage": "This email was deleted and needs to subscribe again.",
     "serverErrorMessage": "Server error. Please try later.",
     "genericErrorMessage": "Unknown error. Please try again later.",
+    "emailAlreadySubscribedMessage": "This email is already subscribed.",
     "loginOrRegisterButton": "Access exclusive content"
   },
   "features": {
-    "title": "What you’ll find here",
-    "pantry": "Latest Fixtures & Results",
-    "scan": "Match Highlights & Photos",
+    "title": "What will you find here?",
+    "pantry": "Latest Matches and Results",
+    "scan": "Match Summaries and Photos",
     "alerts": "News and Updates",
-    "stats": "Team Stats & Rankings"
+    "stats": "Team Statistics and Standings"
   },
   "footer": {
     "left": "2025 CD Estepona Fans. All rights reserved.",
     "right": "Website provided by <link>Fran Aragón</link>."
   },
   "hero": {
-    "title": "All the latest on CD Estepona, in one place",
-    "description": "Follow the team you love. Get exclusive updates, photos, and content made by fans, for fans.",
-    "placeholder": "Your email",
-    "button": "Get the latest updates",
-    "successMessage": "Thanks for subscribing!",
+    "title": "All the latest from CD Estepona, in one place",
+    "description": "Follow the team you love: news, matches, exclusive videos, and all the passion of CD Estepona Fans. Join the official fan community and live every moment.",
+    "placeholder": "Your email address",
+    "button": "Receive the latest news",
+    "successMessage": "Thank you for subscribing to CD Estepona Fans!",
     "errorMessage": "An error occurred. Please try again.",
-    "invalidEmailMessage": "Please enter a valid email.",
+    "invalidEmailMessage": "Please enter a valid email address.",
     "botDetectedMessage": "Bot detected. Action blocked.",
-    "emailDeletedMessage": "This email was deleted and needs to resubscribe.",
+    "emailDeletedMessage": "This email was deleted and needs to subscribe again.",
     "serverErrorMessage": "Server error. Please try later.",
     "genericErrorMessage": "Unknown error. Please try again later.",
-    "loginOrRegisterButton": "Join the community"
+    "loginOrRegisterButton": "Join the CD Estepona Fans community"
   },
   "menu": {
     "home": "Home",
@@ -57,7 +58,7 @@
     "gallery": "Gallery",
     "tribuna": "La Tribuna del Muñoz Pérez",
     "live": "Live",
-    "features": "Features",
+    "features": "Highlights",
     "about": "About the Club",
     "cta": "Subscribe",
     "faq": "Frequently Asked Questions",
@@ -67,7 +68,7 @@
     "language": "Language",
     "profile": "My Profile",
     "logout": "Log Out",
-    "enterApp": "Go to App"
+    "enterApp": "Go to the App"
   },
   "language": {
     "es": "Spanish",
@@ -78,27 +79,27 @@
     "message": "We use cookies to improve your experience and analyze site usage. You can accept or reject them.",
     "accept": "Accept",
     "reject": "Reject",
-    "learnMore": "Learn more",
+    "learnMore": "Learn More",
     "linkText": "Cookie Policy"
   },
   "cookiesPolicy": {
     "title": "Cookie Policy",
-    "intro": "We use cookies to enhance your experience and analyze traffic on our website.",
+    "intro": "We use cookies to improve your experience and analyze traffic on our website.",
     "whatAreCookiesTitle": "What are cookies?",
     "whatAreCookies": "Cookies are small text files stored on your device that help the website remember your preferences and usage patterns.",
     "typesTitle": "Types of cookies we use",
     "typesList": [
-      "Essential cookies: Required for core site functionality.",
-      "Analytics cookies: Help us understand how visitors interact with the site."
+      "Essential cookies: Required for the basic functioning of the site.",
+      "Analytical cookies: Help us understand how visitors interact with the site."
     ],
-    "manageTitle": "Managing cookies",
+    "manageTitle": "Cookie management",
     "manageText": "You can accept or reject non-essential cookies via the banner or through your browser settings.",
     "personalDataTitle": "Personal data collection",
-    "personalDataTextPart1": "We do not use cookies to directly identify you. Some analytical data may be collected anonymously. Please check our ",
+    "personalDataTextPart1": "We do not use cookies to personally identify you. Some analytical data may be collected anonymously. See our ",
     "personalDataTextPart2": " for more details.",
     "privacyPolicyLinkText": "Privacy Policy",
     "changesTitle": "Policy updates",
-    "changesText": "We may update this policy. Check this page regularly for changes.",
+    "changesText": "We may update this policy. Please review this page regularly for changes.",
     "lastUpdated": "Last updated: May 2025"
   },
   "privacyPolicy": {
@@ -107,15 +108,15 @@
     "sections": [
       {
         "title": "1. What we collect",
-        "text": "Your email address (when you subscribe) and anonymized usage data via cookies."
+        "text": "Your email address (when subscribing) and anonymous usage data via cookies."
       },
       {
         "title": "2. How we collect it",
-        "text": "Via forms you fill in, and automatically through cookies."
+        "text": "Through the forms you complete and automatically via cookies."
       },
       {
         "title": "3. Why we collect it",
-        "text": "To keep you updated with news and updates from CD Estepona Fans."
+        "text": "To keep you informed with news and updates from CD Estepona Fans."
       },
       {
         "title": "4. Third parties",
@@ -123,11 +124,11 @@
       },
       {
         "title": "5. Your rights",
-        "text": "You may unsubscribe at any time and request removal of your data."
+        "text": "You can unsubscribe at any time and request deletion of your data."
       },
       {
         "title": "6. Contact",
-        "text": "Use the contact form on our website for privacy-related questions."
+        "text": "Use the contact form on our website for privacy-related matters."
       }
     ],
     "lastUpdated": "Last updated: May 2025",
@@ -137,24 +138,24 @@
     "title": "Frequently Asked Questions",
     "questions": [
       {
-        "q": "Is this the official CD Estepona site?",
-        "a": "No, this is an independent website created by and for the CD Estepona Fans group."
+        "q": "Is this the official site of CD Estepona?",
+        "a": "No, this is an independent site created by and for the CD Estepona Fans group."
       },
       {
-        "q": "How can I get match updates?",
-        "a": "Subscribe to our newsletter or follow us on social media to stay informed."
+        "q": "How can I receive match updates?",
+        "a": "Subscribe to our newsletter or follow us on social media to stay up to date."
       },
       {
-        "q": "Is this free?",
+        "q": "Is it free?",
         "a": "Yes, all content is free for fans."
       },
       {
-        "q": "How often is content updated?",
-        "a": "We update the site after every match and when there is important club news."
+        "q": "How often is the content updated?",
+        "a": "We update the site after each match and when there are important club news."
       },
       {
         "q": "Who created this website?",
-        "a": "This site was developed and donated for free by <link>Fran Aragón</link> for the CD Estepona Fans group, with no official affiliation with the club."
+        "a": "This website was developed and freely provided by <link>Fran Aragón</link> for the CD Estepona Fans group, with no official affiliation to the club."
       }
     ]
   },
@@ -168,7 +169,7 @@
   },
   "appHero": {
     "title": "Welcome to CD Estepona Fans",
-    "description": "Your ultimate source for all news, matches, and exclusive content about CD Estepona."
+    "description": "Your main source for all news, matches, and exclusive content about CD Estepona."
   },
   "latestNews": {
     "title": "Latest News",
@@ -177,16 +178,16 @@
   "nextMatchesPreview": {
     "previousTitle": "PREVIOUS",
     "nextTitle": "NEXT",
-    "button": "View full schedule",
-    "noTime": "No time defined"
+    "button": "View full calendar",
+    "noTime": "No time set"
   },
   "galleryPreview": {
-    "title": "FAN GALLERY",
+    "title": "FANS GALLERY",
     "button": "See more in the gallery"
   },
   "tribuna": {
-    "latestEpisodes": "Latest episodes",
-    "error": "Failed to load La Tribuna content."
+    "latestEpisodes": "Recent episodes",
+    "error": "Could not load content from The Tribune."
   },
   "newsPage": {
     "button": "Back to all news"
@@ -196,12 +197,12 @@
     "description": "Your subscription has been successfully confirmed.",
     "button": "Close",
     "unknownError": "Unknown error",
-    "errorConfirming": "Error confirming"
+    "errorConfirming": "Error while confirming"
   },
   "live": {
     "loading": "Loading...",
-    "noLiveScheduledTitle": "No live streams scheduled",
-    "noLiveScheduledDescription": "There are no live streams at the moment. Subscribe on our website to receive all the latest news and updates from CD Estepona.",
-    "visitChannel": "See latest videos"
+    "noLiveScheduledTitle": "No live events scheduled",
+    "noLiveScheduledDescription": "There are currently no live streams scheduled. Subscribe on our website to receive all news and updates about CD Estepona.",
+    "visitChannel": "Watch latest videos"
   }
 }

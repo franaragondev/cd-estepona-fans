@@ -1,22 +1,22 @@
 {
   "head": {
-    "title": "CD Estepona Fans | Noticias, Partidos y Contenido Exclusivo",
-    "description": "Sigue al CD Estepona como nunca antes. Mantente al día con los partidos, resultados, noticias del club y contenido exclusivo para aficionados.",
+    "title": "CD Estepona Fans | Noticias, Partidos, Resultados y Contenido Exclusivo del Club Deportivo Estepona",
+    "description": "Sigue al CD Estepona como nunca antes. Noticias actualizadas, partidos en directo, resultados, fichajes y contenido exclusivo para los verdaderos aficionados del CD Estepona.",
     "url": "https://www.cdesteponafans.com/",
     "image": "https://www.cdesteponafans.com/logo.png",
-    "keywords": "cd estepona, fútbol, partidos, aficionados, noticias del club, resultados, fútbol español, segunda ref, club deportivo estepona, equipo de estepona, calendario de partidos, fichajes cd estepona, estadio estepona, jugadores cd estepona, clasificación segunda ref, crónicas de partidos, fútbol andaluz"
+    "keywords": "cd estepona, cd estepona fans, club deportivo estepona, fútbol andaluz, segunda división regional, noticias cd estepona, partidos cd estepona, resultados cd estepona, aficionados cd estepona, vídeos cd estepona, estadio munoz perez, calendario partidos estepona"
   },
   "about": {
-    "title": "CD Estepona: Más que un club",
-    "highlight-description": "CD Estepona Fans es un espacio creado para ti:",
-    "description": "Te traemos las últimas noticias, resúmenes de partidos, resultados y contenido exclusivo sobre el CD Estepona. Ya estés en el estadio o siguiéndolo desde lejos, siempre estarás al día con tu equipo favorito."
+    "title": "CD Estepona Fans: Más que un club, la pasión de su afición",
+    "highlight-description": "CD Estepona Fans es tu espacio oficial para seguir al club:",
+    "description": "En CD Estepona Fans encontrarás las últimas noticias, análisis y resúmenes de partidos, resultados al instante y contenido exclusivo sobre el Club Deportivo Estepona. Ya sea que estés en el estadio o siguiendo desde casa, aquí siempre estarás conectado con tu equipo y la gran comunidad de fans."
   },
   "cta": {
-    "title": "Únete a la Marea Roja",
-    "description": "Suscríbete y no te pierdas ninguna novedad del CD Estepona.",
+    "title": "Únete a la Marea Roja del CD Estepona",
+    "description": "Suscríbete y recibe todas las novedades del CD Estepona directamente en tu correo. Sé parte de la comunidad de CD Estepona Fans y no te pierdas ningún detalle.",
     "placeholder": "Tu correo electrónico",
     "button": "Entérate antes que nadie",
-    "successMessage": "Revisa tu email y confirma tu suscripción para recibir novedades.",
+    "successMessage": "Revisa tu email y confirma tu suscripción para recibir novedades exclusivas.",
     "errorMessage": "Ha ocurrido un error. Inténtalo de nuevo.",
     "invalidEmailMessage": "Por favor, introduce un correo válido.",
     "botDetectedMessage": "Bot detectado. Acción bloqueada.",
@@ -39,17 +39,17 @@
   },
   "hero": {
     "title": "Toda la actualidad del CD Estepona, en un solo lugar",
-    "description": "Sigue al equipo que amas. Recibe actualizaciones exclusivas, fotos y contenido hecho por y para los aficionados.",
+    "description": "Sigue al equipo que amas: noticias, partidos, vídeos exclusivos y toda la pasión de CD Estepona Fans. Únete a la comunidad de CD Estepona Fans y vive cada momento.",
     "placeholder": "Tu correo electrónico",
     "button": "Recibe las últimas novedades",
-    "successMessage": "¡Gracias por suscribirte!",
+    "successMessage": "¡Gracias por suscribirte a CD Estepona Fans!",
     "errorMessage": "Ha ocurrido un error. Inténtalo de nuevo.",
     "invalidEmailMessage": "Por favor, introduce un correo válido.",
     "botDetectedMessage": "Bot detectado. Acción bloqueada.",
     "emailDeletedMessage": "Este correo fue eliminado y necesita volver a suscribirse.",
     "serverErrorMessage": "Error del servidor. Intenta más tarde.",
     "genericErrorMessage": "Error desconocido. Intenta nuevamente más tarde.",
-    "loginOrRegisterButton": "Únete a la comunidad"
+    "loginOrRegisterButton": "Únete a la comunidad CD Estepona Fans"
   },
   "menu": {
     "home": "Inicio",
