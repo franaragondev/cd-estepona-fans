@@ -27,7 +27,17 @@ interface VideosResponse {
   items: VideoItem[];
 }
 
+// Caché en memoria para directos
+let liveCache: { timestamp: number; data: VideoItem[] } | null = null;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
+
 export async function GET() {
+  const now = Date.now();
+
+  if (liveCache && now - liveCache.timestamp < CACHE_DURATION) {
+    return NextResponse.json(liveCache.data);
+  }
+
   const apiKey = process.env.YOUTUBE_API_KEY;
   const channelId = "UCz4kCQiwLKzOAKVcO3019fg";
   const maxResults = 1;
@@ -90,6 +100,12 @@ export async function GET() {
       id: video.id,
       snippet: video.snippet,
     }));
+
+    // Guardar en caché
+    liveCache = {
+      timestamp: now,
+      data: videos,
+    };
 
     return NextResponse.json(videos);
   } catch (error) {

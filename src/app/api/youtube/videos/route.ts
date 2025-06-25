@@ -27,7 +27,18 @@ interface VideosResponse {
   items: VideoItem[];
 }
 
+// Caché en memoria
+let cache: { timestamp: number; data: VideoItem[] } | null = null;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
+
 export async function GET() {
+  const now = Date.now();
+
+  if (cache && now - cache.timestamp < CACHE_DURATION) {
+    // Retorna la caché si no ha pasado 5 minutos
+    return NextResponse.json(cache.data);
+  }
+
   const apiKey = process.env.YOUTUBE_API_KEY;
   const channelId = "UCz4kCQiwLKzOAKVcO3019fg";
   const maxResults = 5;
@@ -56,7 +67,6 @@ export async function GET() {
     }
 
     const searchData = (await searchRes.json()) as SearchResponse;
-
     const videoIds = searchData.items.map((item) => item.id.videoId).join(",");
 
     const videosRes = await fetch(
@@ -77,11 +87,16 @@ export async function GET() {
     }
 
     const videosData = (await videosRes.json()) as VideosResponse;
-
     const videos = videosData.items.map((video) => ({
       id: video.id,
       snippet: video.snippet,
     }));
+
+    // Guardar en caché
+    cache = {
+      timestamp: now,
+      data: videos,
+    };
 
     return NextResponse.json(videos);
   } catch (error) {

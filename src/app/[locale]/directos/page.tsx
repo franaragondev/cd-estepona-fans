@@ -64,15 +64,7 @@ export default function DirectosPage() {
     );
   }
 
-  if (error) {
-    return (
-      <main className="flex items-center justify-center py-16 min-h-[85vh]">
-        <p className="text-red-600 font-semibold text-lg">Error: {error}</p>
-      </main>
-    );
-  }
-
-  if (!liveVideo) {
+  if (!liveVideo || error) {
     return (
       <main className="flex flex-col items-center justify-center py-20 min-h-[85vh] bg-white px-6 text-center text-gray-700">
         {/* Icono simple, gris claro */}
