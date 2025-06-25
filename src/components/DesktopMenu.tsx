@@ -18,6 +18,7 @@ export function DesktopMenu() {
     { href: `${basePath}/partidos`, label: t("matches") },
     { href: `${basePath}/galeria`, label: t("gallery") },
     { href: `${basePath}/tribuna`, label: t("tribuna") },
+    { href: `${basePath}/directos`, label: t("live") },
   ];
 
   return (
