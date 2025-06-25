@@ -79,15 +79,22 @@ model PlayerSeasonStat {
   matches   Int      @default(0)
 }
 
+model Team {
+  id       String  @id @default(cuid())
+  name     String
+  crestUrl String?
+  location String?  
+  matches  Match[]
+}
+
 model Match {
   id          String   @id @default(cuid())
-  date        DateTime
-  opponent    String
-  location    String
+  date        DateTime?
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id])
   isHome      Boolean
   competition String
-  score       String?  // Ej: "2-1"
-  opponentImage String?  // ej: "CPCacereno.png"
+  score       String?
 }
 
 model Subscriber {

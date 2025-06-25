@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { redirect } from "next/navigation";
 import GalleryAdmin from "@/components/GalleryAdmin";
 import NewsAdmin from "@/components/NewsAdmin";
+import MatchesAdmin from "@/components/MatchesAdmin";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -62,8 +63,7 @@ export default async function AdminPage({ params }: any) {
             <h2 className="text-2xl font-semibold mb-4 text-indigo-700">
               Partidos
             </h2>
-            {/* <MatchesAdmin /> */}
-            <h4 className="flex justify-center">PRÓXIMAMENTE....</h4>
+            <MatchesAdmin />
           </div>
         </section>
       </main>

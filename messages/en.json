@@ -176,7 +176,8 @@
   "nextMatchesPreview": {
     "previousTitle": "PREVIOUS",
     "nextTitle": "NEXT",
-    "button": "View full schedule"
+    "button": "View full schedule",
+    "noTime": "No time defined"
   },
   "galleryPreview": {
     "title": "FAN GALLERY",

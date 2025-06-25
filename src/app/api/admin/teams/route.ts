@@ -3,19 +3,16 @@ import prisma from "@/lib/prisma";
 
 export async function GET() {
   try {
-    const matches = await prisma.match.findMany({
-      include: {
-        team: true,
-      },
+    const teams = await prisma.team.findMany({
       orderBy: {
-        date: "asc",
+        name: "asc",
       },
     });
-    return NextResponse.json(matches);
+    return NextResponse.json(teams);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Error al obtener partidos" },
+      { error: "Error al obtener equipos" },
       { status: 500 }
     );
   }

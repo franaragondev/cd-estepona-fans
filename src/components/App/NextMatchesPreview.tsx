@@ -12,6 +12,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
+interface Team {
+  id: string;
+  name: string;
+  location: string;
+  crestUrl: string;
+}
+
 interface Match {
   id: string;
   competition: string;
@@ -22,18 +29,20 @@ interface Match {
   awayTeam: string;
   awayLogo: string;
   score?: string;
+  team: Team;
 }
 
 interface RawMatch {
   id: string;
   competition: string;
-  stadium?: string;
+  stadium: string;
   location?: string;
   date: string;
   isHome: boolean;
   opponent: string;
   score?: string;
   opponentImage: string;
+  team: Team;
 }
 
 export default function NextMatchesPreview() {
@@ -62,17 +71,20 @@ export default function NextMatchesPreview() {
           const match: Match = {
             id: m.id,
             competition: m.competition,
-            stadium: m.stadium || m.location || "",
+            stadium: m.isHome
+              ? "Estadio Francisco Muñoz Pérez"
+              : m.team.location,
             date: m.date,
-            homeTeam: m.isHome ? "CD ESTEPONA" : m.opponent,
+            homeTeam: m.isHome ? "CD ESTEPONA" : m.team.name,
             homeLogo: m.isHome
               ? "/teams/cdEstepona.webp"
-              : `/teams/${m.opponentImage}`,
-            awayTeam: m.isHome ? m.opponent : "CD ESTEPONA",
+              : `/teams/${m.team.crestUrl}`,
+            awayTeam: m.isHome ? m.team.name : "CD ESTEPONA",
             awayLogo: m.isHome
-              ? `/teams/${m.opponentImage}`
+              ? `/teams/${m.team.crestUrl}`
               : "/teams/cdEstepona.webp",
             score: m.score,
+            team: m.team,
           };
 
           if (matchDate < now) previous.push(match);
@@ -101,14 +113,27 @@ export default function NextMatchesPreview() {
 
   function formatDate(dateStr: string) {
     const date = new Date(dateStr);
+
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    if (hours === 0 && minutes === 0) {
+      return (
+        date.toLocaleDateString(locale, {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        }) + ` (${t("noTime")})`
+      );
+    }
+
     return date.toLocaleString(locale, {
       weekday: "long",
       day: "numeric",
       month: "long",
       hour: "2-digit",
       minute: "2-digit",
-      hour12: false,
-      timeZoneName: "short",
+      timeZone: "Europe/Madrid",
     });
   }
 

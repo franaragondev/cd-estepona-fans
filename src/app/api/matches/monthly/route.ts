@@ -23,6 +23,9 @@ export async function GET(request: Request) {
         lt: endDate,
       },
     },
+    include: {
+      team: true,
+    },
     orderBy: { date: "asc" },
   });
 

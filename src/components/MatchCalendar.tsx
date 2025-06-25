@@ -4,16 +4,21 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 
+interface Team {
+  id: string;
+  name: string;
+  location: string;
+  crestUrl: string;
+}
+
 interface Match {
   id: string;
-  competition: string;
-  stadium?: string;
-  location?: string;
-  date: string;
+  date: Date;
+  teamId: string;
   isHome: boolean;
-  opponent: string;
+  competition: string;
   score?: string;
-  opponentImage: string;
+  team: Team;
 }
 
 function daysInMonth(year: number, month: number) {
@@ -232,10 +237,10 @@ export default function Page() {
                           src={
                             match.isHome
                               ? "/teams/cdEstepona.webp"
-                              : `/teams/${match.opponentImage}`
+                              : `/teams/${match.team.crestUrl}`
                           }
                           alt={`Logo de ${
-                            match.isHome ? match.opponent : "CD ESTEPONA"
+                            match.isHome ? match.team.name : "CD ESTEPONA"
                           }`}
                           width={24}
                           height={24}
@@ -246,11 +251,11 @@ export default function Page() {
                         <Image
                           src={
                             match.isHome
-                              ? `/teams/${match.opponentImage}`
+                              ? `/teams/${match.team.crestUrl}`
                               : "/teams/cdEstepona.webp"
                           }
                           alt={`Logo de ${
-                            match.isHome ? "CD ESTEPONA" : match.opponent
+                            match.isHome ? "CD ESTEPONA" : match.team.name
                           }`}
                           width={24}
                           height={24}
@@ -259,15 +264,24 @@ export default function Page() {
                         />
                       </div>
                       <div className="text-[9px] md:text-[12px]">
-                        {match.location}
+                        {match.isHome
+                          ? "Estadio Francisco Muñoz Pérez"
+                          : match.team.location}
                       </div>
                       <div className="text-[9px] md:text-[12px] font-bold">
                         {isPast && match.score !== undefined
-                          ? `${match.score}`
-                          : matchDate.toLocaleTimeString(locale, {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
+                          ? match.score
+                          : (() => {
+                              const hours = matchDate.getHours();
+                              const minutes = matchDate.getMinutes();
+                              return hours === 0 && minutes === 0
+                                ? "N/D"
+                                : matchDate.toLocaleTimeString("es-ES", {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    timeZone: "Europe/Madrid",
+                                  });
+                            })()}
                       </div>
                     </div>
                   );
