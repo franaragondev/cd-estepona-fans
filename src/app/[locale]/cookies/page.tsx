@@ -6,17 +6,26 @@ import { useTranslations } from "next-intl";
 interface CookiesPolicyMessages {
   title: string;
   intro: string;
+
   whatAreCookiesTitle: string;
   whatAreCookies: string;
+
   typesTitle: string;
   typesList: string[];
+
   manageTitle: string;
   manageText: string;
+
   personalDataTitle: string;
-  personalDataText: string;
+
+  personalDataTextPart1: string;
+  personalDataTextPart2: string;
+
   privacyPolicyLinkText: string;
+
   changesTitle: string;
   changesText: string;
+
   lastUpdated: string;
 }
 

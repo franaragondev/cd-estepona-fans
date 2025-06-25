@@ -2,10 +2,9 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { notifySubscribersOfMatchUpdate } from "@/lib/email";
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: Request, context: any) {
+  const { id } = context.params;
+
   try {
     const body = await request.json();
     const { date, teamId, isHome, competition, score } = body;
@@ -18,7 +17,7 @@ export async function PUT(
     }
 
     const match = await prisma.match.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         date: new Date(date),
         teamId,
