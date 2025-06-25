@@ -197,5 +197,11 @@
     "button": "Cerrar",
     "unknownError": "Error desconocido",
     "errorConfirming": "Error al confirmar"
+  },
+  "live": {
+    "loading": "Cargando...",
+    "noLiveScheduledTitle": "No hay directos programados",
+    "noLiveScheduledDescription": "Por ahora no hay transmisiones en directo. Puedes seguir el canal para estar informado de futuros eventos.",
+    "visitChannel": "Ver últimos vídeos"
   }
 }

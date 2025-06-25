@@ -196,5 +196,11 @@
     "button": "Close",
     "unknownError": "Unknown error",
     "errorConfirming": "Error confirming"
+  },
+  "live": {
+    "loading": "Loading...",
+    "noLiveScheduledTitle": "No live streams scheduled",
+    "noLiveScheduledDescription": "There are currently no live broadcasts. You can follow the channel to stay informed about upcoming events.",
+    "visitChannel": "See latest videos"
   }
 }

@@ -196,5 +196,11 @@
     "button": "Fermer",
     "unknownError": "Erreur inconnue",
     "errorConfirming": "Erreur lors de la confirmation"
+  },
+  "live": {
+    "loading": "Chargement...",
+    "noLiveScheduledTitle": "Aucun direct programmé",
+    "noLiveScheduledDescription": "Il n'y a actuellement aucune diffusion en direct. Vous pouvez suivre la chaîne pour être informé des événements à venir.",
+    "visitChannel": "Voir les dernières vidéos"
   }
 }
