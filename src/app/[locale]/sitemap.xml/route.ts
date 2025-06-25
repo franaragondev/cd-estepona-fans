@@ -11,6 +11,7 @@ const pages = [
   "partidos",
   "galeria",
   "tribuna",
+  "directos",
 ];
 
 async function generateSitemap(locale: string) {

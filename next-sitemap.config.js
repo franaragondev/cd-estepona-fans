@@ -18,6 +18,7 @@ module.exports = {
       "privacidad",
       "cookies",
       "tribuna",
+      "directos",
     ];
 
     const urls = [];
