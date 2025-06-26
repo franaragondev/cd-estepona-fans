@@ -3,6 +3,7 @@ import Image from "next/image";
 import prisma from "@/lib/prisma";
 import NewsButton from "@/components/CommonButton";
 import SubscribeModal from "@/components/SubscribeModal";
+import { linkify } from "@/utils/linkify";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page({ params }: any) {
@@ -55,12 +56,12 @@ export default async function Page({ params }: any) {
           Por {article.author?.name || "CD Estepona Fans"}
         </div>
 
-        <p
+        <div
           className="text-lg leading-relaxed mb-12"
           style={{ color: neutralDark, opacity: 0.85, whiteSpace: "pre-wrap" }}
         >
-          {article.content}
-        </p>
+          {linkify(article.content)}
+        </div>
         <NewsButton
           href={`/${params.locale}/noticias`}
           className="inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"
