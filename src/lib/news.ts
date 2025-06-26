@@ -14,6 +14,7 @@ export async function getNews(limit = 6) {
       updatedAt: true,
       authorId: true,
       published: true,
+      showTitle: true,
     },
   });
 }

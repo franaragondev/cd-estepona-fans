@@ -13,6 +13,7 @@ interface NewsItem {
   authorId: string;
   createdAt: Date;
   published: boolean;
+  showTitle: boolean;
 }
 
 interface NewsAdminProps {
@@ -28,6 +29,7 @@ const initialFormState = {
   image: "",
   authorId: "",
   published: false,
+  showTitle: true,
 };
 
 function generateSlug(text: string) {
@@ -127,6 +129,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
     formData.append("content", form.content);
     formData.append("authorId", form.authorId);
     formData.append("published", form.published ? "true" : "false");
+    formData.append("showTitle", form.showTitle ? "true" : "false");
 
     if (uploadedFile) {
       formData.append("file", uploadedFile);
@@ -169,6 +172,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
       image: item.image || "",
       authorId: item.authorId,
       published: item.published,
+      showTitle: item.showTitle ?? true,
     });
     setIsEditing(true);
     setUploadedFile(null);
@@ -248,6 +252,17 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
           autoFocus
         />
 
+        <label className="inline-flex items-center space-x-2 mb-6">
+          <input
+            type="checkbox"
+            name="showTitle"
+            checked={form.showTitle}
+            onChange={handleChange}
+            className="form-checkbox h-3 w-3 text-indigo-600"
+          />
+          <span>Mostrar título en la noticia</span>
+        </label>
+
         <input
           type="text"
           name="slug"
@@ -265,6 +280,10 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
           required
           className="w-full p-2 border rounded h-28"
         />
+        <p className="text-xs text-gray-500 -mt-4 mb-6">
+          Puedes usar <strong>**negrita**</strong>, <em>*cursiva*</em>,{" "}
+          ~~tachado~~ y enlaces <span>https://ejemplo.com</span>.
+        </p>
 
         <input
           type="text"

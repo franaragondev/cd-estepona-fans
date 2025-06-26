@@ -3,9 +3,8 @@ import Image from "next/image";
 import prisma from "@/lib/prisma";
 import NewsButton from "@/components/CommonButton";
 import SubscribeModal from "@/components/SubscribeModal";
-import { linkify } from "@/utils/linkify";
+import MarkdownViewer from "@/components/MarkdownViewer";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page({ params }: any) {
   const { slug, locale } = params;
 
@@ -26,7 +25,12 @@ export default async function Page({ params }: any) {
       <SubscribeModal />
 
       <main className="max-w-3xl mx-auto px-4 py-12 min-h-[85vh]">
-        <h1 className="text-4xl font-bold mb-6" style={{ color: neutralDark }}>
+        <h1
+          className={`text-4xl font-bold ${
+            !article.showTitle ? "sr-only" : ""
+          }`}
+          style={{ color: neutralDark }}
+        >
           {article.title}
         </h1>
 
@@ -44,7 +48,7 @@ export default async function Page({ params }: any) {
         </div>
 
         <div
-          className="text-sm mb-2"
+          className="text-sm mb-2 mt-2"
           style={{ color: neutralGray, fontWeight: 500 }}
         >
           {new Date(article.createdAt).toLocaleDateString(locale)}
@@ -58,10 +62,11 @@ export default async function Page({ params }: any) {
 
         <div
           className="text-lg leading-relaxed mb-12"
-          style={{ color: neutralDark, opacity: 0.85, whiteSpace: "pre-wrap" }}
+          style={{ color: neutralDark, opacity: 0.85, whiteSpace: "pre-line" }}
         >
-          {linkify(article.content)}
+          <MarkdownViewer content={article.content} />
         </div>
+
         <NewsButton
           href={`/${params.locale}/noticias`}
           className="inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"

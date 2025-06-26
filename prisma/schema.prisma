@@ -29,16 +29,17 @@ model User {
 }
 
 model News {
-  id         String   @id @default(cuid())
-  title      String
-  slug       String   @unique
-  content    String
-  image      String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  authorId   String
-  author     User     @relation(fields: [authorId], references: [id])
-  published  Boolean  @default(false)
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  content       String
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  authorId      String
+  author        User     @relation(fields: [authorId], references: [id])
+  published     Boolean  @default(false)
+  showTitle     Boolean  @default(true)
 }
 
 model PhotoAlbum {
