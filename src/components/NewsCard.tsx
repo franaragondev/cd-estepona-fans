@@ -1,9 +1,10 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLocale } from "next-intl";
-import React from "react";
+import MarkdownViewer from "./MarkdownViewer";
 
 type NewsCardProps = {
   slug: string;
@@ -122,12 +123,12 @@ export default function NewsCard({
           {title}
         </h2>
         {content && (
-          <p
+          <div
             className="text-gray-700 flex-grow"
             style={{ color: neutralDark, opacity: 0.85 }}
           >
-            {content}
-          </p>
+            <MarkdownViewer content={content} />
+          </div>
         )}
       </div>
     </Link>

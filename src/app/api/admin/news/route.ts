@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
     const content = form.get("content") as string;
     const authorId = form.get("authorId") as string;
     const image = form.get("image") as string | null;
-    const publishedStr = form.get("published") as string | null;
-    const published = publishedStr === "true";
+    const published = form.get("published") === "true";
+    const showTitle = form.get("showTitle") === "true";
 
     if (!title || !slug || !content || !authorId) {
       return NextResponse.json(
@@ -50,6 +50,7 @@ export async function POST(request: NextRequest) {
         image,
         authorId,
         published,
+        showTitle,
       },
     });
 
@@ -83,17 +84,21 @@ export async function PUT(request: NextRequest) {
     const slug = form.get("slug") as string;
     const content = form.get("content") as string;
     const image = form.get("image") as string;
-    const publishedStr = form.get("published") as string;
-    const published = publishedStr === "true";
+    const published = form.get("published") === "true";
+    const showTitleStr = form.get("showTitle") as string | null;
 
     const existing = await prisma.news.findUnique({ where: { id } });
-
     const dataToUpdate: any = {};
     if (title) dataToUpdate.title = title;
     if (slug) dataToUpdate.slug = slug;
     if (content) dataToUpdate.content = content;
     if (image) dataToUpdate.image = image;
+
     dataToUpdate.published = published;
+
+    if (showTitleStr !== null) {
+      dataToUpdate.showTitle = showTitleStr === "true";
+    }
 
     const updated = await prisma.news.update({
       where: { id },

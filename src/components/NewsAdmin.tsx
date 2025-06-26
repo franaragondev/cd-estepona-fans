@@ -411,13 +411,13 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
             <div className="flex space-x-2">
               <button
                 onClick={() => handleEdit(item)}
-                className="px-3 py-1 rounded bg-yellow-400 hover:bg-yellow-500 transition"
+                className="px-3 py-1 rounded bg-yellow-400 hover:bg-yellow-500 transition cursor-pointer"
               >
                 Editar
               </button>
               <button
                 onClick={() => handleDelete(item.id)}
-                className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 transition"
+                className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 transition cursor-pointer"
               >
                 Borrar
               </button>
