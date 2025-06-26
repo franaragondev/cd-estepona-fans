@@ -108,13 +108,13 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
               >
                 {t("tribuna")}
               </Link>
-              <Link
+              {/* <Link
                 href={`${basePath}/directos`}
                 onClick={onCloseAction}
                 className="text-gray-700 hover:text-black"
               >
                 {t("live")}
-              </Link>
+              </Link> */}
             </nav>
 
             <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
