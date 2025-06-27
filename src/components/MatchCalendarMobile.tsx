@@ -99,7 +99,11 @@ export default function MatchCalendarMobile({
                 return (
                   <li
                     key={match.id}
-                    className="flex items-center gap-3 p-2 rounded-md border border-gray-200 hover:bg-gray-50"
+                    className={`flex items-center gap-3 p-2 rounded-md ${
+                      isPast && !isToday
+                        ? "border-2 border-gray-200"
+                        : "animated-border"
+                    }  hover:bg-gray-50`}
                   >
                     <div className="relative w-8 h-8 flex-shrink-0">
                       <Image
@@ -153,6 +157,20 @@ export default function MatchCalendarMobile({
                                     timeZone: "Europe/Madrid",
                                   });
                             })()}
+
+                        {isToday &&
+                          !match.score &&
+                          (() => {
+                            const hours = matchDate.getHours();
+                            const minutes = matchDate.getMinutes();
+                            return hours === 0 && minutes === 0
+                              ? "N/D"
+                              : matchDate.toLocaleTimeString(locale, {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  timeZone: "Europe/Madrid",
+                                });
+                          })()}
                       </span>
                     </div>
                   </li>
