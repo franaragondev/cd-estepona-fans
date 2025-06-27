@@ -209,7 +209,7 @@ export default function NextMatchesPreview() {
               </SwiperSlide>
 
               {previousMatches.length > 0 &&
-                previousMatches.map((match) => (
+                previousMatches.slice(-3).map((match) => (
                   <SwiperSlide
                     key={match.id}
                     className="flex justify-center items-center"
@@ -248,7 +248,7 @@ export default function NextMatchesPreview() {
               className="w-full h-full flex flex-col justify-between swiper-container-custom"
             >
               {upcomingMatches.length > 0 &&
-                upcomingMatches.map((match) => (
+                upcomingMatches.slice(0, 3).map((match) => (
                   <SwiperSlide
                     key={match.id}
                     className="flex justify-center items-center"

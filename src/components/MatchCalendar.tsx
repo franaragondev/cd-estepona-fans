@@ -233,35 +233,39 @@ export default function Page() {
                       className="w-full rounded p-0.5 flex flex-col items-center gap-0.5 z-20"
                     >
                       <div className="flex justify-center gap-1 items-center">
-                        <Image
-                          src={
-                            match.isHome
-                              ? "/teams/cdEstepona.webp"
-                              : `/teams/${match.team.crestUrl}`
-                          }
-                          alt={`Logo de ${
-                            match.isHome ? match.team.name : "CD ESTEPONA"
-                          }`}
-                          width={24}
-                          height={24}
-                          className="h-6 w-6 object-contain"
-                          loading="lazy"
-                        />
+                        <div className="relative w-6 h-6">
+                          <Image
+                            src={
+                              match.isHome
+                                ? "/teams/cdEstepona.webp"
+                                : `/teams/${match.team.crestUrl}`
+                            }
+                            alt={`Logo de ${
+                              match.isHome ? match.team.name : "CD ESTEPONA"
+                            }`}
+                            fill
+                            style={{ objectFit: "contain" }}
+                            loading="lazy"
+                            sizes="24px"
+                          />
+                        </div>
                         <span>vs</span>
-                        <Image
-                          src={
-                            match.isHome
-                              ? `/teams/${match.team.crestUrl}`
-                              : "/teams/cdEstepona.webp"
-                          }
-                          alt={`Logo de ${
-                            match.isHome ? "CD ESTEPONA" : match.team.name
-                          }`}
-                          width={24}
-                          height={24}
-                          className="h-6 w-6 object-contain"
-                          loading="lazy"
-                        />
+                        <div className="relative w-6 h-6">
+                          <Image
+                            src={
+                              match.isHome
+                                ? `/teams/${match.team.crestUrl}`
+                                : "/teams/cdEstepona.webp"
+                            }
+                            alt={`Logo de ${
+                              match.isHome ? "CD ESTEPONA" : match.team.name
+                            }`}
+                            fill
+                            style={{ objectFit: "contain" }}
+                            loading="lazy"
+                            sizes="24px"
+                          />
+                        </div>
                       </div>
                       <div className="text-[9px] md:text-[12px]">
                         {match.isHome
