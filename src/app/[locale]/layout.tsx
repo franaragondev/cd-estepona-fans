@@ -131,7 +131,7 @@ export default async function LocaleLayout({
           <link key={lang} rel="alternate" hrefLang={lang} href={href} />
         ))}
       </Head>
-      <body>
+      <body className="min-h-screen flex flex-col">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-QVPHJBS6Y0"
           strategy="afterInteractive"
@@ -151,7 +151,7 @@ export default async function LocaleLayout({
             <Header />
             <ScrollToTop />
             <ClientParallaxProvider>
-              <main>{children}</main>
+              <main className="flex-grow">{children}</main>
               <ConsentScripts />
               <CookieBanner />
             </ClientParallaxProvider>
