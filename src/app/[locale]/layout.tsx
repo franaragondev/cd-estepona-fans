@@ -36,9 +36,9 @@ export async function generateMetadata({
   params,
 }: {
   params: { locale: string };
+  searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const resolvedParams = await params;
-  const locale = resolvedParams.locale;
+  const locale = params.locale;
 
   if (!hasLocale(routing.locales, locale)) {
     return {};
@@ -47,8 +47,19 @@ export async function generateMetadata({
   const messages = (await import(`../../../messages/${locale}.json`)).default;
   const { head } = messages;
 
-  const urlObj = new URL(head.url);
-  const baseUrl = urlObj.origin;
+  const baseUrl = new URL(head.url).origin;
+
+  const currentPath = `/${locale}`;
+
+  const alternatesLanguages = routing.locales.reduce((acc, loc) => {
+    acc[loc] = `${baseUrl}/${loc}${currentPath.replace(/^\/(es|en|fr)/, "")}`;
+    return acc;
+  }, {} as Record<string, string>);
+
+  alternatesLanguages["x-default"] = `${baseUrl}/es${currentPath.replace(
+    /^\/(es|en|fr)/,
+    ""
+  )}`;
 
   return {
     title: head.title,
@@ -56,19 +67,14 @@ export async function generateMetadata({
     keywords: head.keywords,
     authors: [{ name: "CD Estepona Fans" }],
     alternates: {
-      canonical: head.url,
-      languages: {
-        es: `${baseUrl}/es`,
-        en: `${baseUrl}/en`,
-        fr: `${baseUrl}/fr`,
-        "x-default": `${baseUrl}/es`,
-      },
+      canonical: `${baseUrl}${currentPath}`,
+      languages: alternatesLanguages,
     },
     openGraph: {
       type: "website",
       title: head.title,
       description: head.description,
-      url: head.url,
+      url: `${baseUrl}${currentPath}`,
       images: head.image,
     },
     twitter: {
@@ -91,8 +97,7 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const resolvedParams = await params;
-  const locale = resolvedParams.locale;
+  const locale = params.locale;
 
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -100,33 +105,31 @@ export default async function LocaleLayout({
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
   const { head } = messages;
-  const urlObj = new URL(head.url);
-  const baseUrl = urlObj.origin;
 
-  // URLs hreflang
-  const hreflangUrls = {
-    es: `${baseUrl}/es${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`,
-    en: `${baseUrl}/en${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`,
-    fr: `${baseUrl}/fr${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`,
-  };
+  const baseUrl = new URL(head.url).origin;
+
+  const currentPath = `/${locale}`;
+
+  const hreflangUrls = routing.locales.reduce((acc, loc) => {
+    acc[loc] = `${baseUrl}/${loc}${currentPath.replace(/^\/(es|en|fr)/, "")}`;
+    return acc;
+  }, {} as Record<string, string>);
+
+  hreflangUrls["x-default"] = `${baseUrl}/es${currentPath.replace(
+    /^\/(es|en|fr)/,
+    ""
+  )}`;
 
   return (
     <html lang={locale} className={`${dmSans.variable} ${montserrat.variable}`}>
       <Head>
         {/* Canonical */}
-        <link rel="canonical" href={head.url} />
+        <link rel="canonical" href={`${baseUrl}${currentPath}`} />
 
-        {/* Hreflang for each language */}
+        {/* Hreflang */}
         {Object.entries(hreflangUrls).map(([lang, href]) => (
           <link key={lang} rel="alternate" hrefLang={lang} href={href} />
         ))}
-
-        {/* x-default */}
-        <link
-          rel="alternate"
-          hrefLang="x-default"
-          href={`${baseUrl}/es${urlObj.pathname.replace(/^\/(es|en|fr)/, "")}`}
-        />
       </Head>
       <body>
         <Script
