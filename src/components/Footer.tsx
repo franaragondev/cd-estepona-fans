@@ -20,7 +20,7 @@ export default function Footer() {
           {t.rich("right", {
             link: (chunks) => (
               <a
-                href="https://www.linkedin.com/in/fran-aragon-simon/"
+                href="https://franaragondev.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline hover:text-gray-700"

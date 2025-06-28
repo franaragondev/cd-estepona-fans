@@ -46,7 +46,7 @@ export default function FAQ() {
     return reactStringReplace(text, /<link>(.*?)<\/link>/g, (match, i) => (
       <a
         key={`link-${i}`}
-        href="https://www.linkedin.com/in/fran-aragon-simon/"
+        href="https://franaragondev.com"
         target="_blank"
         rel="noopener noreferrer"
         style={{
