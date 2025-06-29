@@ -1,9 +1,7 @@
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { redirect } from "next/navigation";
-import GalleryAdmin from "@/components/GalleryAdmin";
-import NewsAdmin from "@/components/NewsAdmin";
-import MatchesAdmin from "@/components/MatchesAdmin";
+import AdminTabs from "@/components/AdminTabs";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -33,7 +31,7 @@ export default async function AdminPage({ params }: any) {
     }
 
     return (
-      <main className="min-h-screen bg-gray-50 p-10">
+      <main className="min-h-screen bg-gray-50 p-6 sm:p-10">
         <header className="mb-10">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Panel de Administración
@@ -44,28 +42,7 @@ export default async function AdminPage({ params }: any) {
           </p>
         </header>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow duration-300">
-            <h2 className="text-2xl font-semibold mb-4 text-indigo-700">
-              Noticias
-            </h2>
-            <NewsAdmin name={user.name} id={user.id} />
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow duration-300">
-            <h2 className="text-2xl font-semibold mb-4 text-indigo-700">
-              Galería
-            </h2>
-            <GalleryAdmin />
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow duration-300">
-            <h2 className="text-2xl font-semibold mb-4 text-indigo-700">
-              Partidos
-            </h2>
-            <MatchesAdmin />
-          </div>
-        </section>
+        <AdminTabs userName={user.name} userId={user.id} />
       </main>
     );
   } catch {

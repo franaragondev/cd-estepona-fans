@@ -90,7 +90,7 @@ export function DesktopMenu() {
           </button>
 
           {fansOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">
+            <div className="absolute right-0 mt-2 w-60 bg-white border border-gray-200 rounded shadow-lg z-50">
               {fansLinks.map(({ href, label }) => (
                 <Link
                   key={href}
