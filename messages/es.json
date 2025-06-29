@@ -54,9 +54,11 @@
   "menu": {
     "home": "Inicio",
     "news": "Noticias",
-    "matches": "Partidos",
+    "matches": "Calendario",
     "gallery": "Galería",
+    "fansSection": "Zona Fans",
     "tribuna": "La Tribuna del Muñoz Pérez",
+    "mvp": "MVP",
     "live": "Directos",
     "features": "Destacados",
     "about": "Sobre el Club",
@@ -207,7 +209,21 @@
   },
   "mvp": {
     "title": "Clasificación MVP",
-    "description": "Los jugadores más destacados de cada jornada, elegidos por CD Estepona Fans.",
-    "others": "Otros Jugadores Destacados"
+    "description": "Los jugadores más destacados de cada jornada, elegidos por la comunidad de CD Estepona Fans.",
+    "others": "Otros Jugadores Destacados",
+    "allPlayers": "Plantilla Completa",
+    "positions": {
+      "first": "1º",
+      "second": "2º",
+      "third": "3º"
+    },
+    "positionsByRole": {
+      "Portero": "Porteros",
+      "Defensa": "Defensas",
+      "Centrocampista": "Centrocampistas",
+      "Delantero": "Delanteros"
+    },
+    "howToVoteTitle": "¿Cómo se elige el MVP?",
+    "howToVoteText": "Los aficionados votan al jugador más destacado tras cada jornada en nuestro grupo de"
   }
 }

@@ -54,9 +54,11 @@
   "menu": {
     "home": "Home",
     "news": "News",
-    "matches": "Matches",
+    "matches": "Fixtures",
     "gallery": "Gallery",
+    "fansSection": "Fans Zone",
     "tribuna": "La Tribuna del Muñoz Pérez",
+    "mvp": "MVP",
     "live": "Live",
     "features": "Highlights",
     "about": "About the Club",
@@ -207,7 +209,21 @@
   },
   "mvp": {
     "title": "MVP Ranking",
-    "description": "The most outstanding players of each matchday, chosen by CD Estepona Fans.",
-    "others": "Other Notable Players"
+    "description": "The standout players from each matchday, chosen by the CD Estepona Fans community.",
+    "others": "Other Notable Players",
+    "allPlayers": "Full Squad",
+    "positions": {
+      "first": "1st",
+      "second": "2nd",
+      "third": "3rd"
+    },
+    "positionsByRole": {
+      "Portero": "Goalkeepers",
+      "Defensa": "Defenders",
+      "Centrocampista": "Midfielders",
+      "Delantero": "Forwards"
+    },
+    "howToVoteTitle": "How is the MVP chosen?",
+    "howToVoteText": "Fans vote for the standout player after each matchday in our"
   }
 }

@@ -20,6 +20,7 @@ const locales = [
 
 export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [fansOpen, setFansOpen] = useState(false);
 
   const router = useRouter();
   const locale = useLocale();
@@ -28,13 +29,20 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
   const tLang = useTranslations("language");
   const basePath = `/${locale}`;
 
+  const isLinkActive = (href: string) =>
+    href === basePath
+      ? pathname === href
+      : pathname === href || pathname.startsWith(href + "/");
+
+  const fansLinks = [`${basePath}/tribuna`, `${basePath}/mvp`];
+  const isFansActive = fansLinks.some((href) => isLinkActive(href));
+
   function changeLocale(newLocale: string) {
     const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
     router.push(newPathname);
     onCloseAction();
   }
 
-  // Check login status on mount
   useEffect(() => {
     async function checkLogin() {
       try {
@@ -65,7 +73,7 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
           exit={{ opacity: 0 }}
         >
           <motion.aside
-            className="fixed top-16 left-0 h-[calc(100%-4rem)] w-54 bg-white dark:bg-gray-900 shadow-lg z-50 p-4 mt-4"
+            className="fixed top-16 left-0 h-[calc(100%-4rem)] min-w-72 bg-white dark:bg-gray-900 shadow-lg z-50 p-4 mt-4"
             onClick={(e) => e.stopPropagation()}
             initial={{ x: -300 }}
             animate={{ x: 0 }}
@@ -76,45 +84,97 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
               <Link
                 href={`${basePath}`}
                 onClick={onCloseAction}
-                className="text-gray-700 hover:text-black"
+                className={`text-gray-700 hover:text-black ${
+                  isLinkActive(`${basePath}`) ? "text-black font-semibold" : ""
+                }`}
               >
                 {t("home")}
               </Link>
               <Link
                 href={`${basePath}/noticias`}
                 onClick={onCloseAction}
-                className="text-gray-700 hover:text-black"
+                className={`text-gray-700 hover:text-black ${
+                  isLinkActive(`${basePath}/noticias`)
+                    ? "text-black font-semibold"
+                    : ""
+                }`}
               >
                 {t("news")}
               </Link>
               <Link
                 href={`${basePath}/partidos`}
                 onClick={onCloseAction}
-                className="text-gray-700 hover:text-black"
+                className={`text-gray-700 hover:text-black ${
+                  isLinkActive(`${basePath}/partidos`)
+                    ? "text-black font-semibold"
+                    : ""
+                }`}
               >
                 {t("matches")}
               </Link>
               <Link
                 href={`${basePath}/galeria`}
                 onClick={onCloseAction}
-                className="text-gray-700 hover:text-black"
+                className={`text-gray-700 hover:text-black ${
+                  isLinkActive(`${basePath}/galeria`)
+                    ? "text-black font-semibold"
+                    : ""
+                }`}
               >
                 {t("gallery")}
               </Link>
-              <Link
-                href={`${basePath}/tribuna`}
-                onClick={onCloseAction}
-                className="text-gray-700 hover:text-black"
+
+              {/* Zona Fans */}
+              <button
+                onClick={() => setFansOpen((prev) => !prev)}
+                className={`flex justify-between items-center text-gray-700 hover:text-black ${
+                  isFansActive ? "text-black font-semibold" : ""
+                }`}
               >
-                {t("tribuna")}
-              </Link>
-              {/* <Link
-                href={`${basePath}/directos`}
-                onClick={onCloseAction}
-                className="text-gray-700 hover:text-black"
-              >
-                {t("live")}
-              </Link> */}
+                {t("fansSection")}
+                <svg
+                  className={`w-4 h-4 ml-2 transform transition-transform ${
+                    fansOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {fansOpen && (
+                <div className="ml-4 flex flex-col space-y-2">
+                  <Link
+                    href={`${basePath}/tribuna`}
+                    onClick={onCloseAction}
+                    className={`text-gray-700 hover:text-black ${
+                      isLinkActive(`${basePath}/tribuna`)
+                        ? "text-black font-semibold"
+                        : ""
+                    }`}
+                  >
+                    {t("tribuna")}
+                  </Link>
+                  {/* <Link
+                    href={`${basePath}/mvp`}
+                    onClick={onCloseAction}
+                    className={`text-gray-700 hover:text-black ${
+                      isLinkActive(`${basePath}/mvp`)
+                        ? "text-black font-semibold"
+                        : ""
+                    }`}
+                  >
+                    {t("mvp")}
+                  </Link> */}
+                </div>
+              )}
             </nav>
 
             <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
@@ -141,11 +201,12 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
                 ))}
               </ul>
             </div>
+
             {loggedIn && (
               <div className="mt-4">
                 <button
                   onClick={handleAdmin}
-                  className="w-full inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"
+                  className="w-full px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200"
                 >
                   Panel de Administración
                 </button>
@@ -155,7 +216,7 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
                       window.location.href = `/${locale}`;
                     });
                   }}
-                  className="w-full inline-block px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 cursor-pointer mt-5"
+                  className="w-full px-4 py-2 rounded text-white bg-[#DC2C20] hover:bg-[#2f36a1] transition-colors duration-200 mt-5"
                 >
                   {t("logout")}
                 </button>
