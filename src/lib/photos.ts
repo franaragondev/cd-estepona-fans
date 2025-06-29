@@ -6,7 +6,9 @@ export async function getPhotos(limit = 6) {
     orderBy: { id: "desc" },
     where: {
       albumId: {
-        not: "4",
+        not: {
+          in: ["4", "8"],
+        },
       },
     },
   });
