@@ -204,5 +204,10 @@
     "noLiveScheduledTitle": "Aucun direct programmé",
     "noLiveScheduledDescription": "Aucun streaming en direct n’est prévu pour le moment. Abonnez-vous sur notre site pour recevoir toutes les nouveautés et actualités du CD Estepona.",
     "visitChannel": "Voir les dernières vidéos"
+  },
+  "mvp": {
+    "title": "Classement des MVP",
+    "description": "Les joueurs les plus remarquables de chaque journée, choisis par CD Estepona Fans.",
+    "others": "Autres Joueurs Remarquables"
   }
 }

@@ -68,6 +68,7 @@ model Player {
   birthday     DateTime?
   nationality  String?
   stats        PlayerSeasonStat[]
+  mvps         MVP[]           
 }
 
 model PlayerSeasonStat {
@@ -96,6 +97,8 @@ model Match {
   isHome      Boolean
   competition String
   score       String?
+
+  mvps        MVP[]    
 }
 
 model Subscriber {
@@ -110,4 +113,16 @@ model PendingSubscriber {
   email     String   @unique
   token     String   @unique
   createdAt DateTime @default(now())
+}
+
+model MVP {
+  id        String   @id @default(cuid())
+  matchId   String
+  playerId  String
+  createdAt DateTime @default(now())
+
+  match     Match    @relation(fields: [matchId], references: [id])
+  player    Player   @relation(fields: [playerId], references: [id])
+
+  @@unique([matchId, playerId]) // Evitar duplicados en un mismo partido
 }

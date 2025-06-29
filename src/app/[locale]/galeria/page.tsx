@@ -5,7 +5,7 @@ export default async function GalleryPage() {
   const photos = await getAllPhotos();
   const images = photos.map(({ url, caption }) => ({
     url,
-    caption: caption ?? undefined, // convierte null en undefined
+    caption: caption ?? undefined,
   }));
 
   return (

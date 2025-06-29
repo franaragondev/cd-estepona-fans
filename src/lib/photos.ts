@@ -17,7 +17,9 @@ export async function getAllPhotos() {
     orderBy: { id: "desc" },
     where: {
       albumId: {
-        not: "4",
+        not: {
+          in: ["4", "8"],
+        },
       },
     },
   });

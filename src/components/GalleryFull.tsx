@@ -91,11 +91,11 @@ export default function GalleryFull({ images }: GalleryFullProps) {
 
       if (Math.abs(deltaX) > 50) {
         if (deltaX > 0 && showNext) {
-          // swipe izquierda → siguiente imagen
+          // left swipe
           setModalIndex((i) => i! + 1);
           setIsImageLoading(true);
         } else if (deltaX < 0 && showPrev) {
-          // swipe derecha → imagen anterior
+          // right swipe
           setModalIndex((i) => i! - 1);
           setIsImageLoading(true);
         }

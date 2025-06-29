@@ -204,5 +204,10 @@
     "noLiveScheduledTitle": "No live events scheduled",
     "noLiveScheduledDescription": "There are currently no live streams scheduled. Subscribe on our website to receive all news and updates about CD Estepona.",
     "visitChannel": "Watch latest videos"
+  },
+  "mvp": {
+    "title": "MVP Ranking",
+    "description": "The most outstanding players of each matchday, chosen by CD Estepona Fans.",
+    "others": "Other Notable Players"
   }
 }

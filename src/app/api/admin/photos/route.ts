@@ -15,8 +15,8 @@ export async function GET(request: Request) {
   const limit = parseInt(url.searchParams.get("limit") || "12");
 
   const whereFilter = albumId
-    ? { albumId, NOT: { albumId: "4" } }
-    : { NOT: { albumId: "4" } };
+    ? { albumId, NOT: { albumId: { in: ["4", "8"] } } }
+    : { NOT: { albumId: { in: ["4", "8"] } } };
 
   const photos = await prisma.photo.findMany({
     where: whereFilter,
