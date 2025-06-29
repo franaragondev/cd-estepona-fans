@@ -117,7 +117,7 @@ export default function NewsCard({
           </span>
         )}
         <h2
-          className="text-lg font-semibold mb-2"
+          className="text-lg font-semibold mb-2 uppercase"
           style={{ color: neutralDark }}
         >
           {title}

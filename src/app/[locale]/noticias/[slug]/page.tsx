@@ -26,7 +26,7 @@ export default async function Page({ params }: any) {
 
       <main className="max-w-3xl mx-auto px-4 py-12 min-h-[85vh]">
         <h1
-          className={`text-4xl font-bold ${
+          className={`uppercase mb-6 text-3xl font-bold ${
             !article.showTitle ? "sr-only" : ""
           }`}
           style={{ color: neutralDark }}
