@@ -46,7 +46,8 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
   const [form, setForm] = useState({ ...initialFormState, authorId: id });
   const [isEditing, setIsEditing] = useState(false);
   const [skip, setSkip] = useState(0);
-  const take = 9;
+  const take = 3;
+  const [hasMore, setHasMore] = useState(false);
 
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [modal, setModal] = useState<{
@@ -63,10 +64,12 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
 
   async function fetchNews() {
     const resPublic = await fetch(
-      `/api/admin/news?skip=${skip}&take=${take}&published=true`
+      `/api/admin/news?skip=${skip}&take=${take + 1}&published=true`
     );
     const dataPublic = await resPublic.json();
-    setNewsList(dataPublic);
+
+    setNewsList(dataPublic.slice(0, take));
+    setHasMore(dataPublic.length > take);
 
     const resDrafts = await fetch(
       `/api/admin/news?skip=0&take=100&published=false`
@@ -426,6 +429,23 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
         ))}
       </ul>
 
+      <div className="mb-6 flex justify-between">
+        <button
+          disabled={skip === 0}
+          onClick={() => setSkip(Math.max(0, skip - take))}
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Anterior
+        </button>
+        <button
+          disabled={!hasMore}
+          onClick={() => setSkip(skip + take)}
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Siguiente
+        </button>
+      </div>
+
       <h2 className="text-xl font-semibold mb-4">Borradores</h2>
       {draftsList.length === 0 && <p>No hay borradores guardados.</p>}
       <ul className="space-y-4">
@@ -468,23 +488,6 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
           </li>
         ))}
       </ul>
-
-      <div className="mt-6 flex justify-between">
-        <button
-          disabled={skip === 0}
-          onClick={() => setSkip(Math.max(0, skip - take))}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-        >
-          Anterior
-        </button>
-        <button
-          disabled={newsList.length < take}
-          onClick={() => setSkip(skip + take)}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-        >
-          Siguiente
-        </button>
-      </div>
 
       {modal && (
         <Modal
