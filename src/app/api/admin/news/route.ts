@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { notifySubscribersOfNewPost } from "@/lib/email";
+import { translateText } from "@/lib/deepl";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -55,6 +56,30 @@ export async function POST(request: NextRequest) {
     });
 
     if (published) {
+      const [titleEN, contentEN, titleFR, contentFR] = await Promise.all([
+        translateText(title, "EN"),
+        translateText(content, "EN"),
+        translateText(title, "FR"),
+        translateText(content, "FR"),
+      ]);
+
+      await prisma.newsTranslation.createMany({
+        data: [
+          {
+            newsId: created.id,
+            language: "en",
+            title: titleEN,
+            content: contentEN,
+          },
+          {
+            newsId: created.id,
+            language: "fr",
+            title: titleFR,
+            content: contentFR,
+          },
+        ],
+      });
+
       await notifySubscribersOfNewPost(created.id);
     }
 
@@ -106,6 +131,31 @@ export async function PUT(request: NextRequest) {
     });
 
     if (!existing?.published && published) {
+      const [titleEN, contentEN, titleFR, contentFR] = await Promise.all([
+        translateText(title, "EN"),
+        translateText(content, "EN"),
+        translateText(title, "FR"),
+        translateText(content, "FR"),
+      ]);
+
+      await prisma.newsTranslation.createMany({
+        data: [
+          {
+            newsId: updated.id,
+            language: "en",
+            title: titleEN,
+            content: contentEN,
+          },
+          {
+            newsId: updated.id,
+            language: "fr",
+            title: titleFR,
+            content: contentFR,
+          },
+        ],
+        skipDuplicates: true,
+      });
+
       await notifySubscribersOfNewPost(updated.id);
     }
 
