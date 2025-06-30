@@ -15,13 +15,7 @@ export async function getNews(limit = 6) {
       authorId: true,
       published: true,
       showTitle: true,
-      translations: {
-        select: {
-          language: true,
-          title: true,
-          content: true,
-        },
-      },
+      translations: true,
     },
   });
 }
