@@ -229,5 +229,8 @@
     },
     "howToVoteTitle": "How is the MVP chosen?",
     "howToVoteText": "Fans vote for the standout player after each matchday in our"
+  },
+  "calendar": {
+    "noMatches": "No matches this month."
   }
 }

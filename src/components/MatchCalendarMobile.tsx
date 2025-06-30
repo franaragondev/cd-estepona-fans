@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface Team {
   id: string;
@@ -31,7 +32,6 @@ function getResultColor(score: string | undefined, isHome: boolean) {
   if (!score) return "";
 
   const [homeScore, awayScore] = score.split(":").map(Number);
-
   const esteponaScore = isHome ? homeScore : awayScore;
   const opponentScore = isHome ? awayScore : homeScore;
 
@@ -56,6 +56,7 @@ export default function MatchCalendarMobile({
   locale,
 }: Props) {
   const today = new Date();
+  const t = useTranslations("calendar");
 
   const sortedDays = Object.keys(matchesByDay)
     .map(Number)
@@ -64,7 +65,7 @@ export default function MatchCalendarMobile({
   return (
     <div className="px-4 py-6 space-y-6">
       {sortedDays.length === 0 && (
-        <p className="text-center text-gray-500">No hay partidos este mes.</p>
+        <p className="text-center text-gray-500">{t("noMatches")}</p>
       )}
 
       {sortedDays.map((day) => {
@@ -120,7 +121,7 @@ export default function MatchCalendarMobile({
                       />
                     </div>
 
-                    <span className="font-semibold text-sm">vs</span>
+                    <span className="font-semibold text-sm">{t("vs")}</span>
 
                     <div className="relative w-8 h-8 flex-shrink-0">
                       <Image
@@ -139,9 +140,7 @@ export default function MatchCalendarMobile({
 
                     <div className="flex flex-col flex-grow text-xs md:text-sm min-w-0">
                       <span className="max-w-[120px] break-words block">
-                        {match.isHome
-                          ? "Estadio Francisco Muñoz Pérez"
-                          : match.team.location}
+                        {match.isHome ? t("homeStadium") : match.team.location}
                       </span>
                       <span className={`font-bold ${resultClass}`}>
                         {isPast && match.score !== undefined

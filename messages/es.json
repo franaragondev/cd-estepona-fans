@@ -229,5 +229,8 @@
     },
     "howToVoteTitle": "¿Cómo se elige el MVP?",
     "howToVoteText": "Los aficionados votan al jugador más destacado tras cada jornada en nuestro grupo de"
+  },
+  "calendar": {
+    "noMatches": "No hay partidos este mes."
   }
 }
