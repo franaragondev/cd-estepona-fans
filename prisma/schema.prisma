@@ -40,6 +40,21 @@ model News {
   author        User     @relation(fields: [authorId], references: [id])
   published     Boolean  @default(false)
   showTitle     Boolean  @default(true)
+
+  translations  NewsTranslation[]
+}
+
+model NewsTranslation {
+  id        String   @id @default(cuid())
+  language  String   // "en", "fr", etc.
+  title     String
+  content   String
+  newsId    String
+  news      News     @relation(fields: [newsId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([newsId, language])
 }
 
 model PhotoAlbum {
