@@ -4,18 +4,35 @@ import prisma from "@/lib/prisma";
 import NewsButton from "@/components/CommonButton";
 import SubscribeModal from "@/components/SubscribeModal";
 import MarkdownViewer from "@/components/MarkdownViewer";
+import { getTranslations } from "next-intl/server";
 
 export default async function Page({ params }: any) {
   const { slug, locale } = params;
 
   if (!slug) return notFound();
 
+  const t = await getTranslations({ locale, namespace: "newsPage" });
+
   const article = await prisma.news.findFirst({
     where: { slug },
-    include: { author: true },
+    include: {
+      author: true,
+      translations: {
+        select: {
+          language: true,
+          title: true,
+          content: true,
+        },
+      },
+    },
   });
 
   if (!article) return notFound();
+
+  const translation = article.translations.find((t) => t.language === locale);
+
+  const displayTitle = translation?.title ?? article.title;
+  const displayContent = translation?.content ?? article.content;
 
   const neutralDark = "#333";
   const neutralGray = "#666";
@@ -31,14 +48,14 @@ export default async function Page({ params }: any) {
           }`}
           style={{ color: neutralDark }}
         >
-          {article.title}
+          {displayTitle}
         </h1>
 
         <div className="w-full rounded overflow-hidden flex justify-center">
           {article.image && (
             <Image
               src={article.image}
-              alt={`Imagen de la noticia: ${article.title}`}
+              alt={`Imagen de la noticia: ${displayTitle}`}
               width={1200}
               height={800}
               className="w-full h-auto object-contain"
@@ -53,22 +70,25 @@ export default async function Page({ params }: any) {
         >
           {new Date(article.createdAt).toLocaleDateString(locale)}
         </div>
+
         <div
           className="text-sm mb-6"
           style={{ color: neutralGray, fontStyle: "italic" }}
         >
-          Por {article.author?.name || "CD Estepona Fans"}
+          {t("byAuthor", {
+            author: article.author?.name || "CD Estepona Fans",
+          })}
         </div>
 
         <div
           className="text-lg leading-relaxed mb-12"
           style={{ color: neutralDark, opacity: 0.85, whiteSpace: "pre-line" }}
         >
-          <MarkdownViewer content={article.content} />
+          <MarkdownViewer content={displayContent} />
         </div>
 
         <NewsButton
-          href={`/${params.locale}/noticias`}
+          href={`/${locale}/noticias`}
           className="inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"
           buttonTitle="button"
           translation="newsPage"

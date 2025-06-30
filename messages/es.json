@@ -192,7 +192,11 @@
     "error": "No se pudo cargar el contenido de La Tribuna."
   },
   "newsPage": {
-    "button": "Volver a todas las noticias"
+    "button": "Volver a todas las noticias",
+    "byAuthor": "Por {author}"
+  },
+  "newsCard": {
+    "byAuthor": "Por {author}"
   },
   "confirmEmailModal": {
     "title": "Gracias por confirmar tu suscripción",

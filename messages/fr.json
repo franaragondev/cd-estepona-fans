@@ -192,7 +192,11 @@
     "error": "Impossible de charger le contenu de La Tribune."
   },
   "newsPage": {
-    "button": "Retour à toutes les actualités"
+    "button": "Retour à toutes les actualités",
+    "byAuthor": "Par {author}"
+  },
+  "newsCard": {
+    "byAuthor": "Par {author}"
   },
   "confirmEmailModal": {
     "title": "Merci d’avoir confirmé votre abonnement",

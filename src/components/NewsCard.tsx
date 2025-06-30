@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import MarkdownViewer from "./MarkdownViewer";
 
 type NewsCardProps = {
@@ -26,18 +26,16 @@ export default function NewsCard({
   variant = "detailed",
 }: NewsCardProps) {
   const locale = useLocale();
-  // Format the date according to the current locale
-  const formattedDate = new Date(date).toLocaleDateString(locale);
+  const t = useTranslations("newsCard");
 
+  const formattedDate = new Date(date).toLocaleDateString(locale);
   const href = `/${locale}/noticias/${slug}`;
 
-  // Define neutral color palette for a more elegant look
-  const neutralDark = "#333"; // neutral dark text color
-  const neutralGray = "#666"; // medium gray for details
-  const neutralLight = "#f5f7fa"; // soft light background color
+  const neutralDark = "#333";
+  const neutralGray = "#666";
+  const neutralLight = "#f5f7fa";
 
   if (variant === "overlay") {
-    // Render card with background image overlay style
     return (
       <Link
         href={href}
@@ -49,12 +47,10 @@ export default function NewsCard({
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Semi-transparent overlay to improve text readability */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ backgroundColor: "rgba(0,0,0,0.35)", zIndex: 10 }}
         />
-        {/* Content container with higher z-index */}
         <div className="relative z-20">
           <time
             className="block text-sm mb-1"
@@ -73,7 +69,6 @@ export default function NewsCard({
     );
   }
 
-  // Render detailed card variant with image and text content
   return (
     <Link
       href={href}
@@ -82,7 +77,6 @@ export default function NewsCard({
         backgroundColor: neutralLight,
       }}
     >
-      {/* Image section */}
       <div className="relative w-full h-48">
         <Image
           src={image}
@@ -93,7 +87,7 @@ export default function NewsCard({
           priority={false}
         />
       </div>
-      {/* Text content section */}
+
       <div className="p-5 flex flex-col flex-grow">
         <time
           className="text-sm text-gray-500 mb-1"
@@ -101,21 +95,14 @@ export default function NewsCard({
         >
           {formattedDate}
         </time>
-        {author ? (
-          <span
-            className="text-xs mb-2"
-            style={{ color: neutralGray, fontStyle: "italic" }}
-          >
-            Por {author}
-          </span>
-        ) : (
-          <span
-            className="text-xs mb-2"
-            style={{ color: neutralGray, fontStyle: "italic" }}
-          >
-            CD Estepona Fans
-          </span>
-        )}
+        <span
+          className="text-xs mb-2"
+          style={{ color: neutralGray, fontStyle: "italic" }}
+        >
+          {t("byAuthor", {
+            author: author || "CD Estepona Fans",
+          })}
+        </span>
         <h2
           className="text-lg font-semibold mb-2 uppercase"
           style={{ color: neutralDark }}

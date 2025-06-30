@@ -192,7 +192,11 @@
     "error": "Could not load content from The Tribune."
   },
   "newsPage": {
-    "button": "Back to all news"
+    "button": "Back to all news",
+    "byAuthor": "By {author}"
+  },
+  "newsCard": {
+    "byAuthor": "By {author}"
   },
   "confirmEmailModal": {
     "title": "Thank you for confirming your subscription",

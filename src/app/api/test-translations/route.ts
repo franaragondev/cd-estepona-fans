@@ -2,7 +2,7 @@
 // import prisma from "@/lib/prisma";
 // import { translateText } from "@/lib/deepl";
 
-// curl -X POST http://localhost:3000/api/test-translations
+// // curl -X POST http://localhost:3000/api/test-translations
 // export async function POST() {
 //   const newsItems = await prisma.news.findMany({
 //     include: { translations: true },
