@@ -1,18 +1,24 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import NewsCard from "@/components/NewsCard";
-import { useTranslations } from "next-intl";
 import NewsButton from "../CommonButton";
+
+interface NewsTranslation {
+  language: string;
+  title: string;
+}
 
 interface NewsItem {
   id: string;
   slug: string;
   title: string;
-  createdAt: string; // ISO string
+  createdAt: string;
   image?: string | null;
   published: boolean;
+  translations: NewsTranslation[];
 }
+
 interface LatestNewsProps {
   latestNews: NewsItem[];
 }
@@ -35,16 +41,23 @@ export default function LatestNews({ latestNews }: LatestNewsProps) {
                     mx-auto
                     px-4"
       >
-        {latestNews.map(({ id, slug, title, createdAt, image }, index) => (
-          <NewsCard
-            key={`${id}-${index}`}
-            slug={slug}
-            title={title}
-            date={createdAt}
-            image={image ?? ""}
-            variant="overlay"
-          />
-        ))}
+        {latestNews.map(
+          ({ id, slug, title, createdAt, image, translations }, index) => {
+            const translated = translations?.find((t) => t.language === locale);
+            const displayTitle = translated?.title ?? title;
+
+            return (
+              <NewsCard
+                key={`${id}-${index}`}
+                slug={slug}
+                title={displayTitle}
+                date={createdAt}
+                image={image ?? ""}
+                variant="overlay"
+              />
+            );
+          }
+        )}
       </div>
       <div className="text-center mt-8">
         <NewsButton

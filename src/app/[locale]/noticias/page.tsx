@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useLocale } from "next-intl";
 import NewsCard from "@/components/NewsCard";
+
+type NewsTranslation = {
+  language: string;
+  title: string;
+  content: string;
+};
 
 type NewsItem = {
   id: string;
@@ -13,11 +20,13 @@ type NewsItem = {
   author: {
     name: string;
   };
+  translations: NewsTranslation[];
 };
 
 const BATCH_SIZE = 9;
 
 export default function NewsPage() {
+  const locale = useLocale();
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -78,26 +87,44 @@ export default function NewsPage() {
       <main className="max-w-7xl mx-auto px-4 py-8 min-h-[85vh]">
         <h1 className="sr-only">Noticias</h1>
 
-        <div
-          className="grid gap-8
-                    grid-cols-1
-                    sm:grid-cols-2
-                    md:grid-cols-3"
-        >
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {news.map(
-            ({ id, slug, title, createdAt, image, content, author }, index) => (
-              <NewsCard
-                key={`${id}-${index}`}
-                slug={slug}
-                title={title}
-                date={createdAt}
-                image={image ? image : ""}
-                content={
-                  content.length > 150 ? content.slice(0, 150) + "…" : content
-                }
-                author={author.name}
-              />
-            )
+            (
+              {
+                id,
+                slug,
+                title,
+                createdAt,
+                image,
+                content,
+                author,
+                translations,
+              },
+              index
+            ) => {
+              const translated = translations.find(
+                (t) => t.language === locale
+              );
+
+              const displayTitle = translated?.title ?? title;
+              const displayContent = translated?.content ?? content;
+
+              return (
+                <NewsCard
+                  key={`${id}-${index}`}
+                  slug={slug}
+                  title={displayTitle}
+                  date={createdAt}
+                  image={image ? image : ""}
+                  content={
+                    displayContent.length > 150
+                      ? displayContent.slice(0, 150) + "…"
+                      : displayContent
+                  }
+                  author={author.name}
+                />
+              );
+            }
           )}
         </div>
 

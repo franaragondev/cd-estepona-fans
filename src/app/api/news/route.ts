@@ -10,7 +10,10 @@ export async function GET(request: Request) {
     skip,
     take,
     orderBy: { createdAt: "desc" },
-    include: { author: true },
+    include: {
+      author: true,
+      translations: true,
+    },
   });
 
   return NextResponse.json(news);

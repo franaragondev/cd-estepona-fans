@@ -15,6 +15,13 @@ export async function getNews(limit = 6) {
       authorId: true,
       published: true,
       showTitle: true,
+      translations: {
+        select: {
+          language: true,
+          title: true,
+          content: true,
+        },
+      },
     },
   });
 }
@@ -22,6 +29,6 @@ export async function getNews(limit = 6) {
 export async function getAllNews() {
   return await prisma.news.findMany({
     orderBy: { createdAt: "desc" },
-    include: { author: true },
+    include: { author: true, translations: true },
   });
 }
