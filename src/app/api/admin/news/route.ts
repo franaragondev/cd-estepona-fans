@@ -105,19 +105,30 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const title = form.get("title") as string;
-    const slug = form.get("slug") as string;
-    const content = form.get("content") as string;
-    const image = form.get("image") as string;
+    const title = form.get("title") as string | null;
+    const slug = form.get("slug") as string | null;
+    const content = form.get("content") as string | null;
+    const image = form.get("image") as string | null;
     const published = form.get("published") === "true";
     const showTitleStr = form.get("showTitle") as string | null;
 
     const existing = await prisma.news.findUnique({ where: { id } });
+
+    if (!existing) {
+      return NextResponse.json(
+        { error: "Noticia no encontrada" },
+        { status: 404 }
+      );
+    }
+
+    const titleToTranslate = title ?? existing.title;
+    const contentToTranslate = content ?? existing.content;
+
     const dataToUpdate: any = {};
-    if (title) dataToUpdate.title = title;
-    if (slug) dataToUpdate.slug = slug;
-    if (content) dataToUpdate.content = content;
-    if (image) dataToUpdate.image = image;
+    if (title !== null) dataToUpdate.title = title;
+    if (slug !== null) dataToUpdate.slug = slug;
+    if (content !== null) dataToUpdate.content = content;
+    if (image !== null) dataToUpdate.image = image;
 
     dataToUpdate.published = published;
 
@@ -130,12 +141,12 @@ export async function PUT(request: NextRequest) {
       data: dataToUpdate,
     });
 
-    if (!existing?.published && published) {
+    if (!existing.published && published) {
       const [titleEN, contentEN, titleFR, contentFR] = await Promise.all([
-        translateText(title, "EN"),
-        translateText(content, "EN"),
-        translateText(title, "FR"),
-        translateText(content, "FR"),
+        translateText(titleToTranslate, "EN"),
+        translateText(contentToTranslate, "EN"),
+        translateText(titleToTranslate, "FR"),
+        translateText(contentToTranslate, "FR"),
       ]);
 
       await prisma.newsTranslation.createMany({
@@ -184,6 +195,7 @@ export async function DELETE(request: NextRequest) {
     await prisma.news.delete({ where: { id } });
     return NextResponse.json({ message: "Noticia borrada correctamente" });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Error borrando noticia" },
       { status: 500 }

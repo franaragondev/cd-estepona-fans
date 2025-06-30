@@ -50,7 +50,7 @@ model NewsTranslation {
   title     String
   content   String
   newsId    String
-  news      News     @relation(fields: [newsId], references: [id])
+  news      News     @relation(fields: [newsId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
