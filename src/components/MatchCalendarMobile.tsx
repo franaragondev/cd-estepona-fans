@@ -121,7 +121,7 @@ export default function MatchCalendarMobile({
                       />
                     </div>
 
-                    <span className="font-semibold text-sm">{t("vs")}</span>
+                    <span className="font-semibold text-sm">vs</span>
 
                     <div className="relative w-8 h-8 flex-shrink-0">
                       <Image
@@ -140,7 +140,9 @@ export default function MatchCalendarMobile({
 
                     <div className="flex flex-col flex-grow text-xs md:text-sm min-w-0">
                       <span className="max-w-[120px] break-words block">
-                        {match.isHome ? t("homeStadium") : match.team.location}
+                        {match.isHome
+                          ? "Estadio Francisco Muñoz Pérez"
+                          : match.team.location}
                       </span>
                       <span className={`font-bold ${resultClass}`}>
                         {isPast && match.score !== undefined
