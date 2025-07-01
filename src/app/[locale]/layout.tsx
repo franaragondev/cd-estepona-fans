@@ -87,6 +87,9 @@ export async function generateMetadata({
     icons: {
       icon: "/favicon.png",
     },
+    other: {
+      "fb:app_id": process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "",
+    },
   };
 }
 

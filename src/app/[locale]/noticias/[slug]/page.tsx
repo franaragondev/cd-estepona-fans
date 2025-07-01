@@ -69,6 +69,9 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
       description,
       images: [image],
     },
+    other: {
+      "fb:app_id": process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "",
+    },
   };
 }
 
