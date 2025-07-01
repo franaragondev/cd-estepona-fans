@@ -130,6 +130,11 @@ export default async function LocaleLayout({
         {Object.entries(hreflangUrls).map(([lang, href]) => (
           <link key={lang} rel="alternate" hrefLang={lang} href={href} />
         ))}
+
+        <meta
+          property="fb:app_id"
+          content={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}
+        />
       </Head>
       <body className="min-h-screen flex flex-col">
         <Script
