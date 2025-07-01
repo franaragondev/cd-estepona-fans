@@ -39,7 +39,7 @@ export default function MatchesAdmin() {
   const [editingMatch, setEditingMatch] = useState<Match | null>(null);
   const [formData, setFormData] = useState({
     date: "", // YYYY-MM-DD
-    time: "", // HH:mm (opcional)
+    time: "", // HH:mm (optional)
     teamId: "",
     location: "",
     isHome: false,
