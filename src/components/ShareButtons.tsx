@@ -23,10 +23,9 @@ export default function ShareButtons({
       setFbSdkLoaded(true);
       return;
     }
-    // Cargar el SDK
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: process.env.FACEBOOK_APP_ID,
+        appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
         autoLogAppEvents: true,
         xfbml: false,
         version: "v17.0",
@@ -34,7 +33,6 @@ export default function ShareButtons({
       setFbSdkLoaded(true);
     };
 
-    // Insertar el script
     (function (d, s, id) {
       const fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
