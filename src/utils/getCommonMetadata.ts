@@ -43,7 +43,6 @@ export async function getCommonMetadata(
         description: head.description,
         url: canonicalUrl,
         images: head.image,
-        appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
       },
       twitter: {
         card: "summary_large_image",
