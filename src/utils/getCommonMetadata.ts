@@ -43,6 +43,7 @@ export async function getCommonMetadata(
         description: head.description,
         url: canonicalUrl,
         images: head.image,
+        appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
       },
       twitter: {
         card: "summary_large_image",
@@ -51,10 +52,6 @@ export async function getCommonMetadata(
         images: head.image,
       },
       metadataBase: new URL(baseUrl),
-
-      other: {
-        "fb:app_id": process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "",
-      },
     };
   } catch (error) {
     console.error(`Error loading messages for locale: ${typedLocale}`, error);

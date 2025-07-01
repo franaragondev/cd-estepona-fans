@@ -31,7 +31,6 @@ export default function DirectosPage() {
         return res.json();
       })
       .then((data) => {
-        console.log("Live API data:", data);
         if (Array.isArray(data) && data.length > 0) {
           setLiveVideo(data[0]);
         } else {

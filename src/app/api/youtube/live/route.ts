@@ -66,15 +66,12 @@ export async function GET() {
     }
 
     const searchData = (await searchRes.json()) as SearchResponse;
-    console.log("Search data:", searchData);
 
     if (searchData.items.length === 0) {
-      console.log("No hay directos activos o programados.");
       return NextResponse.json([]);
     }
 
     const videoIds = searchData.items.map((item) => item.id.videoId).join(",");
-    console.log("Video IDs:", videoIds);
 
     const videosRes = await fetch(
       `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoIds}&part=snippet`
@@ -94,7 +91,6 @@ export async function GET() {
     }
 
     const videosData = (await videosRes.json()) as VideosResponse;
-    console.log("Videos data:", videosData);
 
     const videos = videosData.items.map((video) => ({
       id: video.id,
