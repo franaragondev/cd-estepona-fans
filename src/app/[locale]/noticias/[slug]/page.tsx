@@ -8,11 +8,8 @@ import ShareButtons from "@/components/ShareButtons";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
-type Props = {
-  params: { slug: string; locale: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const { slug, locale } = params;
 
   const article = await prisma.news.findFirst({
@@ -75,7 +72,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Page({ params }: any) {
   const { slug, locale } = params;
 
   if (!slug) return notFound();
