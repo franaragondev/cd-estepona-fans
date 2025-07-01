@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Facebook, Twitter, Link as LinkIcon } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,36 +15,6 @@ export default function ShareButtons({
   title,
   label = "Compartir",
 }: ShareButtonsProps) {
-  const [fbSdkLoaded, setFbSdkLoaded] = useState(false);
-
-  useEffect(() => {
-    if (window.FB) {
-      setFbSdkLoaded(true);
-      return;
-    }
-    window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
-        autoLogAppEvents: true,
-        xfbml: false,
-        version: "v17.0",
-      });
-      setFbSdkLoaded(true);
-    };
-
-    (function (d, s, id) {
-      const fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        setFbSdkLoaded(true);
-        return;
-      }
-      const js = d.createElement(s) as HTMLScriptElement;
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode!.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
-  }, []);
-
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
@@ -59,42 +28,18 @@ export default function ShareButtons({
     window.open(shareUrl, "_blank", "width=600,height=400");
   };
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
   const handleFacebookShare = () => {
-    if (isMobile) {
-      openPopup(
-        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          url
-        )}`
-      );
-    } else if (fbSdkLoaded && window.FB) {
-      window.FB.ui(
-        {
-          method: "share",
-          href: url,
-        },
-        function (response: any) {
-          if (response && !response.error_message) {
-            toast.success("Compartido en Facebook!");
-          } else if (
-            response &&
-            response.error_message &&
-            response.error_message.toLowerCase().includes("not logged in")
-          ) {
-            toast.error("Debes iniciar sesión en Facebook para compartir.");
-          } else {
-            toast.error("Error al compartir en Facebook");
-          }
-        }
-      );
-    } else {
-      openPopup(
-        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          url
-        )}`
-      );
-    }
+    openPopup(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+    );
+  };
+
+  const handleTwitterShare = () => {
+    openPopup(
+      `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+        url
+      )}&text=${encodeURIComponent(title)}`
+    );
   };
 
   return (
@@ -103,13 +48,7 @@ export default function ShareButtons({
         <span className="text-sm text-gray-600">{label}</span>
 
         <button
-          onClick={() =>
-            openPopup(
-              `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                url
-              )}&text=${encodeURIComponent(title)}`
-            )
-          }
+          onClick={handleTwitterShare}
           title="Compartir en Twitter"
           className="hover:opacity-80 transition cursor-pointer"
         >
@@ -120,7 +59,6 @@ export default function ShareButtons({
           onClick={handleFacebookShare}
           title="Compartir en Facebook"
           className="hover:opacity-80 transition cursor-pointer"
-          disabled={false}
         >
           <Facebook size={20} />
         </button>
