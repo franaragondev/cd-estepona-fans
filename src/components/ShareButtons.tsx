@@ -24,8 +24,31 @@ export default function ShareButtons({
     }
   };
 
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
   const openPopup = (shareUrl: string) => {
     window.open(shareUrl, "_blank", "width=600,height=400");
+  };
+
+  const handleFacebookShare = () => {
+    if (isMobile) {
+      window.location.href = `fb://facewebmodal/f?href=${encodeURIComponent(
+        url
+      )}`;
+      setTimeout(() => {
+        openPopup(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+            url
+          )}`
+        );
+      }, 1500);
+    } else {
+      openPopup(
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          url
+        )}`
+      );
+    }
   };
 
   return (
@@ -48,13 +71,7 @@ export default function ShareButtons({
         </button>
 
         <button
-          onClick={() =>
-            openPopup(
-              `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                url
-              )}`
-            )
-          }
+          onClick={handleFacebookShare}
           title="Compartir en Facebook"
           className="hover:opacity-80 transition cursor-pointer"
         >
