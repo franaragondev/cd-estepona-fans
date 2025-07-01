@@ -6,6 +6,9 @@ import { verifyToken } from "./lib/auth";
 
 const intlMiddleware = createMiddleware(routing);
 
+const supportedLocales = ["en", "es", "fr"];
+const defaultLocale = "es";
+
 function logDev(...args: unknown[]) {
   if (process.env.NODE_ENV === "development") {
     console.log("[Middleware]", ...args);
@@ -15,7 +18,7 @@ function logDev(...args: unknown[]) {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip API, _next and static files
+  // Skip static files and APIs
   if (
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
@@ -27,30 +30,46 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const user = await verifyToken(token);
 
-  const locale = pathname.split("/")[1];
-  const supportedLocales = ["en", "es", "fr"];
-  const currentLocale = supportedLocales.includes(locale) ? locale : "en";
+  const pathnameLocale = pathname.split("/")[1];
+  const hasLocale = supportedLocales.includes(pathnameLocale);
 
-  const isProtectedRoute = pathname.startsWith(`/${currentLocale}/admin`);
-  const isAuthRoute = pathname.startsWith(`/${currentLocale}/auth/login`);
+  const isProtectedRoute =
+    hasLocale && pathname.startsWith(`/${pathnameLocale}/admin`);
+  const isAuthRoute =
+    hasLocale && pathname.startsWith(`/${pathnameLocale}/auth/login`);
 
   logDev("Path:", pathname);
   logDev("User authenticated:", !!user);
   logDev("Protected route:", isProtectedRoute);
   logDev("Auth route:", isAuthRoute);
 
-  // Redirect to login if accessing protected route without a valid token
+  // Redirect to login if accessing protected route without token
   if (isProtectedRoute && !user) {
     logDev("Redirecting to login");
     return NextResponse.redirect(
-      new URL(`/${currentLocale}/auth/login`, request.url)
+      new URL(`/${pathnameLocale}/auth/login`, request.url)
     );
   }
 
-  // Redirect to app if authenticated user tries to access auth routes
+  // Redirect to app if logged in user accesses login page
   if (isAuthRoute && user) {
     logDev("Redirecting to app");
-    return NextResponse.redirect(new URL(`/${currentLocale}`, request.url));
+    return NextResponse.redirect(new URL(`/${pathnameLocale}`, request.url));
+  }
+
+  if (!hasLocale) {
+    const acceptedLanguages = request.headers.get("accept-language");
+    const preferredLocale =
+      acceptedLanguages
+        ?.split(",")
+        .map((lang) => lang.split(";")[0].trim().split("-")[0])
+        .find((lang) => supportedLocales.includes(lang)) || defaultLocale;
+
+    logDev("No locale in path. Redirecting to preferred:", preferredLocale);
+
+    return NextResponse.redirect(
+      new URL(`/${preferredLocale}${pathname}`, request.url)
+    );
   }
 
   return intlMiddleware(request);

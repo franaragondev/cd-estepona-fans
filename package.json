@@ -37,6 +37,7 @@
     "react-markdown": "^10.1.0",
     "react-scroll-parallax": "^3.4.5",
     "react-string-replace": "^1.1.1",
+    "react-toastify": "^11.0.5",
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.1",
     "swiper": "^11.2.8",

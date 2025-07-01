@@ -4,9 +4,78 @@ import prisma from "@/lib/prisma";
 import NewsButton from "@/components/CommonButton";
 import SubscribeModal from "@/components/SubscribeModal";
 import MarkdownViewer from "@/components/MarkdownViewer";
+import ShareButtons from "@/components/ShareButtons";
 import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 
-export default async function Page({ params }: any) {
+type Props = {
+  params: { slug: string; locale: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = params;
+
+  const article = await prisma.news.findFirst({
+    where: { slug },
+    include: {
+      translations: {
+        select: {
+          language: true,
+          title: true,
+          content: true,
+        },
+      },
+    },
+  });
+
+  if (!article) {
+    return {};
+  }
+
+  const translation = article.translations.find((t) => t.language === locale);
+
+  const title = translation?.title ?? article.title;
+  const description = translation?.content
+    ? translation.content.substring(0, 150).replace(/\n/g, " ") + "..."
+    : article.content
+    ? article.content.substring(0, 150).replace(/\n/g, " ") + "..."
+    : "CD Estepona Fans news article";
+
+  const baseUrl = "https://www.cdesteponafans.com";
+  const url = `${baseUrl}/${locale}/noticias/${slug}`;
+
+  const image = article.image?.startsWith("http")
+    ? article.image
+    : article.image
+    ? `${baseUrl}${article.image}`
+    : `${baseUrl}/default-image.jpg`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
   const { slug, locale } = params;
 
   if (!slug) return notFound();
@@ -37,6 +106,9 @@ export default async function Page({ params }: any) {
   const neutralDark = "#333";
   const neutralGray = "#666";
 
+  const baseUrl = "https://www.cdesteponafans.com";
+  const fullUrl = `${baseUrl}/${locale}/noticias/${slug}`;
+
   return (
     <>
       <SubscribeModal />
@@ -51,10 +123,16 @@ export default async function Page({ params }: any) {
           {displayTitle}
         </h1>
 
+        <ShareButtons url={fullUrl} title={displayTitle} label={t("share")} />
+
         <div className="w-full rounded overflow-hidden flex justify-center">
           {article.image && (
             <Image
-              src={article.image}
+              src={
+                article.image.startsWith("http")
+                  ? article.image
+                  : `${baseUrl}${article.image}`
+              }
               alt={`Imagen de la noticia: ${displayTitle}`}
               width={1200}
               height={800}

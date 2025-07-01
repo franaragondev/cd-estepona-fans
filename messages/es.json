@@ -193,7 +193,8 @@
   },
   "newsPage": {
     "button": "Volver a todas las noticias",
-    "byAuthor": "Por {author}"
+    "byAuthor": "Por {author}",
+    "share": "Comparte este artículo"
   },
   "newsCard": {
     "byAuthor": "Por {author}"
