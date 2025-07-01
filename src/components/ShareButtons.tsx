@@ -59,8 +59,16 @@ export default function ShareButtons({
     window.open(shareUrl, "_blank", "width=600,height=400");
   };
 
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
   const handleFacebookShare = () => {
-    if (fbSdkLoaded && window.FB) {
+    if (isMobile) {
+      openPopup(
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          url
+        )}`
+      );
+    } else if (fbSdkLoaded && window.FB) {
       window.FB.ui(
         {
           method: "share",
@@ -69,7 +77,13 @@ export default function ShareButtons({
         function (response: any) {
           if (response && !response.error_message) {
             toast.success("Compartido en Facebook!");
-          } else if (response && response.error_message) {
+          } else if (
+            response &&
+            response.error_message &&
+            response.error_message.toLowerCase().includes("not logged in")
+          ) {
+            toast.error("Debes iniciar sesión en Facebook para compartir.");
+          } else {
             toast.error("Error al compartir en Facebook");
           }
         }
@@ -106,7 +120,7 @@ export default function ShareButtons({
           onClick={handleFacebookShare}
           title="Compartir en Facebook"
           className="hover:opacity-80 transition cursor-pointer"
-          disabled={!fbSdkLoaded}
+          disabled={false}
         >
           <Facebook size={20} />
         </button>
