@@ -102,10 +102,10 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
                 {t("news")}
               </Link>
               <Link
-                href={`${basePath}/partidos`}
+                href={`${basePath}/calendario`}
                 onClick={onCloseAction}
                 className={`text-gray-700 hover:text-black ${
-                  isLinkActive(`${basePath}/partidos`)
+                  isLinkActive(`${basePath}/calendario`)
                     ? "text-black font-semibold"
                     : ""
                 }`}

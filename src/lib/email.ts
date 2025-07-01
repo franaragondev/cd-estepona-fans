@@ -100,7 +100,7 @@ export async function notifySubscribersOfMatchUpdate(
     return;
   }
 
-  const url = "https://www.cdesteponafans.com/es/partidos";
+  const url = "https://www.cdesteponafans.com/es/calendario";
   const subject = isUpdate
     ? "⚽️ Partido actualizado del CD Estepona"
     : "⚽️ Nuevo partido añadido al calendario del CD Estepona";
