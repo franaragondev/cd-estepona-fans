@@ -1,8 +1,6 @@
 "use client";
 
 import { Facebook, Twitter, Link as LinkIcon } from "lucide-react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 interface ShareButtonsProps {
   url: string;
@@ -18,10 +16,7 @@ export default function ShareButtons({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
-      toast.success("Enlace copiado", { autoClose: 2000 });
-    } catch {
-      toast.error("Error al copiar el enlace");
-    }
+    } catch {}
   };
 
   const handleFacebookShare = () => {
@@ -72,8 +67,6 @@ export default function ShareButtons({
           <LinkIcon size={20} />
         </button>
       </div>
-
-      <ToastContainer position="bottom-center" />
     </>
   );
 }
