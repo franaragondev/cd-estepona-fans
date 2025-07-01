@@ -94,6 +94,7 @@ export async function notifySubscribersOfMatchUpdate(
   isUpdate: boolean
 ) {
   const subscribers = await prisma.subscriber.findMany();
+  //  const subscribers = [{ email: "franaragon196913@gmail.com" }];
 
   if (!subscribers || subscribers.length === 0) {
     console.warn("⚠️ No hay suscriptores para enviar email");

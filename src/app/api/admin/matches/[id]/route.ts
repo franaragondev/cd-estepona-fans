@@ -30,7 +30,7 @@ export async function PUT(request: Request, context: any) {
       },
     });
 
-    // await notifySubscribersOfMatchUpdate(match, true);
+    await notifySubscribersOfMatchUpdate(match, true);
 
     return NextResponse.json(match);
   } catch (error) {
