@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Facebook, Twitter, Link as LinkIcon } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +16,38 @@ export default function ShareButtons({
   title,
   label = "Compartir",
 }: ShareButtonsProps) {
+  const [fbSdkLoaded, setFbSdkLoaded] = useState(false);
+
+  useEffect(() => {
+    if (window.FB) {
+      setFbSdkLoaded(true);
+      return;
+    }
+    // Cargar el SDK
+    window.fbAsyncInit = function () {
+      window.FB.init({
+        appId: process.env.FACEBOOK_APP_ID,
+        autoLogAppEvents: true,
+        xfbml: false,
+        version: "v17.0",
+      });
+      setFbSdkLoaded(true);
+    };
+
+    // Insertar el script
+    (function (d, s, id) {
+      const fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        setFbSdkLoaded(true);
+        return;
+      }
+      const js = d.createElement(s) as HTMLScriptElement;
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode!.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  }, []);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
@@ -24,24 +57,25 @@ export default function ShareButtons({
     }
   };
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
   const openPopup = (shareUrl: string) => {
     window.open(shareUrl, "_blank", "width=600,height=400");
   };
 
   const handleFacebookShare = () => {
-    if (isMobile) {
-      window.location.href = `fb://facewebmodal/f?href=${encodeURIComponent(
-        url
-      )}`;
-      setTimeout(() => {
-        openPopup(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-            url
-          )}`
-        );
-      }, 1500);
+    if (fbSdkLoaded && window.FB) {
+      window.FB.ui(
+        {
+          method: "share",
+          href: url,
+        },
+        function (response: any) {
+          if (response && !response.error_message) {
+            toast.success("Compartido en Facebook!");
+          } else if (response && response.error_message) {
+            toast.error("Error al compartir en Facebook");
+          }
+        }
+      );
     } else {
       openPopup(
         `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
@@ -74,6 +108,7 @@ export default function ShareButtons({
           onClick={handleFacebookShare}
           title="Compartir en Facebook"
           className="hover:opacity-80 transition cursor-pointer"
+          disabled={!fbSdkLoaded}
         >
           <Facebook size={20} />
         </button>
