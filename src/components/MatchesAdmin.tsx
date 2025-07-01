@@ -98,7 +98,7 @@ export default function MatchesAdmin() {
 
     let utcDateISO: string | null = null;
     if (formData.date) {
-      // si no hay hora, asumimos "00:00"
+      // If no time is provided, we assume “00:00”
       const timePart = formData.time ? formData.time : "00:00";
       const combined = `${formData.date}T${timePart}:00`;
       const dateObj = new Date(combined);
