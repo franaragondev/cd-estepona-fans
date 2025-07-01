@@ -24,22 +24,23 @@ export default function ShareButtons({
     }
   };
 
-  const openPopup = (shareUrl: string) => {
+  const handleFacebookShare = () => {
+    const appId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID;
+    const redirectUri = window.location.href;
+
+    const shareUrl = `https://www.facebook.com/dialog/share?app_id=${appId}&display=popup&href=${encodeURIComponent(
+      url
+    )}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+
     window.open(shareUrl, "_blank", "width=600,height=400");
   };
 
-  const handleFacebookShare = () => {
-    openPopup(
-      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
-    );
-  };
-
   const handleTwitterShare = () => {
-    openPopup(
-      `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-        url
-      )}&text=${encodeURIComponent(title)}`
-    );
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(title)}`;
+
+    window.open(twitterUrl, "_blank", "width=600,height=400");
   };
 
   return (
