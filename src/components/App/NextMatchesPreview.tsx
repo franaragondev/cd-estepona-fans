@@ -114,10 +114,11 @@ export default function NextMatchesPreview() {
   function formatDate(dateStr: string) {
     const date = new Date(dateStr);
 
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
+    // Comprobar hora UTC para gestionar "N/D"
+    const utcHours = date.getUTCHours();
+    const utcMinutes = date.getUTCMinutes();
 
-    if (hours === 0 && minutes === 0) {
+    if (utcHours === 0 && utcMinutes === 0) {
       return (
         date.toLocaleDateString(locale, {
           weekday: "long",
@@ -127,6 +128,7 @@ export default function NextMatchesPreview() {
       );
     }
 
+    // Mostrar fecha y hora local con zona Europe/Madrid
     return date.toLocaleString(locale, {
       weekday: "long",
       day: "numeric",
@@ -134,6 +136,7 @@ export default function NextMatchesPreview() {
       hour: "2-digit",
       minute: "2-digit",
       timeZone: "Europe/Madrid",
+      hour12: false,
     });
   }
 
