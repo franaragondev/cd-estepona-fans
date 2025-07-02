@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { toZonedTime } from "date-fns-tz";
+import { getTimezoneOffset } from "date-fns-tz";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -16,13 +16,14 @@ export async function GET(request: Request) {
 
   const timeZone = "Europe/Madrid";
 
-  // Fecha en Madrid a las 00:00 del primer día del mes
-  const startDateMadrid = new Date(year, month, 1, 0, 0, 0);
-  const startDateUtc = toZonedTime(startDateMadrid, timeZone);
+  const startLocal = new Date(year, month, 1, 0, 0, 0);
+  const endLocal = new Date(year, month + 1, 1, 0, 0, 0);
 
-  // Fecha en Madrid a las 00:00 del primer día del mes siguiente
-  const endDateMadrid = new Date(year, month + 1, 1, 0, 0, 0);
-  const endDateUtc = toZonedTime(endDateMadrid, timeZone);
+  const offsetStart = getTimezoneOffset(timeZone, startLocal);
+  const offsetEnd = getTimezoneOffset(timeZone, endLocal);
+
+  const startDateUtc = new Date(startLocal.getTime() - offsetStart);
+  const endDateUtc = new Date(endLocal.getTime() - offsetEnd);
 
   const matches = await prisma.match.findMany({
     where: {
