@@ -54,68 +54,72 @@ export default function MatchCalendar({
   const days = daysInMonth(year, month);
   const today = toZonedTime(new Date(), "Europe/Madrid");
 
+  // Generar nombres abreviados de días de la semana (lunes-domingo)
   const weekDayNames = Array.from({ length: 7 }, (_, i) =>
     formatZonedDate(new Date(2021, 10, 1 + i), locale, { weekday: "short" })
   );
 
+  // Primer día de la semana ajustado para empezar en lunes (JS getDay: 0=domingo)
+  const firstWeekDay = (new Date(year, month, 1).getDay() + 6) % 7;
+
   return (
     <div className="grid grid-cols-7 gap-2 text-center">
-      {/* weekday header */}
+      {/* Cabecera con nombres de días */}
       {weekDayNames.map((day, i) => (
         <div key={i} className="font-semibold border-b pb-1 capitalize">
           {day}
         </div>
       ))}
 
-      {/* empty cells before first day */}
-      {Array((new Date(year, month, 1).getDay() + 6) % 7)
+      {/* Celdas vacías previas al primer día */}
+      {Array(firstWeekDay)
         .fill(null)
         .map((_, i) => (
           <div key={"empty" + i} />
         ))}
 
-      {/* month day cells */}
+      {/* Celdas con los días del mes */}
       {Array(days)
         .fill(null)
         .map((_, i) => {
           const day = i + 1;
           const dayMatches = matchesByDay[day] || [];
 
+          // Fecha del día en zona Europe/Madrid, para comparar con hoy
           const dayDate = toZonedTime(
             new Date(Date.UTC(year, month, day)),
             "Europe/Madrid"
           );
 
-          const isPast =
-            dayDate <
-            new Date(today.getFullYear(), today.getMonth(), today.getDate());
-          const isToday =
-            dayDate.getFullYear() === today.getFullYear() &&
-            dayDate.getMonth() === today.getMonth() &&
-            dayDate.getDate() === today.getDate();
+          // Comparar fechas ignorando horas para saber si es pasado o hoy
+          const todayYMD = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate()
+          );
+          const dayYMD = new Date(
+            dayDate.getFullYear(),
+            dayDate.getMonth(),
+            dayDate.getDate()
+          );
 
-          // Buscamos partido con resultado para el día
+          const isPast = dayYMD < todayYMD;
+          const isToday = dayYMD.getTime() === todayYMD.getTime();
+
+          // Partido con resultado para ese día
           const matchWithResult = dayMatches.find((m) => m.score !== undefined);
 
-          const resultClass = (() => {
-            if (!isPast) return "";
-            return matchWithResult
+          const resultClass =
+            isPast && matchWithResult
               ? getResultColor(matchWithResult.score!, matchWithResult.isHome)
               : "";
-          })();
 
           const pastNoResultClass =
             isPast && !matchWithResult
               ? "bg-gray-100 text-gray-400 line-through"
               : "";
 
-          const isFutureWithMatch =
-            dayDate >
-              new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                today.getDate()
-              ) && dayMatches.length > 0;
+          const isFutureWithMatch = dayYMD > todayYMD && dayMatches.length > 0;
 
           const hasAnimatedBorder =
             isFutureWithMatch || (isToday && dayMatches.length > 0)
@@ -125,20 +129,36 @@ export default function MatchCalendar({
           return (
             <div
               key={day}
-              className={`${
-                hasAnimatedBorder ? "" : "border"
-              } rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs relative ${
-                isToday ? "bg-blue-50" : ""
-              }${
-                isToday && dayMatches.length === 0 ? " ring ring-blue-400" : ""
-              } ${resultClass} ${pastNoResultClass} ${hasAnimatedBorder}`}
+              className={`rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs relative
+                ${hasAnimatedBorder ? "" : "border"}
+                ${isToday ? "bg-blue-50" : ""}
+                ${
+                  isToday && dayMatches.length === 0 ? "ring ring-blue-400" : ""
+                }
+                ${resultClass} ${pastNoResultClass} ${hasAnimatedBorder}`}
             >
               <div className="font-bold">{day}</div>
+
               {dayMatches.map((match) => {
                 const matchDate = toZonedTime(
                   new Date(match.date),
                   "Europe/Madrid"
                 );
+
+                // Extraemos hora y minutos en UTC para comparar con 00:00
+                const utcHours = new Date(match.date).getUTCHours();
+                const utcMinutes = new Date(match.date).getUTCMinutes();
+
+                // Mostrar "N/D" si hora y minutos UTC son 00:00, si no hora local formateada
+                const formattedTime =
+                  utcHours === 0 && utcMinutes === 0
+                    ? "N/D"
+                    : matchDate.toLocaleTimeString(locale, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                        timeZone: "Europe/Madrid",
+                      });
 
                 return (
                   <div
@@ -153,9 +173,7 @@ export default function MatchCalendar({
                               ? "/teams/cdEstepona.webp"
                               : `/teams/${match.team.crestUrl}`
                           }
-                          alt={`Logo de ${
-                            match.isHome ? match.team.name : "CD ESTEPONA"
-                          }`}
+                          alt={match.isHome ? "CD Estepona" : match.team.name}
                           fill
                           style={{ objectFit: "contain" }}
                           loading="lazy"
@@ -170,9 +188,7 @@ export default function MatchCalendar({
                               ? `/teams/${match.team.crestUrl}`
                               : "/teams/cdEstepona.webp"
                           }
-                          alt={`Logo de ${
-                            match.isHome ? "CD ESTEPONA" : match.team.name
-                          }`}
+                          alt={match.isHome ? match.team.name : "CD Estepona"}
                           fill
                           style={{ objectFit: "contain" }}
                           loading="lazy"
@@ -188,17 +204,7 @@ export default function MatchCalendar({
                     <div className="text-[9px] md:text-[12px] font-bold">
                       {isPast && match.score !== undefined
                         ? match.score
-                        : (() => {
-                            const hours = matchDate.getHours();
-                            const minutes = matchDate.getMinutes();
-                            return hours === 0 && minutes === 0
-                              ? "N/D"
-                              : matchDate.toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  timeZone: "Europe/Madrid",
-                                });
-                          })()}
+                        : formattedTime}
                     </div>
                   </div>
                 );

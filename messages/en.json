@@ -232,6 +232,7 @@
     "howToVoteText": "Fans vote for the standout player after each matchday in our"
   },
   "calendar": {
-    "noMatches": "No matches this month."
+    "noMatches": "No matches this month.",
+    "noTime": "N/A"
   }
 }

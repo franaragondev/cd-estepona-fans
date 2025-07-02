@@ -232,6 +232,7 @@
     "howToVoteText": "Les supporters votent pour le joueur le plus remarquable après chaque journée sur notre groupe"
   },
   "calendar": {
-    "noMatches": "Aucun match ce mois-ci."
+    "noMatches": "Aucun match ce mois-ci.",
+    "noTime": "N/D"
   }
 }
