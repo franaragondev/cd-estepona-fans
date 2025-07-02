@@ -14,11 +14,15 @@ export async function GET(request: Request) {
     );
   }
 
-  const startDateMadrid = new Date(year, month, 1, 0, 0, 0);
-  const endDateMadrid = new Date(year, month + 1, 1, 0, 0, 0);
+  const timeZone = "Europe/Madrid";
 
-  const startDateUtc = toZonedTime(startDateMadrid, "Europe/Madrid");
-  const endDateUtc = toZonedTime(endDateMadrid, "Europe/Madrid");
+  // Fecha en Madrid a las 00:00 del primer día del mes
+  const startDateMadrid = new Date(year, month, 1, 0, 0, 0);
+  const startDateUtc = toZonedTime(startDateMadrid, timeZone);
+
+  // Fecha en Madrid a las 00:00 del primer día del mes siguiente
+  const endDateMadrid = new Date(year, month + 1, 1, 0, 0, 0);
+  const endDateUtc = toZonedTime(endDateMadrid, timeZone);
 
   const matches = await prisma.match.findMany({
     where: {
