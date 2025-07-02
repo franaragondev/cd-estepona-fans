@@ -44,8 +44,17 @@ export default function Page() {
         );
 
         if (!res.ok) throw new Error("Error fetching matches");
-        const data = await res.json();
-        setMatches(data);
+        const data: Match[] = await res.json();
+
+        // Filtrar partidos para que pertenezcan al mes y año en Europe/Madrid
+        const filtered = data.filter((match) => {
+          const zonedDate = toZonedTime(new Date(match.date), "Europe/Madrid");
+          return (
+            zonedDate.getFullYear() === year && zonedDate.getMonth() === month
+          );
+        });
+
+        setMatches(filtered);
       } catch {
         setMatches([]);
       } finally {
