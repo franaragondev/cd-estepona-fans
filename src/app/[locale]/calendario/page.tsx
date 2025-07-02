@@ -39,9 +39,12 @@ export default function Page() {
     fetch(`/api/matches/monthly?year=${year}&month=${month}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+
         setMatches(data);
         setLoading(false);
       })
+
       .catch(() => setLoading(false));
   }, [year, month]);
 

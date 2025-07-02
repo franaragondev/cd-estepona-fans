@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { toZonedTime } from "date-fns-tz";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -13,14 +14,17 @@ export async function GET(request: Request) {
     );
   }
 
-  const startDate = new Date(year, month, 1);
-  const endDate = new Date(year, month + 1, 1);
+  const startDateMadrid = new Date(year, month, 1, 0, 0, 0);
+  const endDateMadrid = new Date(year, month + 1, 1, 0, 0, 0);
+
+  const startDateUtc = toZonedTime(startDateMadrid, "Europe/Madrid");
+  const endDateUtc = toZonedTime(endDateMadrid, "Europe/Madrid");
 
   const matches = await prisma.match.findMany({
     where: {
       date: {
-        gte: startDate,
-        lt: endDate,
+        gte: startDateUtc,
+        lt: endDateUtc,
       },
     },
     include: {
