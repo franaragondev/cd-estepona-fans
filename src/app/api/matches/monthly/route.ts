@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { getTimezoneOffset } from "date-fns-tz";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -13,14 +14,22 @@ export async function GET(request: Request) {
     );
   }
 
-  const startDate = new Date(year, month, 1);
-  const endDate = new Date(year, month + 1, 1);
+  const timeZone = "Europe/Madrid";
+
+  const startLocal = new Date(year, month, 1, 0, 0, 0);
+  const endLocal = new Date(year, month + 1, 1, 0, 0, 0);
+
+  const offsetStart = getTimezoneOffset(timeZone, startLocal);
+  const offsetEnd = getTimezoneOffset(timeZone, endLocal);
+
+  const startDateUtc = new Date(startLocal.getTime() - offsetStart);
+  const endDateUtc = new Date(endLocal.getTime() - offsetEnd);
 
   const matches = await prisma.match.findMany({
     where: {
       date: {
-        gte: startDate,
-        lt: endDate,
+        gte: startDateUtc,
+        lt: endDateUtc,
       },
     },
     include: {

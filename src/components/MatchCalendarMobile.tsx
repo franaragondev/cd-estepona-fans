@@ -97,15 +97,17 @@ export default function MatchCalendarMobile({
                   : "";
 
                 const showTime = () => {
-                  const hours = matchDate.getHours();
-                  const minutes = matchDate.getMinutes();
-                  return hours === 0 && minutes === 0
-                    ? "N/D"
-                    : matchDate.toLocaleTimeString(locale, {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        timeZone: "Europe/Madrid",
-                      });
+                  const utcDate = new Date(match.date);
+                  const utcHours = utcDate.getUTCHours();
+                  const utcMinutes = utcDate.getUTCMinutes();
+                  if (utcHours === 0 && utcMinutes === 0) return t("noTime");
+
+                  return matchDate.toLocaleTimeString(locale, {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                    timeZone: "Europe/Madrid",
+                  });
                 };
 
                 return (

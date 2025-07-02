@@ -26,23 +26,40 @@ interface Match {
 
 export default function Page() {
   const [matches, setMatches] = useState<Match[]>([]);
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth());
+  const [year, setYear] = useState(() => new Date().getFullYear());
+  const [month, setMonth] = useState(() => new Date().getMonth());
   const [loading, setLoading] = useState(false);
 
-  const params = useParams();
-  const rawLocale = params.locale;
+  const params = useParams() as { locale?: string | string[] };
+  const rawLocale = params?.locale;
   const locale = Array.isArray(rawLocale) ? rawLocale[0] : rawLocale || "es";
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`/api/matches/monthly?year=${year}&month=${month}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMatches(data);
+    async function fetchMatches() {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `/api/matches/monthly?year=${year}&month=${month}`
+        );
+
+        if (!res.ok) throw new Error("Error fetching matches");
+        const data: Match[] = await res.json();
+
+        const filtered = data.filter((match) => {
+          const zonedDate = toZonedTime(new Date(match.date), "Europe/Madrid");
+          return (
+            zonedDate.getFullYear() === year && zonedDate.getMonth() === month
+          );
+        });
+
+        setMatches(filtered);
+      } catch {
+        setMatches([]);
+      } finally {
         setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      }
+    }
+    fetchMatches();
   }, [year, month]);
 
   const matchesByDay = matches.reduce((acc, match) => {
@@ -54,18 +71,17 @@ export default function Page() {
   }, {} as Record<number, Match[]>);
 
   function getMonthName(year: number, month: number, locale: string) {
-    return formatZonedDate(new Date(Date.UTC(year, month, 1)), locale, {
-      month: "long",
-    });
+    const utcDate = new Date(Date.UTC(year, month, 1));
+    return formatZonedDate(utcDate, locale, { month: "long" });
   }
 
   function prevMonth() {
     setMatches([]);
     if (month === 0) {
       setMonth(11);
-      setYear(year - 1);
+      setYear((y) => y - 1);
     } else {
-      setMonth(month - 1);
+      setMonth((m) => m - 1);
     }
   }
 
@@ -73,9 +89,9 @@ export default function Page() {
     setMatches([]);
     if (month === 11) {
       setMonth(0);
-      setYear(year + 1);
+      setYear((y) => y + 1);
     } else {
-      setMonth(month + 1);
+      setMonth((m) => m + 1);
     }
   }
 
@@ -88,6 +104,7 @@ export default function Page() {
           className="px-4 py-2 border rounded cursor-pointer capitalize"
           onClick={prevMonth}
           aria-label="Mes anterior"
+          type="button"
         >
           {getMonthName(
             month === 0 ? year - 1 : year,
@@ -104,6 +121,7 @@ export default function Page() {
           className="px-4 py-2 border rounded cursor-pointer capitalize"
           onClick={nextMonth}
           aria-label="Mes siguiente"
+          type="button"
         >
           {getMonthName(
             month === 11 ? year + 1 : year,

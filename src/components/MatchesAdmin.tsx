@@ -19,14 +19,29 @@ interface Match {
   team: Team;
 }
 
+function formatDateForDisplay(dateStr: string | null, locale = "es-ES") {
+  if (!dateStr) return "Fecha no definida";
+
+  const date = new Date(dateStr);
+  const hoursUTC = date.getUTCHours();
+  const minutesUTC = date.getUTCMinutes();
+  const dateStrLocal = date.toLocaleDateString(locale);
+
+  if (hoursUTC === 0 && minutesUTC === 0) {
+    return `${dateStrLocal} (N/D)`;
+  }
+
+  return date.toLocaleString(locale);
+}
+
 function toLocalDatetimeInputString(utcDateStr: string | null) {
   if (!utcDateStr) return { date: "", time: "" };
   const date = new Date(utcDateStr);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const hours = String(date.getUTCHours()).padStart(2, "0");
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
   return {
     date: `${year}-${month}-${day}`,
     time: `${hours}:${minutes}`,
@@ -98,11 +113,16 @@ export default function MatchesAdmin() {
 
     let utcDateISO: string | null = null;
     if (formData.date) {
-      // If no time is provided, we assume “00:00”
-      const timePart = formData.time ? formData.time : "00:00";
-      const combined = `${formData.date}T${timePart}:00`;
-      const dateObj = new Date(combined);
-      utcDateISO = dateObj.toISOString();
+      const [year, month, day] = formData.date.split("-").map(Number);
+      const [hours, minutes] = (formData.time ? formData.time : "00:00")
+        .split(":")
+        .map(Number);
+
+      const dateUtc = new Date(
+        Date.UTC(year, month - 1, day, hours, minutes, 0)
+      );
+
+      utcDateISO = dateUtc.toISOString();
     }
 
     const bodyToSend = {
@@ -221,12 +241,11 @@ export default function MatchesAdmin() {
           <button
             type="submit"
             disabled={loading || (!editingMatch && !isFormValid)}
-            className={`cursor-pointer rounded p-2 flex-1 
-              ${
-                loading || (!editingMatch && !isFormValid)
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-indigo-600 hover:bg-indigo-700 text-white"
-              }`}
+            className={`cursor-pointer rounded p-2 flex-1 ${
+              loading || (!editingMatch && !isFormValid)
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 text-white"
+            }`}
           >
             {loading ? "Guardando..." : editingMatch ? "Actualizar" : "Crear"}
           </button>
@@ -257,42 +276,28 @@ export default function MatchesAdmin() {
             </tr>
           </thead>
           <tbody>
-            {matches.map((match) => {
-              const matchDate = match.date ? new Date(match.date) : null;
-
-              let formattedDate = "Fecha no definida";
-              if (matchDate) {
-                const timeStr = matchDate.toTimeString().slice(0, 5);
-                const dateStr = matchDate.toLocaleDateString();
-                formattedDate =
-                  timeStr === "00:00"
-                    ? `${dateStr} (N/D)`
-                    : matchDate.toLocaleString();
-              }
-
-              return (
-                <tr key={match.id} className="border-t">
-                  <td className="p-2">{formattedDate}</td>
-                  <td className="p-2">{match.team.name}</td>
-                  <td className="p-2">
-                    {match.isHome
-                      ? "Estadio Francisco Muñoz Pérez"
-                      : match.team.location}
-                  </td>
-                  <td className="p-2">{match.isHome ? "Sí" : "No"}</td>
-                  <td className="p-2">{match.competition}</td>
-                  <td className="p-2">{match.score ?? "-"}</td>
-                  <td className="p-2">
-                    <button
-                      onClick={() => handleEdit(match)}
-                      className="cursor-pointer bg-yellow-500 text-white rounded p-1 hover:bg-yellow-600"
-                    >
-                      Editar
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {matches.map((match) => (
+              <tr key={match.id} className="border-t">
+                <td className="p-2">{formatDateForDisplay(match.date)}</td>
+                <td className="p-2">{match.team.name}</td>
+                <td className="p-2">
+                  {match.isHome
+                    ? "Estadio Francisco Muñoz Pérez"
+                    : match.team.location}
+                </td>
+                <td className="p-2">{match.isHome ? "Sí" : "No"}</td>
+                <td className="p-2">{match.competition}</td>
+                <td className="p-2">{match.score ?? "-"}</td>
+                <td className="p-2">
+                  <button
+                    onClick={() => handleEdit(match)}
+                    className="cursor-pointer bg-yellow-500 text-white rounded p-1 hover:bg-yellow-600"
+                  >
+                    Editar
+                  </button>
+                </td>
+              </tr>
+            ))}
             {matches.length === 0 && (
               <tr>
                 <td colSpan={7} className="p-4 text-center text-gray-500">

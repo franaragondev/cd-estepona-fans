@@ -58,23 +58,22 @@ export default function MatchCalendar({
     formatZonedDate(new Date(2021, 10, 1 + i), locale, { weekday: "short" })
   );
 
+  const firstWeekDay = (new Date(year, month, 1).getDay() + 6) % 7;
+
   return (
     <div className="grid grid-cols-7 gap-2 text-center">
-      {/* weekday header */}
       {weekDayNames.map((day, i) => (
         <div key={i} className="font-semibold border-b pb-1 capitalize">
           {day}
         </div>
       ))}
 
-      {/* empty cells before first day */}
-      {Array((new Date(year, month, 1).getDay() + 6) % 7)
+      {Array(firstWeekDay)
         .fill(null)
         .map((_, i) => (
           <div key={"empty" + i} />
         ))}
 
-      {/* month day cells */}
       {Array(days)
         .fill(null)
         .map((_, i) => {
@@ -86,36 +85,33 @@ export default function MatchCalendar({
             "Europe/Madrid"
           );
 
-          const isPast =
-            dayDate <
-            new Date(today.getFullYear(), today.getMonth(), today.getDate());
-          const isToday =
-            dayDate.getFullYear() === today.getFullYear() &&
-            dayDate.getMonth() === today.getMonth() &&
-            dayDate.getDate() === today.getDate();
+          const todayYMD = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate()
+          );
+          const dayYMD = new Date(
+            dayDate.getFullYear(),
+            dayDate.getMonth(),
+            dayDate.getDate()
+          );
 
-          // Buscamos partido con resultado para el día
+          const isPast = dayYMD < todayYMD;
+          const isToday = dayYMD.getTime() === todayYMD.getTime();
+
           const matchWithResult = dayMatches.find((m) => m.score !== undefined);
 
-          const resultClass = (() => {
-            if (!isPast) return "";
-            return matchWithResult
+          const resultClass =
+            isPast && matchWithResult
               ? getResultColor(matchWithResult.score!, matchWithResult.isHome)
               : "";
-          })();
 
           const pastNoResultClass =
             isPast && !matchWithResult
               ? "bg-gray-100 text-gray-400 line-through"
               : "";
 
-          const isFutureWithMatch =
-            dayDate >
-              new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                today.getDate()
-              ) && dayMatches.length > 0;
+          const isFutureWithMatch = dayYMD > todayYMD && dayMatches.length > 0;
 
           const hasAnimatedBorder =
             isFutureWithMatch || (isToday && dayMatches.length > 0)
@@ -125,20 +121,34 @@ export default function MatchCalendar({
           return (
             <div
               key={day}
-              className={`${
-                hasAnimatedBorder ? "" : "border"
-              } rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs relative ${
-                isToday ? "bg-blue-50" : ""
-              }${
-                isToday && dayMatches.length === 0 ? " ring ring-blue-400" : ""
-              } ${resultClass} ${pastNoResultClass} ${hasAnimatedBorder}`}
+              className={`rounded p-1 flex flex-col items-center gap-1 min-h-[80px] text-xs relative
+                ${hasAnimatedBorder ? "" : "border"}
+                ${isToday ? "bg-blue-50" : ""}
+                ${
+                  isToday && dayMatches.length === 0 ? "ring ring-blue-400" : ""
+                }
+                ${resultClass} ${pastNoResultClass} ${hasAnimatedBorder}`}
             >
               <div className="font-bold">{day}</div>
+
               {dayMatches.map((match) => {
                 const matchDate = toZonedTime(
                   new Date(match.date),
                   "Europe/Madrid"
                 );
+
+                const utcHours = new Date(match.date).getUTCHours();
+                const utcMinutes = new Date(match.date).getUTCMinutes();
+
+                const formattedTime =
+                  utcHours === 0 && utcMinutes === 0
+                    ? "N/D"
+                    : matchDate.toLocaleTimeString(locale, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                        timeZone: "Europe/Madrid",
+                      });
 
                 return (
                   <div
@@ -153,9 +163,7 @@ export default function MatchCalendar({
                               ? "/teams/cdEstepona.webp"
                               : `/teams/${match.team.crestUrl}`
                           }
-                          alt={`Logo de ${
-                            match.isHome ? match.team.name : "CD ESTEPONA"
-                          }`}
+                          alt={match.isHome ? "CD Estepona" : match.team.name}
                           fill
                           style={{ objectFit: "contain" }}
                           loading="lazy"
@@ -170,9 +178,7 @@ export default function MatchCalendar({
                               ? `/teams/${match.team.crestUrl}`
                               : "/teams/cdEstepona.webp"
                           }
-                          alt={`Logo de ${
-                            match.isHome ? "CD ESTEPONA" : match.team.name
-                          }`}
+                          alt={match.isHome ? match.team.name : "CD Estepona"}
                           fill
                           style={{ objectFit: "contain" }}
                           loading="lazy"
@@ -188,17 +194,7 @@ export default function MatchCalendar({
                     <div className="text-[9px] md:text-[12px] font-bold">
                       {isPast && match.score !== undefined
                         ? match.score
-                        : (() => {
-                            const hours = matchDate.getHours();
-                            const minutes = matchDate.getMinutes();
-                            return hours === 0 && minutes === 0
-                              ? "N/D"
-                              : matchDate.toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  timeZone: "Europe/Madrid",
-                                });
-                          })()}
+                        : formattedTime}
                     </div>
                   </div>
                 );
