@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import MatchCalendar from "@/components/MatchCalendar";
 import MatchCalendarMobile from "@/components/MatchCalendarMobile";
+import { toZonedTime } from "date-fns-tz";
 
 interface Team {
   id: string;
@@ -44,7 +45,8 @@ export default function Page() {
   }, [year, month]);
 
   const matchesByDay = matches.reduce((acc, match) => {
-    const day = new Date(match.date).getDate();
+    const zonedDate = toZonedTime(match.date, "Europe/Madrid");
+    const day = zonedDate.getDate();
     if (!acc[day]) acc[day] = [];
     acc[day].push(match);
     return acc;
@@ -135,7 +137,7 @@ export default function Page() {
         />
       </div>
 
-      <div className="hidden md:block ">
+      <div className="hidden md:block">
         <MatchCalendar
           matchesByDay={matchesByDay}
           year={year}

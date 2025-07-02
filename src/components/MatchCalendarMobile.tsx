@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { toZonedTime } from "date-fns-tz";
 
 interface Team {
   id: string;
@@ -30,7 +31,6 @@ interface Props {
 
 function getResultColor(score: string | undefined, isHome: boolean) {
   if (!score) return "";
-
   const [homeScore, awayScore] = score.split(":").map(Number);
   const esteponaScore = isHome ? homeScore : awayScore;
   const opponentScore = isHome ? awayScore : homeScore;
@@ -41,7 +41,7 @@ function getResultColor(score: string | undefined, isHome: boolean) {
 }
 
 function formatDate(year: number, month: number, day: number, locale: string) {
-  const date = new Date(year, month, day);
+  const date = toZonedTime(new Date(year, month, day), "Europe/Madrid");
   return date.toLocaleDateString(locale, {
     weekday: "long",
     day: "numeric",
@@ -55,8 +55,8 @@ export default function MatchCalendarMobile({
   month,
   locale,
 }: Props) {
-  const today = new Date();
   const t = useTranslations("calendar");
+  const today = toZonedTime(new Date(), "Europe/Madrid");
 
   const sortedDays = Object.keys(matchesByDay)
     .map(Number)
@@ -90,12 +90,27 @@ export default function MatchCalendarMobile({
 
             <ul className="space-y-4">
               {dayMatches.map((match) => {
-                const matchDate = new Date(match.date);
+                const matchDate = toZonedTime(
+                  new Date(match.date),
+                  "Europe/Madrid"
+                );
                 const isPast = matchDate < today;
 
                 const resultClass = isPast
                   ? getResultColor(match.score, match.isHome)
                   : "";
+
+                const showTime = () => {
+                  const hours = matchDate.getHours();
+                  const minutes = matchDate.getMinutes();
+                  return hours === 0 && minutes === 0
+                    ? "N/D"
+                    : matchDate.toLocaleTimeString(locale, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        timeZone: "Europe/Madrid",
+                      });
+                };
 
                 return (
                   <li
@@ -104,7 +119,7 @@ export default function MatchCalendarMobile({
                       isPast && !isToday
                         ? "border-2 border-gray-200"
                         : "animated-border"
-                    }  hover:bg-gray-50`}
+                    } hover:bg-gray-50`}
                   >
                     <div className="relative w-8 h-8 flex-shrink-0">
                       <Image
@@ -147,31 +162,7 @@ export default function MatchCalendarMobile({
                       <span className={`font-bold ${resultClass}`}>
                         {isPast && match.score !== undefined
                           ? match.score
-                          : (() => {
-                              const hours = matchDate.getHours();
-                              const minutes = matchDate.getMinutes();
-                              return hours === 0 && minutes === 0
-                                ? "N/D"
-                                : matchDate.toLocaleTimeString(locale, {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    timeZone: "Europe/Madrid",
-                                  });
-                            })()}
-
-                        {isToday &&
-                          !match.score &&
-                          (() => {
-                            const hours = matchDate.getHours();
-                            const minutes = matchDate.getMinutes();
-                            return hours === 0 && minutes === 0
-                              ? "N/D"
-                              : matchDate.toLocaleTimeString(locale, {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  timeZone: "Europe/Madrid",
-                                });
-                          })()}
+                          : showTime()}
                       </span>
                     </div>
                   </li>

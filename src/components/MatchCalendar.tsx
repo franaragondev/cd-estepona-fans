@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { toZonedTime } from "date-fns-tz";
 
 interface Team {
   id: string;
@@ -31,7 +32,6 @@ function getResultColor(score: string | null | undefined, isHome: boolean) {
   if (!score) return "";
 
   const [homeScore, awayScore] = score.split(":").map(Number);
-
   const esteponaScore = isHome ? homeScore : awayScore;
   const opponentScore = isHome ? awayScore : homeScore;
 
@@ -79,15 +79,17 @@ export default function MatchCalendar({
         .map((_, i) => {
           const day = i + 1;
           const dayMatches = matchesByDay[day] || [];
-          const dayDate = new Date(year, month, day);
+
+          const dayDate = new Date(Date.UTC(year, month, day));
+          const dayDateMadrid = toZonedTime(dayDate, "Europe/Madrid");
 
           const isPast =
-            dayDate <
+            dayDateMadrid <
             new Date(today.getFullYear(), today.getMonth(), today.getDate());
           const isToday =
-            year === today.getFullYear() &&
-            month === today.getMonth() &&
-            day === today.getDate();
+            dayDateMadrid.getFullYear() === today.getFullYear() &&
+            dayDateMadrid.getMonth() === today.getMonth() &&
+            dayDateMadrid.getDate() === today.getDate();
 
           const matchWithResult = dayMatches.find((m) => m.score !== undefined);
 
@@ -104,7 +106,7 @@ export default function MatchCalendar({
               : "";
 
           const isFutureWithMatch =
-            dayDate >
+            dayDateMadrid >
               new Date(
                 today.getFullYear(),
                 today.getMonth(),
@@ -129,7 +131,8 @@ export default function MatchCalendar({
             >
               <div className="font-bold">{day}</div>
               {dayMatches.map((match) => {
-                const matchDate = new Date(match.date);
+                const matchDate = toZonedTime(match.date, "Europe/Madrid");
+
                 return (
                   <div
                     key={match.id}
