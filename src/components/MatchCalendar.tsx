@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { toZonedTime } from "date-fns-tz";
+import { formatZonedDate } from "@/utils/formatZonedDate";
 
 interface Team {
   id: string;
@@ -51,10 +52,10 @@ export default function MatchCalendar({
   locale,
 }: Props) {
   const days = daysInMonth(year, month);
-  const today = new Date();
+  const today = toZonedTime(new Date(), "Europe/Madrid");
 
   const weekDayNames = Array.from({ length: 7 }, (_, i) =>
-    new Date(2021, 10, 1 + i).toLocaleDateString(locale, { weekday: "short" })
+    formatZonedDate(new Date(2021, 10, 1 + i), locale, { weekday: "short" })
   );
 
   return (
@@ -80,17 +81,20 @@ export default function MatchCalendar({
           const day = i + 1;
           const dayMatches = matchesByDay[day] || [];
 
-          const dayDate = new Date(Date.UTC(year, month, day));
-          const dayDateMadrid = toZonedTime(dayDate, "Europe/Madrid");
+          const dayDate = toZonedTime(
+            new Date(Date.UTC(year, month, day)),
+            "Europe/Madrid"
+          );
 
           const isPast =
-            dayDateMadrid <
+            dayDate <
             new Date(today.getFullYear(), today.getMonth(), today.getDate());
           const isToday =
-            dayDateMadrid.getFullYear() === today.getFullYear() &&
-            dayDateMadrid.getMonth() === today.getMonth() &&
-            dayDateMadrid.getDate() === today.getDate();
+            dayDate.getFullYear() === today.getFullYear() &&
+            dayDate.getMonth() === today.getMonth() &&
+            dayDate.getDate() === today.getDate();
 
+          // Buscamos partido con resultado para el día
           const matchWithResult = dayMatches.find((m) => m.score !== undefined);
 
           const resultClass = (() => {
@@ -106,7 +110,7 @@ export default function MatchCalendar({
               : "";
 
           const isFutureWithMatch =
-            dayDateMadrid >
+            dayDate >
               new Date(
                 today.getFullYear(),
                 today.getMonth(),
@@ -131,7 +135,10 @@ export default function MatchCalendar({
             >
               <div className="font-bold">{day}</div>
               {dayMatches.map((match) => {
-                const matchDate = toZonedTime(match.date, "Europe/Madrid");
+                const matchDate = toZonedTime(
+                  new Date(match.date),
+                  "Europe/Madrid"
+                );
 
                 return (
                   <div

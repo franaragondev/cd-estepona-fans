@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { toZonedTime } from "date-fns-tz";
+import { formatZonedDate } from "@/utils/formatZonedDate";
 
 interface Team {
   id: string;
@@ -38,15 +39,6 @@ function getResultColor(score: string | undefined, isHome: boolean) {
   if (esteponaScore > opponentScore) return "text-green-600";
   if (esteponaScore === opponentScore) return "text-yellow-600";
   return "text-red-600";
-}
-
-function formatDate(year: number, month: number, day: number, locale: string) {
-  const date = toZonedTime(new Date(year, month, day), "Europe/Madrid");
-  return date.toLocaleDateString(locale, {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
 }
 
 export default function MatchCalendarMobile({
@@ -85,7 +77,11 @@ export default function MatchCalendarMobile({
             }`}
           >
             <h2 className="font-semibold mb-3 capitalize">
-              {formatDate(year, month, day, locale)}
+              {formatZonedDate(new Date(year, month, day), locale, {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+              })}
             </h2>
 
             <ul className="space-y-4">

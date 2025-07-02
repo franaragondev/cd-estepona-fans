@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import MatchCalendar from "@/components/MatchCalendar";
 import MatchCalendarMobile from "@/components/MatchCalendarMobile";
 import { toZonedTime } from "date-fns-tz";
+import { formatZonedDate } from "@/utils/formatZonedDate";
 
 interface Team {
   id: string;
@@ -45,7 +46,7 @@ export default function Page() {
   }, [year, month]);
 
   const matchesByDay = matches.reduce((acc, match) => {
-    const zonedDate = toZonedTime(match.date, "Europe/Madrid");
+    const zonedDate = toZonedTime(new Date(match.date), "Europe/Madrid");
     const day = zonedDate.getDate();
     if (!acc[day]) acc[day] = [];
     acc[day].push(match);
@@ -53,7 +54,9 @@ export default function Page() {
   }, {} as Record<number, Match[]>);
 
   function getMonthName(year: number, month: number, locale: string) {
-    return new Date(year, month).toLocaleString(locale, { month: "long" });
+    return formatZonedDate(new Date(Date.UTC(year, month, 1)), locale, {
+      month: "long",
+    });
   }
 
   function prevMonth() {
@@ -94,10 +97,7 @@ export default function Page() {
         </button>
 
         <div className="font-semibold capitalize text-lg">
-          {new Date(year, month).toLocaleString(locale, {
-            month: "long",
-            year: "numeric",
-          })}
+          {getMonthName(year, month, locale)} {year}
         </div>
 
         <button
