@@ -19,7 +19,6 @@ interface Match {
   team: Team;
 }
 
-// Función helper para mostrar fecha con "(N/D)" si la hora UTC es 00:00
 function formatDateForDisplay(dateStr: string | null, locale = "es-ES") {
   if (!dateStr) return "Fecha no definida";
 
@@ -35,7 +34,6 @@ function formatDateForDisplay(dateStr: string | null, locale = "es-ES") {
   return date.toLocaleString(locale);
 }
 
-// Ajustamos para que use UTC al rellenar el form
 function toLocalDatetimeInputString(utcDateStr: string | null) {
   if (!utcDateStr) return { date: "", time: "" };
   const date = new Date(utcDateStr);

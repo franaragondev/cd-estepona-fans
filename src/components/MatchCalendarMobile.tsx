@@ -96,7 +96,6 @@ export default function MatchCalendarMobile({
                   ? getResultColor(match.score, match.isHome)
                   : "";
 
-                // Mostrar hora local o "N/D" traducido si hora UTC es 00:00
                 const showTime = () => {
                   const utcDate = new Date(match.date);
                   const utcHours = utcDate.getUTCHours();

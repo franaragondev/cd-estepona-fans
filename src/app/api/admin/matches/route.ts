@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // await notifySubscribersOfMatchUpdate(match, false);
+    await notifySubscribersOfMatchUpdate(match, false);
 
     return NextResponse.json(match);
   } catch (error) {

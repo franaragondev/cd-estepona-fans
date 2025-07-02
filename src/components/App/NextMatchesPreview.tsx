@@ -114,7 +114,6 @@ export default function NextMatchesPreview() {
   function formatDate(dateStr: string) {
     const date = new Date(dateStr);
 
-    // Comprobar hora UTC para gestionar "N/D"
     const utcHours = date.getUTCHours();
     const utcMinutes = date.getUTCMinutes();
 
@@ -128,7 +127,6 @@ export default function NextMatchesPreview() {
       );
     }
 
-    // Mostrar fecha y hora local con zona Europe/Madrid
     return date.toLocaleString(locale, {
       weekday: "long",
       day: "numeric",

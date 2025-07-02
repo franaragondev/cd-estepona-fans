@@ -54,44 +54,37 @@ export default function MatchCalendar({
   const days = daysInMonth(year, month);
   const today = toZonedTime(new Date(), "Europe/Madrid");
 
-  // Generar nombres abreviados de días de la semana (lunes-domingo)
   const weekDayNames = Array.from({ length: 7 }, (_, i) =>
     formatZonedDate(new Date(2021, 10, 1 + i), locale, { weekday: "short" })
   );
 
-  // Primer día de la semana ajustado para empezar en lunes (JS getDay: 0=domingo)
   const firstWeekDay = (new Date(year, month, 1).getDay() + 6) % 7;
 
   return (
     <div className="grid grid-cols-7 gap-2 text-center">
-      {/* Cabecera con nombres de días */}
       {weekDayNames.map((day, i) => (
         <div key={i} className="font-semibold border-b pb-1 capitalize">
           {day}
         </div>
       ))}
 
-      {/* Celdas vacías previas al primer día */}
       {Array(firstWeekDay)
         .fill(null)
         .map((_, i) => (
           <div key={"empty" + i} />
         ))}
 
-      {/* Celdas con los días del mes */}
       {Array(days)
         .fill(null)
         .map((_, i) => {
           const day = i + 1;
           const dayMatches = matchesByDay[day] || [];
 
-          // Fecha del día en zona Europe/Madrid, para comparar con hoy
           const dayDate = toZonedTime(
             new Date(Date.UTC(year, month, day)),
             "Europe/Madrid"
           );
 
-          // Comparar fechas ignorando horas para saber si es pasado o hoy
           const todayYMD = new Date(
             today.getFullYear(),
             today.getMonth(),
@@ -106,7 +99,6 @@ export default function MatchCalendar({
           const isPast = dayYMD < todayYMD;
           const isToday = dayYMD.getTime() === todayYMD.getTime();
 
-          // Partido con resultado para ese día
           const matchWithResult = dayMatches.find((m) => m.score !== undefined);
 
           const resultClass =
@@ -145,11 +137,9 @@ export default function MatchCalendar({
                   "Europe/Madrid"
                 );
 
-                // Extraemos hora y minutos en UTC para comparar con 00:00
                 const utcHours = new Date(match.date).getUTCHours();
                 const utcMinutes = new Date(match.date).getUTCMinutes();
 
-                // Mostrar "N/D" si hora y minutos UTC son 00:00, si no hora local formateada
                 const formattedTime =
                   utcHours === 0 && utcMinutes === 0
                     ? "N/D"

@@ -30,7 +30,6 @@ export default function Page() {
   const [month, setMonth] = useState(() => new Date().getMonth());
   const [loading, setLoading] = useState(false);
 
-  // Extraemos el locale de params con tipado simple
   const params = useParams() as { locale?: string | string[] };
   const rawLocale = params?.locale;
   const locale = Array.isArray(rawLocale) ? rawLocale[0] : rawLocale || "es";
@@ -46,7 +45,6 @@ export default function Page() {
         if (!res.ok) throw new Error("Error fetching matches");
         const data: Match[] = await res.json();
 
-        // Filtrar partidos para que pertenezcan al mes y año en Europe/Madrid
         const filtered = data.filter((match) => {
           const zonedDate = toZonedTime(new Date(match.date), "Europe/Madrid");
           return (
@@ -64,7 +62,6 @@ export default function Page() {
     fetchMatches();
   }, [year, month]);
 
-  // Agrupar partidos por día (en zona Europe/Madrid)
   const matchesByDay = matches.reduce((acc, match) => {
     const zonedDate = toZonedTime(new Date(match.date), "Europe/Madrid");
     const day = zonedDate.getDate();
@@ -74,7 +71,6 @@ export default function Page() {
   }, {} as Record<number, Match[]>);
 
   function getMonthName(year: number, month: number, locale: string) {
-    // Mes en UTC para evitar desfases
     const utcDate = new Date(Date.UTC(year, month, 1));
     return formatZonedDate(utcDate, locale, { month: "long" });
   }
