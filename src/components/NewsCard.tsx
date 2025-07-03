@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import MarkdownViewer from "./MarkdownViewer";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 
 type NewsCardProps = {
   href: string;
@@ -61,7 +62,7 @@ export default function NewsCard({
             className="text-lg font-bold leading-tight"
             style={{ color: neutralLight }}
           >
-            {title}
+            {capitalizeFirstLetter(title)}
           </h3>
         </div>
       </Link>
