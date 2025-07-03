@@ -307,6 +307,24 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
           ~~tachado~~ y enlaces <span>https://ejemplo.com</span>.
         </p>
 
+        <input
+          type="text"
+          name="image"
+          placeholder="URL Imagen generada automáticamente"
+          value={form.image}
+          onChange={handleChange}
+          className="w-full p-2 border rounded bg-gray-100 cursor-not-allowed"
+          disabled
+        />
+
+        <Uploader
+          albumId={"4"}
+          slug={form.slug}
+          title={form.title}
+          content={form.content}
+          onUploadComplete={handleImageUpload}
+        />
+
         <label
           htmlFor="newsAlbumId"
           className="block mb-1 font-medium text-gray-700"
@@ -327,27 +345,6 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
             </option>
           ))}
         </select>
-        <p className="text-xs text-gray-500 -mt-4 mb-6">
-          <em>*Elegir primero álbum de noticia antes de subir foto*</em>
-        </p>
-
-        <input
-          type="text"
-          name="image"
-          placeholder="URL Imagen generada automáticamente"
-          value={form.image}
-          onChange={handleChange}
-          className="w-full p-2 border rounded bg-gray-100 cursor-not-allowed"
-          disabled
-        />
-
-        <Uploader
-          albumId={form.newsAlbumId || ""}
-          slug={form.slug}
-          title={form.title}
-          content={form.content}
-          onUploadComplete={handleImageUpload}
-        />
 
         <label
           htmlFor="authorId"
