@@ -14,6 +14,7 @@ interface NewsItem {
   createdAt: Date;
   published: boolean;
   showTitle: boolean;
+  newsAlbumId?: string;
 }
 
 interface NewsAdminProps {
@@ -30,6 +31,7 @@ const initialFormState = {
   authorId: "",
   published: false,
   showTitle: true,
+  newsAlbumId: "",
 };
 
 function generateSlug(text: string) {
@@ -43,6 +45,7 @@ function generateSlug(text: string) {
 export default function NewsAdmin({ name, id }: NewsAdminProps) {
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [draftsList, setDraftsList] = useState<NewsItem[]>([]);
+  const [albums, setAlbums] = useState<{ id: string; title: string }[]>([]);
   const [form, setForm] = useState({ ...initialFormState, authorId: id });
   const [isEditing, setIsEditing] = useState(false);
   const [skip, setSkip] = useState(0);
@@ -55,6 +58,20 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
     title?: string;
     confirm?: () => Promise<void>;
   } | null>(null);
+
+  useEffect(() => {
+    async function fetchAlbums() {
+      try {
+        const res = await fetch("/api/admin/newsAlbum");
+        if (!res.ok) throw new Error("Error fetching albums");
+        const data = await res.json();
+        setAlbums(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchAlbums();
+  }, []);
 
   useEffect(() => {
     if (!isEditing) {
@@ -133,6 +150,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
     formData.append("authorId", form.authorId);
     formData.append("published", form.published ? "true" : "false");
     formData.append("showTitle", form.showTitle ? "true" : "false");
+    formData.append("newsAlbumId", form.newsAlbumId || "");
 
     if (uploadedFile) {
       formData.append("file", uploadedFile);
@@ -176,6 +194,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
       authorId: item.authorId,
       published: item.published,
       showTitle: item.showTitle ?? true,
+      newsAlbumId: item.newsAlbumId || "",
     });
     setIsEditing(true);
     setUploadedFile(null);
@@ -288,6 +307,30 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
           ~~tachado~~ y enlaces <span>https://ejemplo.com</span>.
         </p>
 
+        <label
+          htmlFor="newsAlbumId"
+          className="block mb-1 font-medium text-gray-700"
+        >
+          Álbum de la noticia
+        </label>
+        <select
+          id="newsAlbumId"
+          name="newsAlbumId"
+          value={form.newsAlbumId}
+          onChange={handleChange}
+          className="w-full p-2 border rounded mb-4"
+        >
+          <option value="">Selecciona un álbum</option>
+          {albums.map((album) => (
+            <option key={album.id} value={album.id}>
+              {album.title}
+            </option>
+          ))}
+        </select>
+        <p className="text-xs text-gray-500 -mt-4 mb-6">
+          <em>*Elegir primero álbum de noticia antes de subir foto*</em>
+        </p>
+
         <input
           type="text"
           name="image"
@@ -299,7 +342,7 @@ export default function NewsAdmin({ name, id }: NewsAdminProps) {
         />
 
         <Uploader
-          albumId="4"
+          albumId={form.newsAlbumId || ""}
           slug={form.slug}
           title={form.title}
           content={form.content}

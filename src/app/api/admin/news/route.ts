@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     skip,
     take,
     orderBy: { createdAt: "desc" },
-    include: { author: true },
+    include: { author: true, newsAlbum: true },
     where: published !== undefined ? { published } : undefined,
   });
 
@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
     const image = form.get("image") as string | null;
     const published = form.get("published") === "true";
     const showTitle = form.get("showTitle") === "true";
+    const newsAlbumId = form.get("newsAlbumId") as string | null;
 
     if (!title || !slug || !content || !authorId) {
       return NextResponse.json(
@@ -52,6 +53,7 @@ export async function POST(request: NextRequest) {
         authorId,
         published,
         showTitle,
+        newsAlbumId: newsAlbumId || undefined,
       },
     });
 
@@ -111,6 +113,7 @@ export async function PUT(request: NextRequest) {
     const image = form.get("image") as string | null;
     const published = form.get("published") === "true";
     const showTitleStr = form.get("showTitle") as string | null;
+    const newsAlbumId = form.get("newsAlbumId") as string | null;
 
     const existing = await prisma.news.findUnique({ where: { id } });
 
@@ -124,17 +127,24 @@ export async function PUT(request: NextRequest) {
     const titleToTranslate = title ?? existing.title;
     const contentToTranslate = content ?? existing.content;
 
+    let newsAlbumIdToUpdate: string | null | undefined;
+    if (newsAlbumId === null) {
+      newsAlbumIdToUpdate = undefined;
+    } else if (newsAlbumId === "") {
+      newsAlbumIdToUpdate = null;
+    } else {
+      newsAlbumIdToUpdate = newsAlbumId;
+    }
+
     const dataToUpdate: any = {};
     if (title !== null) dataToUpdate.title = title;
     if (slug !== null) dataToUpdate.slug = slug;
     if (content !== null) dataToUpdate.content = content;
     if (image !== null) dataToUpdate.image = image;
+    if (showTitleStr !== null) dataToUpdate.showTitle = showTitleStr === "true";
 
     dataToUpdate.published = published;
-
-    if (showTitleStr !== null) {
-      dataToUpdate.showTitle = showTitleStr === "true";
-    }
+    dataToUpdate.newsAlbumId = newsAlbumIdToUpdate;
 
     const updated = await prisma.news.update({
       where: { id },
