@@ -20,9 +20,18 @@ export async function getAllPhotos() {
     where: {
       albumId: {
         not: {
-          in: ["4", "8"],
+          in: ["4", "8", "9"],
         },
       },
+    },
+  });
+}
+
+export async function getAcademyPhotos() {
+  return await prisma.photo.findMany({
+    orderBy: { id: "desc" },
+    where: {
+      albumId: "9",
     },
   });
 }

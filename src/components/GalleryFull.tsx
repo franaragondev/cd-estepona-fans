@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface GalleryFullProps {
   images: { url: string; caption?: string }[];
@@ -10,6 +11,8 @@ interface GalleryFullProps {
 const CHUNK_SIZE = 12;
 
 export default function GalleryFull({ images }: GalleryFullProps) {
+  const t = useTranslations("gallery");
+
   const [visibleImages, setVisibleImages] = useState(() =>
     images.slice(0, CHUNK_SIZE)
   );
@@ -91,63 +94,66 @@ export default function GalleryFull({ images }: GalleryFullProps) {
 
       if (Math.abs(deltaX) > 50) {
         if (deltaX > 0 && showNext) {
-          // left swipe
           setModalIndex((i) => i! + 1);
           setIsImageLoading(true);
         } else if (deltaX < 0 && showPrev) {
-          // right swipe
           setModalIndex((i) => i! - 1);
           setIsImageLoading(true);
         }
       }
     }
 
-    // Reset
     touchStartX.current = null;
     touchEndX.current = null;
   };
 
   return (
     <section>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {visibleImages.map(({ url, caption }, i) => (
-          <div
-            key={i}
-            className="relative w-full h-40 cursor-pointer rounded overflow-hidden transition-transform duration-300 hover:scale-105"
-            onClick={() => {
-              setModalIndex(i);
-              setIsImageLoading(true);
-            }}
-          >
-            <Image
-              src={url}
-              alt={caption ?? `Fan pic ${i + 1}`}
-              width={400}
-              height={300}
-              className="object-cover w-full h-full"
-              loading={i < 4 ? "eager" : "lazy"}
-              priority={i < 4}
-            />
+      {visibleImages.length === 0 ? (
+        <p className="text-center text-gray-500 mt-10">{t("noPhotos")}</p>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {visibleImages.map(({ url, caption }, i) => (
+              <div
+                key={i}
+                className="relative w-full h-40 cursor-pointer rounded overflow-hidden transition-transform duration-300 hover:scale-105"
+                onClick={() => {
+                  setModalIndex(i);
+                  setIsImageLoading(true);
+                }}
+              >
+                <Image
+                  src={url}
+                  alt={caption ?? `Fan pic ${i + 1}`}
+                  width={400}
+                  height={300}
+                  className="object-cover w-full h-full"
+                  loading={i < 4 ? "eager" : "lazy"}
+                  priority={i < 4}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <div ref={sentinelRef} className="h-10 relative">
-        {isLoadingMore && (
-          <div className="absolute inset-0 flex items-center justify-center z-10 mt-14">
-            <div
-              className="w-12 h-12 rounded-full animate-spin"
-              style={{
-                background:
-                  "conic-gradient(from 45deg, #DC2C20, #DC2C20, #2f36a1, #2f36a1, transparent 270deg 360deg)",
-                WebkitMask:
-                  "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
-                mask: "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
-              }}
-            />
+          <div ref={sentinelRef} className="h-10 relative">
+            {isLoadingMore && (
+              <div className="absolute inset-0 flex items-center justify-center z-10 mt-14">
+                <div
+                  className="w-12 h-12 rounded-full animate-spin"
+                  style={{
+                    background:
+                      "conic-gradient(from 45deg, #DC2C20, #DC2C20, #2f36a1, #2f36a1, transparent 270deg 360deg)",
+                    WebkitMask:
+                      "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+                    mask: "radial-gradient(farthest-side, transparent calc(100% - 6px), black calc(100% - 5px))",
+                  }}
+                />
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      )}
 
       {modalImage && (
         <div

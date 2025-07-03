@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const skip = parseInt(searchParams.get("skip") || "0", 10);
   const take = parseInt(searchParams.get("take") || "9", 10);
 
-  const albumId = "1";
+  const albumId = "2";
 
   const news = await prisma.news.findMany({
     skip,

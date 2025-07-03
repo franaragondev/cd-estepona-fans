@@ -33,7 +33,7 @@ export default function NewsPage() {
 
   async function fetchNews(skip: number, take: number) {
     setLoading(true);
-    const res = await fetch(`/api/news?skip=${skip}&take=${take}`);
+    const res = await fetch(`/api/news/cantera?skip=${skip}&take=${take}`);
     if (!res.ok) {
       setLoading(false);
       return;
@@ -85,7 +85,7 @@ export default function NewsPage() {
       </style>
 
       <main className="max-w-7xl mx-auto px-4 py-8 min-h-[85vh]">
-        <h1 className="sr-only">Noticias CD Estepona</h1>
+        <h1 className="sr-only">Noticias CD Estepona Cantera</h1>
 
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {news.map(
@@ -112,7 +112,7 @@ export default function NewsPage() {
               return (
                 <NewsCard
                   key={`${id}-${index}`}
-                  href={`/${locale}/noticias/${slug}`}
+                  href={`/${locale}/cantera/noticias/${slug}`}
                   title={displayTitle}
                   date={createdAt}
                   image={image ? image : ""}

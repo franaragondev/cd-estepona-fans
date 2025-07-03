@@ -28,6 +28,16 @@ model User {
   posts     News[]
 }
 
+model NewsAlbum {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  coverImage  String?
+
+  news        News[]
+}
+
 model News {
   id            String   @id @default(cuid())
   title         String
@@ -40,6 +50,9 @@ model News {
   author        User     @relation(fields: [authorId], references: [id])
   published     Boolean  @default(false)
   showTitle     Boolean  @default(true)
+
+  newsAlbumId   String?     
+  newsAlbum     NewsAlbum?  @relation(fields: [newsAlbumId], references: [id]) // Relación opcional
 
   translations  NewsTranslation[]
 }

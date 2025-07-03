@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import MarkdownViewer from "./MarkdownViewer";
 
 type NewsCardProps = {
-  slug: string;
+  href: string;
   title: string;
   date: string;
   image: string;
@@ -17,7 +17,7 @@ type NewsCardProps = {
 };
 
 export default function NewsCard({
-  slug,
+  href,
   title,
   date,
   image,
@@ -29,7 +29,6 @@ export default function NewsCard({
   const t = useTranslations("newsCard");
 
   const formattedDate = new Date(date).toLocaleDateString(locale);
-  const href = `/${locale}/noticias/${slug}`;
 
   const neutralDark = "#333";
   const neutralGray = "#666";
