@@ -56,6 +56,7 @@
     "news": "Noticias",
     "matches": "Calendario",
     "gallery": "Galería",
+    "academySection": "Cantera",
     "fansSection": "Zona Fans",
     "tribuna": "La Tribuna del Muñoz Pérez",
     "mvp": "MVP",
@@ -234,5 +235,8 @@
   "calendar": {
     "noMatches": "No hay partidos este mes.",
     "noTime": "N/D"
+  },
+  "gallery": {
+    "noPhotos": "No hay fotos para mostrar."
   }
 }

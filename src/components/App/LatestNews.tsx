@@ -49,7 +49,7 @@ export default function LatestNews({ latestNews }: LatestNewsProps) {
             return (
               <NewsCard
                 key={`${id}-${index}`}
-                slug={slug}
+                href={`/${locale}/noticias/${slug}`}
                 title={displayTitle}
                 date={createdAt}
                 image={image ?? ""}
