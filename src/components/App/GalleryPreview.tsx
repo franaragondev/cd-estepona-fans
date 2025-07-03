@@ -26,7 +26,7 @@ export default function GalleryPreview({ images }: GalleryPreviewProps) {
         {images.slice(0, 6).map((src, i) => (
           <div
             key={i}
-            className="relative w-full h-40 cursor-pointer rounded overflow-hidden transition-transform duration-300 hover:scale-105"
+            className="relative w-full h-40 cursor-pointer rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.03]"
             onClick={() => {
               setModalImage(src);
               setIsImageLoading(true);

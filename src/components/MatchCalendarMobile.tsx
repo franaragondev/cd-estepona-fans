@@ -72,7 +72,7 @@ export default function MatchCalendarMobile({
         return (
           <section
             key={day}
-            className={`border rounded-lg p-4 shadow-sm ${
+            className={`border rounded-xl p-4 shadow-sm ${
               isToday ? "bg-blue-50 border-blue-400" : "bg-white"
             }`}
           >

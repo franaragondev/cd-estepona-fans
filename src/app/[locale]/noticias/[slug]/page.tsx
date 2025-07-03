@@ -123,7 +123,7 @@ export default async function Page({ params }: any) {
 
         <ShareButtons url={fullUrl} title={displayTitle} label={t("share")} />
 
-        <div className="w-full rounded overflow-hidden flex justify-center">
+        <div className="w-full rounded-xl overflow-hidden flex justify-center">
           {article.image && (
             <Image
               src={

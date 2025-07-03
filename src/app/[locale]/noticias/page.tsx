@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useLocale } from "next-intl";
 import NewsCard from "@/components/NewsCard";
 
@@ -85,6 +87,10 @@ export default function NewsPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [news, loading, hasMore]);
 
+  const firstNews = news.length > 0 ? news[0] : null;
+
+  const otherNews = news.length > 1 ? news.slice(1) : [];
+
   return (
     <>
       <style>
@@ -104,11 +110,59 @@ export default function NewsPage() {
         `}
       </style>
 
-      <main className="max-w-7xl mx-auto px-4 py-8 min-h-[85vh]">
+      <main className="max-w-[100rem] mx-auto px-4 py-8 min-h-[85vh]">
         <h1 className="sr-only">Noticias CD Estepona</h1>
 
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          {news.map(
+        {firstNews && (
+          <>
+            <div className="block md:hidden mb-12">
+              <NewsCard
+                href={`/${locale}/noticias/${firstNews.slug}`}
+                title={
+                  firstNews.translations.find((t) => t.language === locale)
+                    ?.title ?? firstNews.title
+                }
+                date={firstNews.createdAt}
+                image={firstNews.image ?? ""}
+                content={
+                  (
+                    firstNews.translations.find((t) => t.language === locale)
+                      ?.content ?? firstNews.content
+                  ).slice(0, 150) + "…"
+                }
+                author={firstNews.author.name}
+              />
+            </div>
+
+            <Link
+              href={`/${locale}/noticias/${firstNews.slug}`}
+              className="hidden md:flex mb-12 rounded-xl overflow-hidden h-[60vh] group"
+            >
+              <div className="relative w-4/5 h-full overflow-hidden">
+                <div className="absolute inset-0 transition-transform duration-300 transform group-hover:scale-[1.03]">
+                  <Image
+                    src={firstNews.image ?? ""}
+                    alt={firstNews.title}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 768px) 100vw, 60vw"
+                    priority={true}
+                  />
+                </div>
+              </div>
+
+              <div className="w-2/5 p-6 flex flex-col justify-center bg-[#f5f7fa]">
+                <h2 className="text-3xl font-bold mb-4 text-[#333]">
+                  {firstNews.translations.find((t) => t.language === locale)
+                    ?.title ?? firstNews.title}
+                </h2>
+              </div>
+            </Link>
+          </>
+        )}
+
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+          {otherNews.map(
             ({
               id,
               slug,
