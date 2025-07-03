@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocale } from "next-intl";
 import NewsCard from "@/components/NewsCard";
 
@@ -31,18 +31,38 @@ export default function NewsPage() {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  async function fetchNews(skip: number, take: number) {
-    setLoading(true);
-    const res = await fetch(`/api/news?skip=${skip}&take=${take}`);
-    if (!res.ok) {
-      setLoading(false);
-      return;
-    }
-    const data = await res.json();
+  const isFetching = useRef(false);
 
-    setNews((prev) => (skip === 0 ? data : [...prev, ...data]));
-    setHasMore(data.length === take);
-    setLoading(false);
+  async function fetchNews(skip: number, take: number) {
+    if (isFetching.current) return;
+
+    setLoading(true);
+    isFetching.current = true;
+
+    try {
+      const res = await fetch(`/api/news?skip=${skip}&take=${take}`);
+      if (!res.ok) {
+        setLoading(false);
+        isFetching.current = false;
+        return;
+      }
+      const data = await res.json();
+
+      setNews((prev) => {
+        const combined = skip === 0 ? data : [...prev, ...data];
+
+        const uniqueNews = combined.filter(
+          (item: NewsItem, index: number, self: NewsItem[]) =>
+            index === self.findIndex((t: NewsItem) => t.id === item.id)
+        );
+        return uniqueNews;
+      });
+
+      setHasMore(data.length === take);
+    } finally {
+      setLoading(false);
+      isFetching.current = false;
+    }
   }
 
   useEffect(() => {
@@ -89,19 +109,16 @@ export default function NewsPage() {
 
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {news.map(
-            (
-              {
-                id,
-                slug,
-                title,
-                createdAt,
-                image,
-                content,
-                author,
-                translations,
-              },
-              index
-            ) => {
+            ({
+              id,
+              slug,
+              title,
+              createdAt,
+              image,
+              content,
+              author,
+              translations,
+            }) => {
               const translated = translations.find(
                 (t) => t.language === locale
               );
@@ -111,11 +128,11 @@ export default function NewsPage() {
 
               return (
                 <NewsCard
-                  key={`${id}-${index}`}
+                  key={id}
                   href={`/${locale}/noticias/${slug}`}
                   title={displayTitle}
                   date={createdAt}
-                  image={image ? image : ""}
+                  image={image ?? ""}
                   content={
                     displayContent.length > 150
                       ? displayContent.slice(0, 150) + "…"

@@ -25,7 +25,6 @@ export default function GalleryAdmin() {
   const limit = 12;
   const [loading, setLoading] = useState(false);
 
-  // Estados para subir foto
   const [photoUrl, setPhotoUrl] = useState("");
   const [caption, setCaption] = useState("");
   const [selectedAlbumId, setSelectedAlbumId] = useState<string>("");
