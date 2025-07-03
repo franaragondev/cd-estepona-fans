@@ -66,7 +66,7 @@ export default function NewsCard({
 
   return (
     <Link href={href} className="overflow-hidden flex flex-col">
-      <div className="relative w-full md:h-48 rounded-xl overflow-hidden fade-in">
+      <div className="relative w-full h-48 rounded-xl overflow-hidden fade-in">
         <div className="transition-transform duration-300 transform hover:scale-[1.03] w-full h-full">
           <Image
             src={image}
