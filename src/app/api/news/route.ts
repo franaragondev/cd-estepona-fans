@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { optimizeCloudinaryUrl } from "@/lib/optimizeImage";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -21,5 +22,10 @@ export async function GET(request: Request) {
     },
   });
 
-  return NextResponse.json(news);
+  const optimizedNews = news.map((item) => ({
+    ...item,
+    image: item.image ? optimizeCloudinaryUrl(item.image) : null,
+  }));
+
+  return NextResponse.json(optimizedNews);
 }

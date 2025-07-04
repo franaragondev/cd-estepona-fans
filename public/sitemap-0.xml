@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.cdesteponafans.com/api/sitemap</loc><lastmod>2025-07-01T18:30:28.061Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.cdesteponafans.com/sitemap.xml</loc><lastmod>2025-07-01T18:30:28.062Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.cdesteponafans.com/api/sitemap</loc><lastmod>2025-07-04T09:34:39.114Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.cdesteponafans.com/sitemap.xml</loc><lastmod>2025-07-04T09:34:39.114Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/es</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/es/galeria</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/es/noticias</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.cdesteponafans.com/es/partidos</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.cdesteponafans.com/es/calendario</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/es/privacidad</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/es/cookies</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/es/tribuna</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
@@ -13,7 +13,7 @@
 <url><loc>https://www.cdesteponafans.com/en</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/en/galeria</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/en/noticias</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.cdesteponafans.com/en/partidos</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.cdesteponafans.com/en/calendario</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/en/privacidad</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/en/cookies</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/en/tribuna</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
@@ -21,7 +21,7 @@
 <url><loc>https://www.cdesteponafans.com/fr</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/fr/galeria</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/fr/noticias</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.cdesteponafans.com/fr/partidos</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.cdesteponafans.com/fr/calendario</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/fr/privacidad</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/fr/cookies</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://www.cdesteponafans.com/fr/tribuna</loc><changefreq>daily</changefreq><priority>0.7</priority></url>

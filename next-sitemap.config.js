@@ -14,7 +14,7 @@ module.exports = {
       "", // Home
       "galeria",
       "noticias",
-      "partidos",
+      "calendario",
       "privacidad",
       "cookies",
       "tribuna",

@@ -10,6 +10,7 @@ interface ParallaxBackgroundProps {
   minHeight?: string;
   sectionName?: string;
   children?: ReactNode;
+  priority?: boolean;
 }
 
 export default function ParallaxBackground({
@@ -18,6 +19,7 @@ export default function ParallaxBackground({
   minHeight = "600px",
   sectionName,
   children,
+  priority,
 }: ParallaxBackgroundProps) {
   const calculatedMinHeight = `calc(${minHeight} + 350px)`;
 
@@ -37,7 +39,7 @@ export default function ParallaxBackground({
             alt=""
             fill
             priority
-            fetchPriority="high"
+            fetchPriority={priority ? "high" : "auto"}
             sizes="100vw"
             style={{ objectFit: "cover" }}
           />

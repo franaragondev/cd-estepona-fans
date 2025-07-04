@@ -1,7 +1,13 @@
 import prisma from "@/lib/prisma";
 
+function optimizeCloudinaryUrl(url: string): string {
+  return url.includes("res.cloudinary.com")
+    ? url.replace("/upload/", "/upload/f_auto,q_auto/")
+    : url;
+}
+
 export async function getNews(limit = 6) {
-  return await prisma.news.findMany({
+  const news = await prisma.news.findMany({
     take: limit,
     orderBy: { createdAt: "desc" },
     select: {
@@ -18,11 +24,21 @@ export async function getNews(limit = 6) {
       translations: true,
     },
   });
+
+  return news.map((item) => ({
+    ...item,
+    image: item.image ? optimizeCloudinaryUrl(item.image) : null,
+  }));
 }
 
 export async function getAllNews() {
-  return await prisma.news.findMany({
+  const news = await prisma.news.findMany({
     orderBy: { createdAt: "desc" },
     include: { author: true, translations: true },
   });
+
+  return news.map((item) => ({
+    ...item,
+    image: item.image ? optimizeCloudinaryUrl(item.image) : null,
+  }));
 }
