@@ -1,10 +1,5 @@
 import prisma from "@/lib/prisma";
-
-function optimizeCloudinaryUrl(url: string): string {
-  return url.includes("res.cloudinary.com")
-    ? url.replace("/upload/", "/upload/f_auto,q_auto/")
-    : url;
-}
+import { optimizeCloudinaryUrl } from "./optimizeImage";
 
 export async function getNews(limit = 6) {
   const news = await prisma.news.findMany({
