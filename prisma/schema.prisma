@@ -90,6 +90,8 @@ model Photo {
 model Player {
   id           String              @id @default(cuid())
   name         String
+  preferredName String?
+  instagram     String?
   number       Int
   position     String
   photo        String?
