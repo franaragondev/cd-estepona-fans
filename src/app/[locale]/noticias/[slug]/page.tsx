@@ -5,6 +5,7 @@ import NewsButton from "@/components/CommonButton";
 import SubscribeModal from "@/components/SubscribeModal";
 import MarkdownViewer from "@/components/MarkdownViewer";
 import ShareButtons from "@/components/ShareButtons";
+import InlineSubscribe from "@/components/InlineSubscribe";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
@@ -170,6 +171,9 @@ export default async function Page({ params }: any) {
           translation="newsPage"
         />
       </main>
+      <div className="bg-gray-50">
+        <InlineSubscribe />
+      </div>
     </>
   );
 }

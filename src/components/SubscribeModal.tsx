@@ -3,15 +3,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
-
 import { useSubscribe } from "../hooks/useSubscribe";
 
 export default function SubscribeModal() {
   const t = useTranslations("cta");
+
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setIsOpen(true);
+    const hasClosed = localStorage.getItem("subscribe-modal-closed");
+    if (!hasClosed) {
+      setIsOpen(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -27,6 +30,11 @@ export default function SubscribeModal() {
 
   const { email, setEmail, status, errorMessage, honeypotRef, handleSubmit } =
     useSubscribe(t);
+
+  const handleClose = () => {
+    localStorage.setItem("subscribe-modal-closed", "true");
+    setIsOpen(false);
+  };
 
   if (!isOpen) return null;
 
@@ -53,7 +61,7 @@ export default function SubscribeModal() {
         animate="visible"
         exit="hidden"
         variants={backdropVariants}
-        onClick={() => setIsOpen(false)}
+        onClick={handleClose}
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.6)",
           backdropFilter: "blur(10px)",
@@ -68,15 +76,17 @@ export default function SubscribeModal() {
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            onClick={() => setIsOpen(false)}
+            onClick={handleClose}
             className="cursor-pointer absolute top-2 right-4 text-black text-3xl font-bold hover:text-gray-300"
             aria-label="Cerrar modal"
           >
             &times;
           </button>
+
           <div className="relative z-10 max-w-md mx-auto text-center text-black px-4 py-12">
             <h2 className="text-2xl font-bold mb-4">{t("title")}</h2>
             <p className="mb-6 text-gray-600">{t("description")}</p>
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-2">
               <input
                 type="email"
@@ -101,6 +111,7 @@ export default function SubscribeModal() {
                   ref={honeypotRef}
                 />
               </div>
+
               <button
                 className="animated-border cursor-pointer bg-white text-black py-2 rounded-md font-medium hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 type="submit"
