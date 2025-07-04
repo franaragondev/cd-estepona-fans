@@ -38,7 +38,7 @@ export default function ParallaxBackground({
             src={backgroundImage}
             alt=""
             fill
-            priority
+            priority={!!priority}
             fetchPriority={priority ? "high" : "auto"}
             sizes="100vw"
             style={{ objectFit: "cover" }}
