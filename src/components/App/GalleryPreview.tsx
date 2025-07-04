@@ -35,11 +35,10 @@ export default function GalleryPreview({ images }: GalleryPreviewProps) {
             <Image
               src={src}
               alt={`Fan pic ${i + 1}`}
-              width={400}
-              height={200}
-              className="object-cover w-full h-full"
-              loading={i === 0 ? "eager" : "lazy"}
-              priority={i === 0}
+              fill
+              sizes="(max-width: 768px) 33vw, 400px"
+              className="object-cover"
+              loading="lazy"
             />
           </div>
         ))}
@@ -91,8 +90,8 @@ export default function GalleryPreview({ images }: GalleryPreviewProps) {
               width={1200}
               height={900}
               style={{ objectFit: "contain" }}
-              priority
               onLoadingComplete={() => setIsImageLoading(false)}
+              loading="eager"
               className={
                 isImageLoading
                   ? "opacity-0"

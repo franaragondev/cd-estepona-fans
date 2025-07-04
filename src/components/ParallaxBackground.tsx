@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { Parallax } from "react-scroll-parallax";
+import Image from "next/image";
 
 interface ParallaxBackgroundProps {
   backgroundImage: string;
@@ -18,6 +19,8 @@ export default function ParallaxBackground({
   sectionName,
   children,
 }: ParallaxBackgroundProps) {
+  const calculatedMinHeight = `calc(${minHeight} + 350px)`;
+
   return (
     <section
       id={sectionName}
@@ -26,14 +29,19 @@ export default function ParallaxBackground({
     >
       <Parallax speed={speed}>
         <div
-          className="relative w-full h-full min-h-[600px] bg-center bg-cover"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            willChange: "transform",
-            transform: "translate3d(0,0,0)",
-            minHeight: `calc(${minHeight} + 350px)`,
-          }}
-        />
+          className="relative w-full h-full"
+          style={{ minHeight: calculatedMinHeight }}
+        >
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
 
         <div
           className="absolute inset-0 bg-black pointer-events-none"

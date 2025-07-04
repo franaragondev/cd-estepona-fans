@@ -1,5 +1,4 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "../context/AuthContext";
@@ -135,20 +134,6 @@ export default async function LocaleLayout({
         ))}
       </Head>
       <body className="min-h-screen flex flex-col">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-QVPHJBS6Y0"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-QVPHJBS6Y0');
-          `}
-        </Script>
-
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AuthProvider>
             <Header />

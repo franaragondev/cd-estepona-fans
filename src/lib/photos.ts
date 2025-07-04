@@ -1,7 +1,13 @@
 import prisma from "@/lib/prisma";
 
+function optimizeCloudinaryUrl(url: string): string {
+  return url.includes("res.cloudinary.com")
+    ? url.replace("/upload/", "/upload/f_auto,q_auto/")
+    : url;
+}
+
 export async function getPhotos(limit = 6) {
-  return await prisma.photo.findMany({
+  const photos = await prisma.photo.findMany({
     take: limit,
     orderBy: { id: "desc" },
     where: {
@@ -12,10 +18,15 @@ export async function getPhotos(limit = 6) {
       },
     },
   });
+
+  return photos.map((photo) => ({
+    ...photo,
+    url: optimizeCloudinaryUrl(photo.url),
+  }));
 }
 
 export async function getAllPhotos() {
-  return await prisma.photo.findMany({
+  const photos = await prisma.photo.findMany({
     orderBy: { id: "desc" },
     where: {
       albumId: {
@@ -25,13 +36,23 @@ export async function getAllPhotos() {
       },
     },
   });
+
+  return photos.map((photo) => ({
+    ...photo,
+    url: optimizeCloudinaryUrl(photo.url),
+  }));
 }
 
 export async function getAcademyPhotos() {
-  return await prisma.photo.findMany({
+  const photos = await prisma.photo.findMany({
     orderBy: { id: "desc" },
     where: {
       albumId: "9",
     },
   });
+
+  return photos.map((photo) => ({
+    ...photo,
+    url: optimizeCloudinaryUrl(photo.url),
+  }));
 }
