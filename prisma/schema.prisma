@@ -93,6 +93,7 @@ model Player {
   preferredName String?
   instagram     String?
   number       Int
+  teamId       Int? // Primer Equipo: 1, Cantera: 2
   position     String
   photo        String?
   birthday     DateTime?

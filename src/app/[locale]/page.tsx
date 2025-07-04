@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import type { Metadata } from "next";
 import { getCommonMetadata } from "@/utils/getCommonMetadata";
 import ConfirmModal from "@/components/ConfirmModal";
@@ -17,7 +18,13 @@ export async function generateMetadata(ctx: any): Promise<Metadata> {
   return await getCommonMetadata(locale);
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const players = await prisma.player.findMany({
+    include: {
+      stats: true,
+    },
+  });
+
   return (
     <>
       <ConfirmModal />
@@ -30,8 +37,8 @@ export default function HomePage() {
       <section className="py-10">
         <NextMatchesPreview />
       </section>
-      <section className="py-10">
-        <TeamRoster />
+      <section className="py-10 bg-[#202025] text-white">
+        <TeamRoster players={players} />
       </section>
       <main className="max-w-7xl mx-auto px-4">
         <section className="py-10">
