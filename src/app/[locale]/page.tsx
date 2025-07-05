@@ -37,7 +37,7 @@ export default async function HomePage() {
       <section className="py-10">
         <NextMatchesPreview />
       </section>
-      <section className="py-10 bg-[#202025] text-white">
+      <section className="py-10 bg-[#202025] text-white md:flex md:justify-center lg:bg-white">
         <TeamRoster players={players} />
       </section>
       <main className="max-w-7xl mx-auto px-4">

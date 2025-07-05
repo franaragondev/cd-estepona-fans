@@ -11,7 +11,7 @@ import ConsentScripts from "@/components/ConsentScripts";
 import Head from "next/head";
 
 import "@/app/globals.css";
-import { DM_Sans, Montserrat } from "next/font/google";
+import { DM_Sans, Montserrat, Bebas_Neue } from "next/font/google";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -23,6 +23,12 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-montserrat",
+});
+
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-bebas",
 });
 
 export const viewport = {
@@ -123,7 +129,10 @@ export default async function LocaleLayout({
   )}`;
 
   return (
-    <html lang={locale} className={`${dmSans.variable} ${montserrat.variable}`}>
+    <html
+      lang={locale}
+      className={`${dmSans.variable} ${montserrat.variable} ${bebas.variable}`}
+    >
       <Head>
         {/* Canonical */}
         <link rel="canonical" href={`${baseUrl}${currentPath}`} />
