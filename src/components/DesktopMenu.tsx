@@ -26,20 +26,35 @@ export function DesktopMenu() {
     // { href: `${basePath}/directos`, label: t("live") },
   ];
 
+  const academyLinks = [
+    { href: `${basePath}/cantera/noticias`, label: t("news") },
+    { href: `${basePath}/cantera/galeria`, label: t("gallery") },
+  ];
+
   const isLinkActive = (href: string) =>
     href === basePath
       ? pathname === href
       : pathname === href || pathname.startsWith(href + "/");
 
   const isFansActive = fansLinks.some(({ href }) => isLinkActive(href));
+  const isAcademyActive = academyLinks.some(({ href }) => isLinkActive(href));
 
   const [fansOpen, setFansOpen] = useState(false);
+  const [academyOpen, setAcademyOpen] = useState(false);
+
   const fansRef = useRef<HTMLDivElement>(null);
+  const academyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (fansRef.current && !fansRef.current.contains(event.target as Node)) {
         setFansOpen(false);
+      }
+      if (
+        academyRef.current &&
+        !academyRef.current.contains(event.target as Node)
+      ) {
+        setAcademyOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -61,6 +76,54 @@ export function DesktopMenu() {
           </Link>
         ))}
 
+        {/* Academy dropdown */}
+        <div className="relative" ref={academyRef}>
+          <button
+            onClick={() => setAcademyOpen((open) => !open)}
+            className={`text-gray-700 hover:text-black transition flex items-center gap-1 ${
+              isAcademyActive ? "text-black font-semibold" : ""
+            }`}
+            aria-haspopup="true"
+            aria-expanded={academyOpen}
+            type="button"
+          >
+            {t("academySection")}
+            <svg
+              className={`w-4 h-4 transition-transform duration-200 ${
+                academyOpen ? "rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          {academyOpen && (
+            <div className="absolute right-0 mt-2 w-60 bg-white border border-gray-200 rounded shadow-lg z-50">
+              {academyLinks.map(({ href, label }, index) => (
+                <Link
+                  key={`${href}-${index}`}
+                  href={href}
+                  className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 transition ${
+                    isLinkActive(href) ? "font-semibold bg-gray-100" : ""
+                  }`}
+                  onClick={() => setAcademyOpen(false)}
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Fans dropdown */}
         <div className="relative" ref={fansRef}>
           <button
             onClick={() => setFansOpen((open) => !open)}
@@ -91,9 +154,9 @@ export function DesktopMenu() {
 
           {fansOpen && (
             <div className="absolute right-0 mt-2 w-60 bg-white border border-gray-200 rounded shadow-lg z-50">
-              {fansLinks.map(({ href, label }) => (
+              {fansLinks.map(({ href, label }, index) => (
                 <Link
-                  key={href}
+                  key={`${href}-${index}`}
                   href={href}
                   className={`block px-4 py-2 text-gray-700 hover:bg-gray-100 transition ${
                     isLinkActive(href) ? "font-semibold bg-gray-100" : ""

@@ -56,6 +56,7 @@
     "news": "Actualités",
     "matches": "Calendrier",
     "gallery": "Galerie",
+    "academySection": "Centre de formation",
     "fansSection": "Zone Fans",
     "tribuna": "La Tribuna del Muñoz Pérez",
     "mvp": "MVP",
@@ -234,5 +235,21 @@
   "calendar": {
     "noMatches": "Aucun match ce mois-ci.",
     "noTime": "N/D"
+  },
+  "gallery": {
+    "noPhotos": "Aucune photo à afficher."
+  },
+  "teamRoster": {
+    "title": "Joueurs",
+    "teamButton": "Équipe Première",
+    "BteamButton": "Équipe B",
+    "matchPlayed": "Matchs Joués",
+    "minutesPlayed": "Minutes Jouées",
+    "position": {
+      "portero": "Gardien",
+      "defensa": "Défenseur",
+      "centrocampista": "Milieu",
+      "delantero": "Attaquant"
+    }
   }
 }

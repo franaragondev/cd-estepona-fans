@@ -6,8 +6,20 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "www.cdesteponafans.com",
+        port: "",
+      },
+    ],
   },
+  productionBrowserSourceMaps: true,
 };
 
 const withNextIntl = createNextIntlPlugin();

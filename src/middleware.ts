@@ -58,6 +58,14 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!hasLocale) {
+    const botAgents = ["googlebot", "adsbot-google", "mediapartners-google"];
+    const userAgent = request.headers.get("user-agent")?.toLowerCase() || "";
+    const isGooglebot = botAgents.some((bot) => userAgent.includes(bot));
+
+    if (isGooglebot) {
+      return NextResponse.redirect(new URL(`/es${pathname}`, request.url), 301);
+    }
+
     const acceptedLanguages = request.headers.get("accept-language");
     const preferredLocale =
       acceptedLanguages
@@ -68,7 +76,8 @@ export async function middleware(request: NextRequest) {
     logDev("No locale in path. Redirecting to preferred:", preferredLocale);
 
     return NextResponse.redirect(
-      new URL(`/${preferredLocale}${pathname}`, request.url)
+      new URL(`/${preferredLocale}${pathname}`, request.url),
+      301
     );
   }
 

@@ -1,5 +1,4 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "../context/AuthContext";
@@ -12,7 +11,7 @@ import ConsentScripts from "@/components/ConsentScripts";
 import Head from "next/head";
 
 import "@/app/globals.css";
-import { DM_Sans, Montserrat } from "next/font/google";
+import { DM_Sans, Montserrat, Bebas_Neue } from "next/font/google";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -24,6 +23,12 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-montserrat",
+});
+
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-bebas",
 });
 
 export const viewport = {
@@ -124,7 +129,10 @@ export default async function LocaleLayout({
   )}`;
 
   return (
-    <html lang={locale} className={`${dmSans.variable} ${montserrat.variable}`}>
+    <html
+      lang={locale}
+      className={`${dmSans.variable} ${montserrat.variable} ${bebas.variable}`}
+    >
       <Head>
         {/* Canonical */}
         <link rel="canonical" href={`${baseUrl}${currentPath}`} />
@@ -135,20 +143,6 @@ export default async function LocaleLayout({
         ))}
       </Head>
       <body className="min-h-screen flex flex-col">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-QVPHJBS6Y0"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-QVPHJBS6Y0');
-          `}
-        </Script>
-
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AuthProvider>
             <Header />

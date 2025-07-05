@@ -42,7 +42,7 @@ export default function NewsPage() {
     isFetching.current = true;
 
     try {
-      const res = await fetch(`/api/news?skip=${skip}&take=${take}`);
+      const res = await fetch(`/api/news/cantera?skip=${skip}&take=${take}`);
       if (!res.ok) {
         setLoading(false);
         isFetching.current = false;
@@ -111,13 +111,13 @@ export default function NewsPage() {
       </style>
 
       <main className="max-w-[100rem] mx-auto px-4 py-8 min-h-[85vh]">
-        <h1 className="sr-only">Noticias CD Estepona</h1>
+        <h1 className="sr-only">Noticias CD Estepona Cantera</h1>
 
         {firstNews && (
           <>
             <div className="block md:hidden mb-12">
               <NewsCard
-                href={`/${locale}/noticias/${firstNews.slug}`}
+                href={`/${locale}/cantera/noticias/${firstNews.slug}`}
                 title={
                   firstNews.translations.find((t) => t.language === locale)
                     ?.title ?? firstNews.title
@@ -135,7 +135,7 @@ export default function NewsPage() {
             </div>
 
             <Link
-              href={`/${locale}/noticias/${firstNews.slug}`}
+              href={`/${locale}/cantera/noticias/${firstNews.slug}`}
               className="hidden md:flex mb-12 rounded-xl overflow-hidden h-[60vh] group"
             >
               <div className="relative w-4/5 h-full overflow-hidden">
@@ -183,7 +183,7 @@ export default function NewsPage() {
               return (
                 <NewsCard
                   key={id}
-                  href={`/${locale}/noticias/${slug}`}
+                  href={`/${locale}/cantera/noticias/${slug}`}
                   title={displayTitle}
                   date={createdAt}
                   image={image ?? ""}

@@ -10,6 +10,7 @@ export default function AppHero() {
       speed={-20}
       minHeight="400px"
       sectionName="home"
+      priority={true}
     >
       <div className="flex flex-col items-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 -mt-24 md:w-[50vw] bg-gradient-to-r from-[#ff5c50] to-[#6c73ff] bg-clip-text text-transparent drop-shadow-lg">

@@ -56,6 +56,7 @@
     "news": "News",
     "matches": "Fixtures",
     "gallery": "Gallery",
+    "academySection": "Academy",
     "fansSection": "Fans Zone",
     "tribuna": "La Tribuna del Muñoz Pérez",
     "mvp": "MVP",
@@ -234,5 +235,21 @@
   "calendar": {
     "noMatches": "No matches this month.",
     "noTime": "N/A"
+  },
+  "gallery": {
+    "noPhotos": "No photos to display."
+  },
+  "teamRoster": {
+    "title": "Players",
+    "teamButton": "First Team",
+    "BteamButton": "B Team",
+    "matchPlayed": "Matches Played",
+    "minutesPlayed": "Minutes Played",
+    "position": {
+      "portero": "Goalkeeper",
+      "defensa": "Defender",
+      "centrocampista": "Midfielder",
+      "delantero": "Forward"
+    }
   }
 }

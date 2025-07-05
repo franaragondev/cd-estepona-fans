@@ -1,8 +1,8 @@
 import GalleryFull from "@/components/GalleryFull";
-import { getAllPhotos } from "@/lib/photos";
+import { getAcademyPhotos } from "@/lib/photos";
 
 export default async function GalleryPage() {
-  const photos = await getAllPhotos();
+  const photos = await getAcademyPhotos();
   const images = photos.map(({ url, caption }) => ({
     url,
     caption: caption ?? undefined,
@@ -10,7 +10,9 @@ export default async function GalleryPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-12 min-h-[85vh]">
-      <h1 className="sr-only">Galería de Imágenes del CD Estepona</h1>
+      <h1 className="sr-only">
+        Galería de Imágenes de la Cantera del CD Estepona
+      </h1>
       <GalleryFull images={images} />
     </main>
   );

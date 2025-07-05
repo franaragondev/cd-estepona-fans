@@ -21,6 +21,7 @@ const locales = [
 export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [fansOpen, setFansOpen] = useState(false);
+  const [academyOpen, setAcademyOpen] = useState(false);
 
   const router = useRouter();
   const locale = useLocale();
@@ -34,8 +35,18 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
       ? pathname === href
       : pathname === href || pathname.startsWith(href + "/");
 
-  const fansLinks = [`${basePath}/tribuna`, `${basePath}/mvp`];
+  const fansLinks = [
+    `${basePath}/tribuna`,
+    // `${basePath}/mvp`,
+    // `${basePath}/directos`,
+  ];
+  const academyLinks = [
+    `${basePath}/cantera/noticias`,
+    `${basePath}/cantera/galeria`,
+  ];
+
   const isFansActive = fansLinks.some((href) => isLinkActive(href));
+  const isAcademyActive = academyLinks.some((href) => isLinkActive(href));
 
   function changeLocale(newLocale: string) {
     const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
@@ -123,6 +134,58 @@ export default function MobileMenu({ isOpen, onCloseAction }: MobileMenuProps) {
               >
                 {t("gallery")}
               </Link>
+
+              {/* Academy dropdown */}
+              <button
+                onClick={() => setAcademyOpen((prev) => !prev)}
+                className={`flex justify-between items-center text-gray-700 hover:text-black ${
+                  isAcademyActive ? "text-black font-semibold" : ""
+                }`}
+              >
+                {t("academySection")}
+                <svg
+                  className={`w-4 h-4 ml-2 transform transition-transform ${
+                    academyOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {academyOpen && (
+                <div className="ml-4 flex flex-col space-y-2">
+                  <Link
+                    href={`${basePath}/cantera/noticias`}
+                    onClick={onCloseAction}
+                    className={`text-gray-700 hover:text-black ${
+                      isLinkActive(`${basePath}/cantera/noticias`)
+                        ? "text-black font-semibold"
+                        : ""
+                    }`}
+                  >
+                    {t("news")}
+                  </Link>
+                  <Link
+                    href={`${basePath}/cantera/galeria`}
+                    onClick={onCloseAction}
+                    className={`text-gray-700 hover:text-black ${
+                      isLinkActive(`${basePath}/cantera/galeria`)
+                        ? "text-black font-semibold"
+                        : ""
+                    }`}
+                  >
+                    {t("gallery")}
+                  </Link>
+                </div>
+              )}
 
               {/* Zona Fans */}
               <button

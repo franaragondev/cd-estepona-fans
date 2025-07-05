@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
     : "CD Estepona Fans news article";
 
   const baseUrl = "https://www.cdesteponafans.com";
-  const url = `${baseUrl}/${locale}/noticias/${slug}`;
+  const url = `${baseUrl}/${locale}/cantera/noticias/${slug}`;
 
   const image = article.image?.startsWith("http")
     ? article.image
@@ -106,7 +106,7 @@ export default async function Page({ params }: any) {
   const neutralGray = "#666";
 
   const baseUrl = "https://www.cdesteponafans.com";
-  const fullUrl = `${baseUrl}/${locale}/noticias/${slug}`;
+  const fullUrl = `${baseUrl}/${locale}/cantera/noticias/${slug}`;
 
   return (
     <>
@@ -165,7 +165,7 @@ export default async function Page({ params }: any) {
         </div>
 
         <NewsButton
-          href={`/${locale}/noticias`}
+          href={`/${locale}/cantera/noticias`}
           className="inline-block px-4 py-2 rounded text-white bg-[#2f36a1] hover:bg-[#DC2C20] transition-colors duration-200 cursor-pointer"
           buttonTitle="button"
           translation="newsPage"

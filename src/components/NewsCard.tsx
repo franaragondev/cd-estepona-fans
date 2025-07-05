@@ -3,11 +3,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import MarkdownViewer from "./MarkdownViewer";
+import { useLocale } from "next-intl";
 
 type NewsCardProps = {
-  slug: string;
+  href: string;
   title: string;
   date: string;
   image: string;
@@ -17,29 +16,24 @@ type NewsCardProps = {
 };
 
 export default function NewsCard({
-  slug,
+  href,
   title,
   date,
   image,
-  content,
-  author,
   variant = "detailed",
 }: NewsCardProps) {
   const locale = useLocale();
-  const t = useTranslations("newsCard");
 
   const formattedDate = new Date(date).toLocaleDateString(locale);
-  const href = `/${locale}/noticias/${slug}`;
 
   const neutralDark = "#333";
-  const neutralGray = "#666";
   const neutralLight = "#f5f7fa";
 
   if (variant === "overlay") {
     return (
       <Link
         href={href}
-        className="relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition transform hover:scale-105 duration-300 group h-48 flex items-end p-4 text-white"
+        className="relative rounded-xl overflow-hidden shadow-sm hover:shadow-md transition transform hover:scale-105 duration-300 group h-48 flex items-end p-4 text-white"
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
@@ -70,53 +64,27 @@ export default function NewsCard({
   }
 
   return (
-    <Link
-      href={href}
-      className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition transform hover:scale-[1.03] duration-300 flex flex-col fade-in"
-      style={{
-        backgroundColor: neutralLight,
-      }}
-    >
-      <div className="relative w-full h-48">
-        <Image
-          src={image}
-          alt={`News image: ${title}`}
-          fill
-          style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          priority={false}
-        />
+    <Link href={href} className="overflow-hidden flex flex-col">
+      <div className="relative w-full h-48 rounded-xl overflow-hidden fade-in">
+        <div className="transition-transform duration-300 transform hover:scale-[1.03] w-full h-full">
+          <Image
+            src={image}
+            alt={`News image: ${title}`}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            priority={false}
+          />
+        </div>
       </div>
 
-      <div className="p-5 flex flex-col flex-grow">
-        <time
-          className="text-sm text-gray-500 mb-1"
-          style={{ color: neutralGray, fontWeight: 500 }}
-        >
-          {formattedDate}
-        </time>
-        <span
-          className="text-xs mb-2"
-          style={{ color: neutralGray, fontStyle: "italic" }}
-        >
-          {t("byAuthor", {
-            author: author || "CD Estepona Fans",
-          })}
-        </span>
+      <div className="pt-3 flex flex-col flex-grow align-left">
         <h2
-          className="text-lg font-semibold mb-2 uppercase"
+          className="text-md font-semibold mb-2"
           style={{ color: neutralDark }}
         >
           {title}
         </h2>
-        {content && (
-          <div
-            className="text-gray-700 flex-grow"
-            style={{ color: neutralDark, opacity: 0.85 }}
-          >
-            <MarkdownViewer content={content} />
-          </div>
-        )}
       </div>
     </Link>
   );

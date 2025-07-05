@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import ReactCountryFlag from "react-country-flag";
 
 type MVPPlayer = {
   id: string;
@@ -18,13 +19,19 @@ type PlayerBasic = {
   photo?: string | null;
   position: string;
   number: number;
+  nationality: string;
 };
 
-type PlayerWithMVP = PlayerBasic & { mvps: number };
+type PlayerWithMVP = PlayerBasic & { mvps: number; countryCode?: string };
 
 function getPlayerPhoto(photo?: string | null): string {
   return photo && photo.trim() !== "" ? photo : "/default-player.jpg";
 }
+
+const countryNameToCode: Record<string, string> = {
+  Española: "ES",
+  Costamarfileño: "CI",
+};
 
 export default function MVPPage() {
   const t = useTranslations("mvp");
@@ -48,7 +55,7 @@ export default function MVPPage() {
           mvpMap.set(p.id, p.mvps);
         });
 
-        // Fill podium array with top 3 MVP players, fill empty slots with placeholder
+        // Podium
         const podiumPlayers: MVPPlayer[] = mvpData.top3.slice(0, 3);
         while (podiumPlayers.length < 3) {
           podiumPlayers.push({
@@ -60,7 +67,6 @@ export default function MVPPage() {
         }
         setPodium(podiumPlayers);
 
-        // Add MVP counts and group players by their position
         const grouped: Record<string, PlayerWithMVP[]> = {};
         for (const player of playersData) {
           const position = player.position;
@@ -71,10 +77,10 @@ export default function MVPPage() {
             ...player,
             photo: player.photo ?? "/default-player.jpg",
             mvps: mvpMap.get(player.id) ?? 0,
+            countryCode: countryNameToCode[player.nationality] ?? undefined,
           });
         }
 
-        // Sort players alphabetically within each position group
         Object.keys(grouped).forEach((key) => {
           grouped[key].sort((a, b) => a.name.localeCompare(b.name));
         });
@@ -85,7 +91,6 @@ export default function MVPPage() {
         setLoading(false);
       }
     }
-
     fetchData();
   }, []);
 
@@ -241,21 +246,45 @@ export default function MVPPage() {
                     className="flex items-center gap-4 bg-white p-3 rounded-lg shadow-sm"
                   >
                     <div
-                      className="relative w-18 h-18 shrink-0"
-                      style={{ width: 72, height: 72 }}
+                      className="relative shrink-0"
+                      style={{ width: 60, height: 62 }}
                     >
-                      <Image
-                        src={getPlayerPhoto(player.photo)}
-                        alt={player.name}
-                        fill
-                        className="rounded-full object-cover object-top"
-                      />
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white text-[12px] font-bold px-2 py-0.5 rounded-full shadow-sm">
+                      <div
+                        className="rounded-full overflow-hidden w-52 h-52 border-1"
+                        style={{ width: 50, height: 62 }}
+                      >
+                        <Image
+                          src={getPlayerPhoto(player.photo)}
+                          alt={player.name}
+                          width={48}
+                          height={48}
+                          className="object-cover object-top"
+                        />
+                      </div>
+                      <div
+                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white text-[12px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10"
+                        style={{ marginLeft: "-0.3rem" }}
+                      >
                         {player.number}
                       </div>
                     </div>
                     <div>
-                      <p className="font-medium">{player.name}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="font-medium">{player.name}</p>
+                        {player.countryCode && (
+                          <ReactCountryFlag
+                            countryCode={player.countryCode}
+                            svg
+                            style={{
+                              width: 20,
+                              height: 15,
+                              borderRadius: 2,
+                              boxShadow: "0 0 1px rgba(0,0,0,0.2)",
+                            }}
+                            title={player.nationality}
+                          />
+                        )}
+                      </div>
                       <p className="text-sm text-gray-500">{player.mvps} MVP</p>
                     </div>
                   </div>

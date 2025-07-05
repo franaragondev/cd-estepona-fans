@@ -123,6 +123,7 @@ section {
     @apply border-border outline-ring/50;
   }
   body {
+    overflow-x: hidden;
     @apply bg-background text-foreground;
     @apply font-sans;
   }
@@ -202,4 +203,24 @@ section {
   animation: border-move 3s linear infinite;
   pointer-events: none;
   z-index: 1;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #1774cb transparent;
+}
+
+/* Chrome, Edge and Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #1774cb;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
