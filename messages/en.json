@@ -238,5 +238,18 @@
   },
   "gallery": {
     "noPhotos": "No photos to display."
+  },
+  "teamRoster": {
+    "title": "Players",
+    "teamButton": "First Team",
+    "BteamButton": "B Team",
+    "matchPlayed": "Matches Played",
+    "minutesPlayed": "Minutes Played",
+    "position": {
+      "portero": "Goalkeeper",
+      "defensa": "Defender",
+      "centrocampista": "Midfielder",
+      "delantero": "Forward"
+    }
   }
 }

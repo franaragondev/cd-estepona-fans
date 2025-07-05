@@ -238,5 +238,18 @@
   },
   "gallery": {
     "noPhotos": "No hay fotos para mostrar."
+  },
+  "teamRoster": {
+    "title": "Jugadores",
+    "teamButton": "Primer Equipo",
+    "BteamButton": "Cantera",
+    "matchPlayed": "Partidos Jugados",
+    "minutesPlayes": "Minutos Jugados",
+    "position": {
+      "portero": "Portero",
+      "defensa": "Defensa",
+      "centrocampista": "Centrocampista",
+      "delantero": "Delantero"
+    }
   }
 }

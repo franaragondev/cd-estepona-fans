@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import classNames from "classnames";
 import { motion } from "framer-motion";
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export default function TeamRoster({ players }: Props) {
+  const t = useTranslations("teamRoster");
   const [selectedTeamId, setSelectedTeamId] = useState<1 | 2>(1);
   const [activePlayerId, setActivePlayerId] = useState<string | null>(null);
   const [hoveredPlayerId, setHoveredPlayerId] = useState<string | null>(null);
@@ -50,7 +52,7 @@ export default function TeamRoster({ players }: Props) {
     <section className="w-full lg:max-w-7xl">
       <div className="text-center mb-6">
         <h2 className="text-5xl font-bold font-bebas uppercase tracking-widest mb-8 lg:text-[#202025] lg:text-7xl lg:mt-15">
-          JUGADORES
+          {t("title")}
         </h2>
 
         <div className="flex justify-center gap-4 ">
@@ -59,11 +61,11 @@ export default function TeamRoster({ players }: Props) {
               "px-4 py-2 rounded border transition-colors cursor-pointer",
               selectedTeamId === 1
                 ? "bg-red-600 text-white border-red-600"
-                : "border-gray-300 hover:bg-gray-200 hover:text-[#202025]"
+                : "border-gray-300 lg:text-[#202025] hover:bg-gray-200 hover:text-[#202025]"
             )}
             onClick={() => setSelectedTeamId(1)}
           >
-            Primer Equipo
+            {t("teamButton")}
           </button>
           <button
             className={classNames(
@@ -74,7 +76,7 @@ export default function TeamRoster({ players }: Props) {
             )}
             onClick={() => setSelectedTeamId(2)}
           >
-            Cantera
+            {t("BteamButton")}
           </button>
         </div>
       </div>
@@ -164,7 +166,7 @@ export default function TeamRoster({ players }: Props) {
                   {activePlayer.number}
                 </div>
                 <h3 className="text-lg font-light uppercase text-gray-400 pt-2">
-                  {activePlayer.position}
+                  {t(`position.${activePlayer.position.toLowerCase()}`)}
                 </h3>
                 <h4 className="text-white text-5xl font-montserrat whitespace-pre-line font-bold">
                   {activePlayer.name.replace(" ", "\n")}
@@ -174,13 +176,16 @@ export default function TeamRoster({ players }: Props) {
                     <p className="text-4xl font-light text-[#1774cb]">
                       {activePlayer.stats[0]?.matches ?? 0}
                     </p>
-                    <p className="text-gray-500 text-md">Partidos Jugados</p>
+                    <p className="text-gray-500 text-md"> {t("matchPlayed")}</p>
                   </div>
                   <div className="flex flex-col items-center">
                     <p className="text-4xl font-light text-[#1774cb]">
                       {activePlayer.stats[0]?.minutes ?? 0}
                     </p>
-                    <p className="text-gray-500 text-md">Minutos Jugados</p>
+                    <p className="text-gray-500 text-md">
+                      {" "}
+                      {t("minutesPlayed")}
+                    </p>
                   </div>
                 </div>
               </div>
